@@ -48,10 +48,8 @@ namespace Sync.SQL
             return builder.ConnectionString;
         }
 
-        public List<T> ExecuteQuery<T>(string query, string tableName) where T : DataContractUtility<T>
+        public DataSet ExecuteQuery(string query, string tableName)
         {
-            List<T> result = new List<T>();
-
             try
             {
                 using (MySqlConnection mySqlConnection = new MySqlConnection(GetConnectionString()))
@@ -59,17 +57,11 @@ namespace Sync.SQL
                     mySqlConnection.Open();
 
                     using (MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(query, mySqlConnection))
-                    using (DataSet schema = new DataSet())
+                    using (DataSet dataset = new DataSet())
                     {
-                        mySqlDataAdapter.Fill(schema, tableName);
+                        mySqlDataAdapter.Fill(dataset, tableName);
 
-                        if (schema.Tables.Contains(tableName))
-                        {
-                            foreach (DataRow row in schema.Tables[tableName]!.Rows)
-                            {
-                                result.Add((T)Activator.CreateInstance(typeof(T), new object[] { row })!);
-                            }
-                        }
+                        return dataset;
                     }
                 }
             }
@@ -78,8 +70,6 @@ namespace Sync.SQL
                 // Handle the exception, log it, or rethrow a more specific exception.
                 throw new Exception("Error executing query: " + ex.Message);
             }
-
-            return result;
         }
 
 

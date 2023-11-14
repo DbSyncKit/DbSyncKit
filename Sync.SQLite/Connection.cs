@@ -28,10 +28,8 @@ namespace Sync.SQLite
 
         #region Public Functions
 
-        public List<T> ExecuteQuery<T>(string query, string tableName) where T : DataContractUtility<T>
+        public DataSet ExecuteQuery(string query, string tableName)
         {
-            List<T> result = new List<T>();
-
             try
             {
                 using (var connection = new SqliteConnection(GetConnectionString()))
@@ -44,16 +42,12 @@ namespace Sync.SQLite
 
                         using (var reader = command.ExecuteReader())
                         {
-                            DataTable dataTable = new DataTable();
+                            DataSet dataSet = new DataSet();
+                            DataTable dataTable = new DataTable(tableName);
                             dataTable.Load(reader);
 
-                            if (dataTable.Rows.Count > 0)
-                            {
-                                foreach (DataRow row in dataTable.Rows)
-                                {
-                                    result.Add((T)Activator.CreateInstance(typeof(T), new object[] { row })!);
-                                }
-                            }
+                            dataSet.Tables.Add(dataTable);
+                            return dataSet;
                         }
                     }
                 }
@@ -63,8 +57,6 @@ namespace Sync.SQLite
                 // Handle the exception, log it, or rethrow a more specific exception.
                 throw new Exception("Error executing query: " + ex.Message);
             }
-
-            return result;
         }
 
 

@@ -117,10 +117,8 @@ namespace Sync.MSSQL
         #endregion
 
         #region Static Method
-        public List<T> ExecuteQuery<T>(string query, string tableName) where T : DataContractUtility<T>
+        public DataSet ExecuteQuery(string query, string tableName)
         {
-            List<T> result = new List<T>();
-
             using (SqlConnection sqlConnection = new SqlConnection(this.GetConnectionString()))
             {
                 try
@@ -132,13 +130,7 @@ namespace Sync.MSSQL
                     {
                         sqlDataAdapter.Fill(schema, tableName);
 
-                        if (schema.Tables.Contains(tableName))
-                        {
-                            foreach (DataRow row in schema.Tables[tableName]!.Rows)
-                            {
-                                result.Add((T)Activator.CreateInstance(typeof(T), new object[] { row })!);
-                            }
-                        }
+                        return schema;
                     }
                 }
                 catch (Exception ex)
@@ -147,8 +139,6 @@ namespace Sync.MSSQL
                     throw new Exception("Error executing query: " + ex.Message);
                 }
             }
-
-            return result;
         }
 
         #endregion

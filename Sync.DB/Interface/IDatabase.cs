@@ -1,4 +1,6 @@
 ﻿using Sync.DB.Enum;
+using Sync.DB.Utils;
+using System.Data;
 
 namespace Sync.DB.Interface
 {
@@ -25,7 +27,7 @@ namespace Sync.DB.Interface
         /// <typeparam name="T">The type of data to retrieve.</typeparam>
         /// <param name="query">The SQL query to execute.</param>
         /// <param name="tableName">The name of the table associated with the query.</param>
-        /// <returns>A list of results of type <typeparamref name="T"/>.</returns>
-        List<T> ExecuteQuery<T>(string query, string tableName) where T : Utils.DataContractUtility<T>;
+        /// <returns>A list of results of type <typeparamref name="DataSet"/>.</returns>
+        DataSet ExecuteQuery(string query, string tableName);
     }
 }
