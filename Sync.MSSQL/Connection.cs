@@ -1,4 +1,5 @@
-﻿using Sync.DB.Enum;
+﻿using Sync.Core.Utils;
+using Sync.DB.Enum;
 using Sync.DB.Interface;
 using System.Data;
 using System.Data.SqlClient;
@@ -116,7 +117,7 @@ namespace Sync.MSSQL
         #endregion
 
         #region Static Method
-        public List<T> ExecuteQuery<T>(string query, string tableName)
+        public List<T> ExecuteQuery<T>(string query, string tableName) where T : DataContractUtility<T>
         {
             List<T> result = new List<T>();
 

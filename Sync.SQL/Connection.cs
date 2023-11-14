@@ -2,6 +2,7 @@
 using Sync.DB.Interface;
 using MySql.Data.MySqlClient;
 using System.Data;
+using Sync.Core.Utils;
 
 namespace Sync.SQL
 {
@@ -47,7 +48,7 @@ namespace Sync.SQL
             return builder.ConnectionString;
         }
 
-        public List<T> ExecuteQuery<T>(string query, string tableName)
+        public List<T> ExecuteQuery<T>(string query, string tableName) where T : DataContractUtility<T>
         {
             List<T> result = new List<T>();
 

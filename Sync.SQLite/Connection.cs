@@ -2,6 +2,7 @@
 using Sync.DB.Interface;
 using Microsoft.Data.Sqlite;
 using System.Data;
+using Sync.Core.Utils;
 
 namespace Sync.SQLite
 {
@@ -25,10 +26,9 @@ namespace Sync.SQLite
 
         #endregion
 
-
         #region Public Functions
 
-        public List<T> ExecuteQuery<T>(string query, string tableName)
+        public List<T> ExecuteQuery<T>(string query, string tableName) where T : DataContractUtility<T>
         {
             List<T> result = new List<T>();
 
