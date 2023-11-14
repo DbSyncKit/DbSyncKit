@@ -1,4 +1,5 @@
 ﻿using Sync.DB.Interface;
+using Sync.DB.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,16 +9,31 @@ using System.Threading.Tasks;
 
 namespace Sync.DB
 {
-    public class DatabaseManager<T> where T : IDatabase
+    /// <summary>
+    /// Manages database operations for a specific database provider implementing the IDatabase interface.
+    /// </summary>
+    /// <typeparam name="T">Type of the database provider implementing IDatabase.</typeparam>
+    public class DatabaseManager<T>: IDisposable where T : IDatabase
     {
         private readonly T _databaseProvider;
 
+        /// <summary>
+        /// Initializes a new instance of the DatabaseManager class.
+        /// </summary>
+        /// <param name="databaseProvider">The instance of the database provider.</param>
         public DatabaseManager(T databaseProvider)
         {
             _databaseProvider = databaseProvider ?? throw new ArgumentNullException(nameof(databaseProvider));
         }
 
-        public List<TItem> ExecuteQuery<TItem>(string query, string tableName)
+        /// <summary>
+        /// Executes a query against the database and returns a list of results for a specific data type.
+        /// </summary>
+        /// <typeparam name="TItem">The type of data to retrieve, constrained to be an instance of DataContractUtility.</typeparam>
+        /// <param name="query">The SQL query to execute.</param>
+        /// <param name="tableName">The name of the table associated with the query.</param>
+        /// <returns>A list of results of type <typeparamref name="TItem"/>.</returns>
+        public List<TItem> ExecuteQuery<TItem>(string query, string tableName) where TItem : DataContractUtility<TItem>
         {
             List<TItem> result = new List<TItem>();
 
@@ -32,6 +48,14 @@ namespace Sync.DB
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Disposes of the DatabaseManager.
+        /// </summary>
+        public void Dispose()
+        {
+            // No additional cleanup required
         }
     }
 }
