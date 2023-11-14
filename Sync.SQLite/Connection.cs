@@ -1,8 +1,9 @@
-﻿using DBSync.DB.Interface;
+﻿using Sync.DB.Enum;
+using Sync.DB.Interface;
 using Microsoft.Data.Sqlite;
 using System.Data;
 
-namespace DBSync.SQLite
+namespace Sync.SQLite
 {
     public class Connection : IDatabase
     {
@@ -10,6 +11,8 @@ namespace DBSync.SQLite
 
         private readonly string DataSource;
         private readonly string Version;
+        public DatabaseProvider Provider => DatabaseProvider.SQLite;
+
         #endregion
 
         #region Constructor

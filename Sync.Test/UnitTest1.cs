@@ -1,4 +1,4 @@
-namespace DBSync.Test
+namespace Sync.Test
 {
     [TestClass]
     public class UnitTest1

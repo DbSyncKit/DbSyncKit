@@ -1,4 +1,4 @@
-﻿namespace DBSync.ConsoleApp
+﻿namespace Sync.ConsoleApp
 {
     internal class Program
     {

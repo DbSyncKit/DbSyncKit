@@ -1,8 +1,9 @@
-﻿using DBSync.DB.Interface;
+﻿using Sync.DB.Enum;
+using Sync.DB.Interface;
 using MySql.Data.MySqlClient;
 using System.Data;
 
-namespace DBSync.SQL
+namespace Sync.SQL
 {
     public class Connection : IDatabase
     {
@@ -13,6 +14,8 @@ namespace DBSync.SQL
         private readonly string Database;
         private readonly string UserID;
         private readonly string Password;
+        public DatabaseProvider Provider => DatabaseProvider.MySQL;
+
 
         #endregion
 

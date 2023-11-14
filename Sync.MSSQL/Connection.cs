@@ -1,8 +1,9 @@
-﻿using DBSync.DB.Interface;
+﻿using Sync.DB.Enum;
+using Sync.DB.Interface;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace DBSync.MSSQL
+namespace Sync.MSSQL
 {
     public class Connection : IDatabase
     {
@@ -45,6 +46,7 @@ namespace DBSync.MSSQL
         public string? UserID { get; set; }
         public string? Password { get; set; }
         public bool IntegratedSecurity { get; set; }
+        public DatabaseProvider Provider => DatabaseProvider.MSSQL;
 
         #endregion
 
