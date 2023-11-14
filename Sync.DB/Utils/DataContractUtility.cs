@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
-namespace Sync.Core.Utils
+namespace Sync.DB.Utils
 {
     /// <summary>
     /// Generic utility class for working with data contract classes.

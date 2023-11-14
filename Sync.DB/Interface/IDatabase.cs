@@ -1,5 +1,4 @@
-﻿using Sync.Core.Utils;
-using Sync.DB.Enum;
+﻿using Sync.DB.Enum;
 
 namespace Sync.DB.Interface
 {
@@ -27,6 +26,6 @@ namespace Sync.DB.Interface
         /// <param name="query">The SQL query to execute.</param>
         /// <param name="tableName">The name of the table associated with the query.</param>
         /// <returns>A list of results of type <typeparamref name="T"/>.</returns>
-        List<T> ExecuteQuery<T>(string query, string tableName) where T : DataContractUtility<T>;
+        List<T> ExecuteQuery<T>(string query, string tableName) where T : Utils.DataContractUtility<T>;
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sync.Core.Enum
+﻿namespace Sync.Core.Enum
 {
     /// <summary>
     /// Represents the direction of synchronization between source and destination.

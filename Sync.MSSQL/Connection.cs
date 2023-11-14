@@ -1,6 +1,6 @@
-﻿using Sync.Core.Utils;
-using Sync.DB.Enum;
+﻿using Sync.DB.Enum;
 using Sync.DB.Interface;
+using Sync.DB.Utils;
 using System.Data;
 using System.Data.SqlClient;
 

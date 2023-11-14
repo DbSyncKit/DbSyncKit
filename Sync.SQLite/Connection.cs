@@ -1,8 +1,8 @@
-﻿using Sync.DB.Enum;
+﻿using Microsoft.Data.Sqlite;
+using Sync.DB.Enum;
 using Sync.DB.Interface;
-using Microsoft.Data.Sqlite;
+using Sync.DB.Utils;
 using System.Data;
-using Sync.Core.Utils;
 
 namespace Sync.SQLite
 {

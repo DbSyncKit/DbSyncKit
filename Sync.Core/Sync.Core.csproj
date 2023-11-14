@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Sync.DB\Sync.DB.csproj" />
+  </ItemGroup>
+
 </Project>

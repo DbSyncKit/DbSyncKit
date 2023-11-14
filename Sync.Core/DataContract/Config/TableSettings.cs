@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sync.Core.DataContract.Config
+﻿namespace Sync.Core.DataContract.Config
 {
     /// <summary>
     /// Represents synchronization settings specific to a table.

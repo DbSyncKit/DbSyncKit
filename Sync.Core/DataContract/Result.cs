@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sync.Core.DataContract
+﻿namespace Sync.Core.DataContract
 {
     /// <summary>
     /// Represents the result of a synchronization operation for a specific data type.

@@ -1,6 +1,6 @@
 ﻿using Sync.DB.Utils;
 using System.Data;
-namespace Sync.Core.Extensions
+namespace Sync.DB.Extensions
 {
     /// <summary>
     /// Extension methods for DataRow to simplify retrieving values from columns.
