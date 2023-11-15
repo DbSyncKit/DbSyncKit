@@ -73,6 +73,25 @@ namespace Sync.SQLite
             return connectionString.Trim();
         }
 
+        public bool TestConnection()
+        {
+            try
+            {
+                using (var connection = new SqliteConnection(GetConnectionString()))
+                {
+                    connection.Open();
+                    connection.Close();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception, log it, or rethrow a more specific exception.
+                throw new Exception("Error executing query: " + ex.Message);
+            }
+        }
+
 
         #endregion
 

@@ -1,6 +1,5 @@
 ﻿using Sync.DB.Enum;
 using Sync.DB.Interface;
-using Sync.DB.Utils;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -15,7 +14,7 @@ namespace Sync.MSSQL
 
         }
 
-        public Connection(string dataSource, string? initialCatalog, bool integratedSecurity, string? userID, string? password)
+        public Connection(string dataSource, string? initialCatalog, bool integratedSecurity, string? userID = "", string? password = "")
         {
             DataSource = dataSource;
             InitialCatalog = initialCatalog;

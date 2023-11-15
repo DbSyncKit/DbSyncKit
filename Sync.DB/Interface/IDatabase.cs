@@ -29,5 +29,12 @@ namespace Sync.DB.Interface
         /// <param name="tableName">The name of the table associated with the query.</param>
         /// <returns>A list of results of type <typeparamref name="DataSet"/>.</returns>
         DataSet ExecuteQuery(string query, string tableName);
+
+
+        /// <summary>
+        /// Tests weather the connection string is valid or not
+        /// </summary>
+        /// <returns></returns>
+        bool TestConnection();
     }
 }

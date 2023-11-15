@@ -72,6 +72,23 @@ namespace Sync.SQL
             }
         }
 
+        public bool TestConnection()
+        {
+            try
+            {
+                using (MySqlConnection mySqlConnection = new MySqlConnection(GetConnectionString()))
+                {
+                    mySqlConnection.Open();
+                    mySqlConnection.Close();
 
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception, log it, or rethrow a more specific exception.
+                throw new Exception("Error executing query: " + ex.Message);
+            }
+        }
     }
 }
