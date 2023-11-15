@@ -1,4 +1,5 @@
-﻿using Sync.DB.Utils;
+﻿using Sync.DB.Interface;
+using Sync.DB.Utils;
 
 namespace Sync.Core.DataContract.Config
 {
@@ -43,13 +44,13 @@ namespace Sync.Core.DataContract.Config
 
                 // Filter types that inherit from DataContractUtility<T>
                 var dataContractTypes = types
-                    .Where(type =>
-                        type.IsClass &&
-                        !type.IsAbstract &&
-                        type.BaseType != null &&
-                        type.BaseType.IsGenericType &&
-                        type.BaseType.GetGenericTypeDefinition() == typeof(DataContractUtility<>)
-                    );
+                .Where(type =>
+                    type.IsClass &&
+                    !type.IsAbstract &&
+                    type.BaseType != null &&
+                    (type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(DataContractUtility<>) ||
+                    type.GetInterfaces().Any(i => i == typeof(IDataContractComparer)))
+                );
 
                 // Add the found types to the dictionary
                 foreach (var dataContractType in dataContractTypes)

@@ -1,8 +1,9 @@
-﻿using System.Data;
+﻿using Sync.DB.Interface;
+using System.Data;
 
 namespace Sync.MSSQL.DataContract
 {
-    public class UserDataType
+    public class UserDataType : IDataContractComparer
     {
         #region Constructor
 

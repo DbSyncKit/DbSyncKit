@@ -1,8 +1,9 @@
 ﻿using System.Data;
+using Sync.DB.Interface;
 
 namespace Sync.MSSQL.DataContract.Generic
 {
-    public class Schema
+    public class Schema : IDataContractComparer
     {
         #region Constructor
 

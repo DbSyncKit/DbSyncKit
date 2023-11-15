@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Sync.DB.Interface;
+using System.Text;
 
 namespace Sync.DB.Utils
 {
@@ -6,9 +7,8 @@ namespace Sync.DB.Utils
     /// Generic utility class for working with data contract classes.
     /// </summary>
     /// <typeparam name="T">The type of the data contract class.</typeparam>
-    public class DataContractUtility<T> where T : DataContractUtility<T>
+    public class DataContractUtility<T> : IDataContractComparer where T : IDataContractComparer
     {
-
         /// <summary>
         /// Calculates the hash code for the object, excluding specified properties.
         /// </summary>
