@@ -1,3 +1,4 @@
+using Sync.Core.DataContract.Config;
 using Sync.DB.Interface;
 using Sync.DB.Utils;
 using System.Reflection;
@@ -11,10 +12,20 @@ namespace Sync.Test
         public void Init()
         {
             //IF the Assembly is not loaded please make sure its loaded at startup.
-            Assembly.Load("Sync.MSSQL");
-            Assembly.Load("Sync.SQL");
-            Assembly.Load("Sync.SQLite");
-            Assembly.Load("Sync.Test.SampleContract");
+            var listOfAssm = new List<string>();
+            listOfAssm.Add("Sync.MSSQL");
+            listOfAssm.Add("Sync.SQL");
+            listOfAssm.Add("Sync.SQLite");
+            listOfAssm.Add("Sync.Test.SampleContract");
+
+            foreach (var assm in listOfAssm)
+            {
+                try
+                {
+                    Assembly.Load(assm);
+                }
+                catch (Exception) { }
+            }
         }
 
 

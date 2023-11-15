@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sync.Test.DBTests
+namespace Sync.Test.MSSQL
 {
     [TestClass]
-    public class MS_SQL
+    public class SyncTest
     {
 
         public IDatabase Source { get; set; }
