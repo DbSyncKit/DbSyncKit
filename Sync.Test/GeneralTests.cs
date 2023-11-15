@@ -14,6 +14,7 @@ namespace Sync.Test
             Assembly.Load("Sync.MSSQL");
             Assembly.Load("Sync.SQL");
             Assembly.Load("Sync.SQLite");
+            Assembly.Load("Sync.Test.SampleContract");
         }
 
 
@@ -22,9 +23,7 @@ namespace Sync.Test
         {
             Dictionary<string, string> contracts = new();
             // Get all loaded assemblies
-            //var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(assembly => assembly.GetName().Name.StartsWith("Sync") );
-
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();//.Where(assembly => assembly.GetName().Name.StartsWith("Sync"));
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             // Iterate through each assembly
             foreach (var assembly in assemblies)

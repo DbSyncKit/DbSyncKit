@@ -28,6 +28,7 @@
     <ProjectReference Include="..\Sync.MSSQL\Sync.MSSQL.csproj" />
     <ProjectReference Include="..\Sync.SQLite\Sync.SQLite.csproj" />
     <ProjectReference Include="..\Sync.SQL\Sync.SQL.csproj" />
+    <ProjectReference Include="..\Sync.Test.Contracts\Sync.Test.SampleContract.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>

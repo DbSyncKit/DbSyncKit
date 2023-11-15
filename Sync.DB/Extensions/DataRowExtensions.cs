@@ -17,7 +17,7 @@ namespace Sync.DB.Extensions
         /// <remarks>
         /// This extension method is intended for use with classes that inherit from <see cref="DataContractUtility{T}"/>.
         /// </remarks>
-        public static T GetValue<T>(this DataRow row, string columnName) where T : DataContractUtility<T>
+        public static T GetValue<T>(this DataRow row, string columnName)
         {
             // Check if the DataRow is null
             if (row == null)
