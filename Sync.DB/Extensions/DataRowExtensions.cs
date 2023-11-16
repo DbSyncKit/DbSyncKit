@@ -1,5 +1,6 @@
-﻿using Sync.DB.Utils;
-using System.Data;
+﻿using System.Data;
+
+using Sync.DB.Utils;
 namespace Sync.DB.Extensions
 {
     /// <summary>

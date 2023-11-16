@@ -1,11 +1,7 @@
-﻿using Sync.DB.Interface;
+﻿using System.Data;
+using Sync.DB.Interface;
 using Sync.DB.Utils;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Sync.DB
 {
@@ -13,7 +9,7 @@ namespace Sync.DB
     /// Manages database operations for a specific database provider implementing the IDatabase interface.
     /// </summary>
     /// <typeparam name="T">Type of the database provider implementing IDatabase.</typeparam>
-    public class DatabaseManager<T>: IDisposable where T : IDatabase
+    public class DatabaseManager<T> : IDisposable where T : IDatabase
     {
         private readonly T _databaseProvider;
 

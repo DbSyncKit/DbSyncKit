@@ -1,11 +1,7 @@
-﻿using Sync.DB.Utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+
+using Sync.DB.Utils;
 
 namespace Sync.Core.Comparer
 {

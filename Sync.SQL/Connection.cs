@@ -1,8 +1,9 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Data;
+
+using MySql.Data.MySqlClient;
+
 using Sync.DB.Enum;
 using Sync.DB.Interface;
-using Sync.DB.Utils;
-using System.Data;
 
 namespace Sync.SQL
 {

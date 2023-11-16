@@ -1,17 +1,10 @@
-﻿using Sync.Core.Comparer;
-using Sync.Core.DataContract;
+﻿using System.Reflection;
+using Sync.Core.Comparer;
 using Sync.Core.DataContract.Config;
 using Sync.Core.Helper;
 using Sync.DB;
 using Sync.DB.Interface;
 using Sync.DB.Utils;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sync.Core
 {

@@ -1,7 +1,6 @@
-using Sync.Core.DataContract.Config;
+using System.Reflection;
 using Sync.DB.Interface;
 using Sync.DB.Utils;
-using System.Reflection;
 
 namespace Sync.Test
 {
@@ -53,7 +52,7 @@ namespace Sync.Test
                     );
 
                 // Add the found types to the dictionary
-                if( dataContractTypes.Any() )
+                if (dataContractTypes.Any())
                     Console.WriteLine($"Found {dataContractTypes.Count()} classes in {assembly.GetName().Name}");
 
                 foreach (var dataContractType in dataContractTypes)

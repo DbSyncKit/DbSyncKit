@@ -1,7 +1,7 @@
-﻿using Sync.DB.Extensions;
-using Sync.DB.Utils;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Data;
+using Sync.DB.Extensions;
+using Sync.DB.Utils;
 
 namespace Sync.Test.SampleContract.DataContract
 {

@@ -1,5 +1,6 @@
-﻿using Sync.DB.Interface;
-using System.Text;
+﻿using System.Text;
+
+using Sync.DB.Interface;
 
 namespace Sync.DB.Utils
 {
