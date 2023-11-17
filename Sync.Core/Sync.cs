@@ -1,8 +1,9 @@
 ﻿using System.Reflection;
 using Sync.Core.Comparer;
-using Sync.Core.DataContract.Config;
+using Sync.Core.DataContract;
 using Sync.Core.Helper;
 using Sync.DB;
+using Sync.DB.Attributes;
 using Sync.DB.Interface;
 using Sync.DB.Utils;
 
@@ -13,85 +14,55 @@ namespace Sync.Core
         private readonly IDatabase Source;
         private readonly IDatabase Destination;
         //private readonly DatabaseMetadata dbSchema;
-        //private readonly QueryGenerator queryGenerater;
-        public Sync(IDatabase source, IDatabase destination)
+        private readonly QueryGenerationManager queryGenerationManager;
+        public Sync(IDatabase source, IDatabase destination,IQuerryGenerator querryGenerator)
         {
             Source = source;
             Destination = destination;
             //dbSchema = new DatabaseMetadata();
-            //queryGenerater = new QueryGenerator();
+            queryGenerationManager = new QueryGenerationManager(querryGenerator);
         }
-        public void SyncTables(List<string> tableNames)
+
+        public Result<T> SyncData<T>() where T : IDataContractComparer
         {
-            Dictionary<string, long> changesCouter = new();
-            changesCouter.Add("Added", 0);
-            changesCouter.Add("Deleted", 0);
-            changesCouter.Add("Edited", 0);
+            string tableName = typeof(T).Assembly.GetName().Name!;
 
-            foreach (var tableName in tableNames)
-            {
-                // Assuming contract class is in the same namespace and follows the naming convention
-                var contractTypeName = SyncConfiguation.DataContractList.FirstOrDefault(contract => contract.Key == tableName).Value;
+            if(string.IsNullOrEmpty(tableName))
+                throw new ArgumentNullException(tableName,"Table Name Cannot be null");
 
-                // Use reflection to get the contract type
-                Type contractType = Type.GetType(contractTypeName);
+            List<string> sourceColList = new List<string>();
+            List<string> destinationColList = new List<string>();
 
-                if (contractType == null)
-                {
-                    Console.WriteLine($"Contract not found for table {tableName}");
-                    continue;
-                }
+            var sourceList = GetDataFromDatabase<T>(tableName, Source,sourceColList);
+            var destinationList = GetDataFromDatabase<T>(tableName, Destination, destinationColList);
 
-                // Use reflection to get the list of entities from the database for the current table
-                var methodInfo = this.GetType().GetMethod("GetDataFromDatabase", BindingFlags.NonPublic | BindingFlags.Instance);
-                var genericMethod = methodInfo.MakeGenericMethod(contractType);
+            return DataMetadataComparisonHelper<T>.GetDifferences(sourceList,destinationList,GetKeyColumns<T>(),GetExcludedProperties<T>());
 
-                //List<string> sourceColList = dbSchema.GetColumns(Source, tableName).Select(col => col.column_name).ToList();
-                //List<string> destinationColList = dbSchema.GetColumns(Destination, tableName).Select(col => col.column_name).ToList();
-                List<string> sourceColList = new List<string>();
-                List<string> destinationColList = new List<string>();
-                var sourceList = (IEnumerable<object>)genericMethod.Invoke(this, new object[] { tableName, Source, sourceColList });
-
-                // Use reflection to get the list of entities from the destination
-                var destinationList = (IEnumerable<object>)genericMethod.Invoke(this, new object[] { tableName, Destination, destinationColList });
-
-                // Use the MetadataComparer to get the differences
-                var comparerType = typeof(DataMetadataComparisonHelper<>).MakeGenericType(contractType);
-                var comparer = Activator.CreateInstance(comparerType);
-
-                // Get the MethodInfo for the GetDifferences method
-                var getDifferencesMethodInfo = comparerType.GetMethod("GetDifferences", BindingFlags.Public | BindingFlags.Static);
-
-                // Invoke the method on the current instance (this)
-                var result = getDifferencesMethodInfo.Invoke(null, new object[] { sourceList, destinationList, GetKeyColumns(tableName), GetExcludedProperties(tableName) });
-
-                // Process the differences
-                //ProcessDifferences((dynamic)result, contractType, ref changesCouter);
-
-            }
-
-            Console.WriteLine($"Edits: {changesCouter["Edited"]} Added: {changesCouter["Added"]} Deleted: {changesCouter["Deleted"]}");
         }
 
-        private List<string> GetExcludedProperties(string tableName)
+        private List<string> GetKeyColumns<T>()
         {
-            return SyncConfiguation.GetExcludedList(tableName);
+            return typeof(T).GetProperties()
+                .Where(prop => !Attribute.IsDefined(prop, typeof(KeyPropertyAttribute))).Select(prop => prop.Name).ToList();
         }
 
-        private List<string> GetKeyColumns(string tableName)
+        private List<string> GetExcludedProperties<T>()
         {
-            return SyncConfiguation.GetKeyColumnsList(tableName);
+            return typeof(T).GetProperties()
+               .Where(prop => !Attribute.IsDefined(prop, typeof(ExcludedPropertyAttribute))).Select(prop => prop.Name).ToList();
         }
 
-        private HashSet<T> GetDataFromDatabase<T>(string tableName, IDatabase connection, List<string> columns) where T : DataContractUtility<T>
+        private HashSet<T> GetDataFromDatabase<T>(string tableName, IDatabase connection, List<string> columns) where T : IDataContractComparer
         {
             columns = columns
-                .Where(prop => !GetExcludedProperties(tableName).Contains(prop)).Select(col => $"[{col}]").ToList();
-            var querry = $"SELECT {string.Join(",", columns)} FROM {tableName}";
+                .Where(prop => !GetExcludedProperties<T>().Contains(prop)).Select(col => $"[{col}]").ToList();
+            var querry = $" SELECT {string.Join(",", columns)} FROM {tableName} ";
+
+            var query = queryGenerationManager.GenerateSelectQuery(tableName, columns,string.Empty);
 
             using (var DBManager = new DatabaseManager<IDatabase>(connection))
             {
-                return DBManager.ExecuteQuery<T>(querry, tableName).ToHashSet(new KeyEqualityComparer<T>(GetKeyColumns(tableName), GetExcludedProperties(tableName)));
+                return DBManager.ExecuteQuery<T>(querry, tableName).ToHashSet(new KeyEqualityComparer<T>(GetKeyColumns<T>(), GetExcludedProperties<T>()));
             }
         }
 

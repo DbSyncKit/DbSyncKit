@@ -1,14 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data;
+
+using Sync.DB.Attributes;
 using Sync.DB.Extensions;
 using Sync.DB.Utils;
 
 namespace Sync.Test.SampleContract.DataContract
 {
+    [TableName("Playlist"), TableSchema("dbo")]
     public class Playlist : DataContractUtility<Playlist>
     {
         #region Declerations
-        [Key]
+        [KeyProperty]
         public int PlaylistId { get; set; }
         public string Name { get; set; }
 

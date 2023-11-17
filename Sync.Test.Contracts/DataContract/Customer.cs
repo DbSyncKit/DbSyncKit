@@ -1,14 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data;
+
+using Sync.DB.Attributes;
 using Sync.DB.Extensions;
 using Sync.DB.Utils;
 
 namespace Sync.Test.SampleContract.DataContract
 {
+    [TableName("Customer"), TableSchema("dbo")]
+
     public class Customer : DataContractUtility<Customer>
     {
         #region Properties
-        [Key]
+        [KeyProperty]
         public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

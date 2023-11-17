@@ -21,9 +21,8 @@ namespace Sync.DB.Interface
         string GetConnectionString();
 
         /// <summary>
-        /// Executes a query against the database and returns a list of results for a specific data type.
+        /// Executes a query against the database
         /// </summary>
-        /// <typeparam name="T">The type of data to retrieve.</typeparam>
         /// <param name="query">The SQL query to execute.</param>
         /// <param name="tableName">The name of the table associated with the query.</param>
         /// <returns>A list of results of type <typeparamref name="DataSet"/>.</returns>

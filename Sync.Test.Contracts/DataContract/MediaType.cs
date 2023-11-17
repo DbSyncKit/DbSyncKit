@@ -1,14 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data;
+
+using Sync.DB.Attributes;
 using Sync.DB.Extensions;
 using Sync.DB.Utils;
 
 namespace Sync.Test.SampleContract.DataContract
 {
+    [TableName("MediaType"), TableSchema("dbo")]
     public class MediaType : DataContractUtility<MediaType>
     {
         #region Declerations
-        [Key]
+        [KeyProperty]
         public int MediaTypeId { get; set; }
         public string Name { get; set; }
 

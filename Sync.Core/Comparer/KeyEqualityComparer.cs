@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
+using Sync.DB.Interface;
 using Sync.DB.Utils;
 
 namespace Sync.Core.Comparer
 {
-    public class KeyEqualityComparer<T> : IEqualityComparer<T> where T : DataContractUtility<T>
+    public class KeyEqualityComparer<T> : IEqualityComparer<T> where T : IDataContractComparer
     {
         private readonly PropertyInfo keyProperty;
 

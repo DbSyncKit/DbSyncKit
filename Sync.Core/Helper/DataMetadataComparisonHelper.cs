@@ -3,11 +3,12 @@ using System.Reflection;
 using Sync.Core.Comparer;
 
 using Sync.Core.DataContract;
+using Sync.DB.Interface;
 using Sync.DB.Utils;
 
 namespace Sync.Core.Helper
 {
-    public class DataMetadataComparisonHelper<T> where T : DataContractUtility<T>
+    public class DataMetadataComparisonHelper<T> where T : IDataContractComparer
     {
         public static Result<T> GetDifferences(HashSet<T> sourceList, HashSet<T> destinationList, List<string> keyProperties, List<string> excludedProperties)
         {
@@ -65,7 +66,7 @@ namespace Sync.Core.Helper
         {
             Dictionary<string, object> updatedProperties = new Dictionary<string, object>();
             bool isEdited = false;
-            if (source.Equals(destination, excludedProperties))
+            if (source.Equals(destination))
             {
                 return (isEdited, updatedProperties);
             }

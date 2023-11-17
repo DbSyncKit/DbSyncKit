@@ -1,14 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data;
+
+using Sync.DB.Attributes;
 using Sync.DB.Extensions;
 using Sync.DB.Utils;
 
 namespace Sync.Test.SampleContract.DataContract
 {
+    [TableName("Invoice"), TableSchema("dbo")]
     public class InvoiceLine : DataContractUtility<InvoiceLine>
     {
         #region Declerations
-        [Key]
+        [KeyProperty]
         public int InvoiceLineId { get; set; }
         public int CustomerId { get; set; }
         public int TrackId { get; set; }

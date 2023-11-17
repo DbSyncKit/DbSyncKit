@@ -29,7 +29,7 @@ namespace Sync.DB
         /// <param name="query">The SQL query to execute.</param>
         /// <param name="tableName">The name of the table associated with the query.</param>
         /// <returns>A list of results of type <typeparamref name="TItem"/>.</returns>
-        public List<TItem> ExecuteQuery<TItem>(string query, string tableName) where TItem : DataContractUtility<TItem>
+        public List<TItem> ExecuteQuery<TItem>(string query, string tableName) where TItem : IDataContractComparer
         {
             List<TItem> result = new List<TItem>();
 

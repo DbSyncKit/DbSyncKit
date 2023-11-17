@@ -5,7 +5,7 @@ using Sync.DB.Interface;
 
 namespace Sync.MSSQL
 {
-    public class Connection : IDatabase
+    public class Connection : IDatabase, IMetadata
     {
         #region Constructors
 
@@ -47,6 +47,51 @@ namespace Sync.MSSQL
         public string? Password { get; set; }
         public bool IntegratedSecurity { get; set; }
         public DatabaseProvider Provider => DatabaseProvider.MSSQL;
+
+        #region SQL Querries
+        private readonly string GET_TABLE_LIST = @"
+            SELECT 
+                name AS table_name, 
+                schema_id, 
+                SCHEMA_NAME(schema_id) AS schema_name, 
+                type, 
+                create_date, 
+                modify_date, 
+                max_column_id_used, 
+                uses_ansi_nulls 
+            FROM 
+                sys.tables 
+            WHERE 
+                type = 'U' 
+            ORDER BY 
+                name;
+        ";
+
+        string GET_DATATYPE_LIST = @"
+            SELECT 
+                name,
+                system_type_id,
+                user_type_id,
+                schema_id,
+                principal_id,
+                max_length,
+                [precision],
+                [scale],
+                collation_name,
+                is_nullable,
+                is_user_defined,
+                is_assembly_type,
+                default_object_id,
+                rule_object_id,
+                is_table_type
+            FROM 
+                sys.types 
+            ORDER BY 
+                name;
+        ";
+
+
+        #endregion
 
         #endregion
 
@@ -138,6 +183,68 @@ namespace Sync.MSSQL
                     throw new Exception("Error executing query: " + ex.Message);
                 }
             }
+        }
+
+        public ICollection<T> GetTables<T>()
+        {
+            var sqlQuerry = "";
+
+            throw new NotImplementedException();
+        }
+
+        public ICollection<T> GetColumns<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<T> GetColumns<T>(string tableName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<T> GetIndex<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<T> GetPrimary<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<T> GetForeign<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<T> GetIdentity<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<T> GetUniqueConstraint<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<T> GetDefaultConstraint<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<T> GetCheckConstraint<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<T> GetUserDataType<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<T> GetUserTableType<T>()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
