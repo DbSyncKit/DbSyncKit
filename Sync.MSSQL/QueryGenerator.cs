@@ -15,7 +15,7 @@ namespace Sync.MSSQL
     /// <summary>
     /// MSSQL Scepific Querry Generator
     /// </summary>
-    public class QueryGenerator : QueryHelper,IQuerryGenerator
+    public class QueryGenerator : QueryHelper,IQueryGenerator
     {
         #region Properties
 
@@ -117,7 +117,7 @@ namespace Sync.MSSQL
         /// <param name="excludedColumns">List of excluded columns.</param>
         /// <param name="editedProperties">Dictionary of edited properties.</param>
         /// <returns>Update Query in string.</returns>
-        public string GenerateUpdateQuery<T>(T DataContract, List<string> keyColumns, List<string> excludedColumns, Dictionary<string, object> editedProperties)
+        public string GenerateUpdateQuery<T>(T DataContract, List<string> keyColumns, List<string> excludedColumns, Dictionary<string, object> editedProperties) where T : IDataContractComparer
         {
             queryBuilder.Clear();
 
@@ -143,7 +143,7 @@ namespace Sync.MSSQL
         /// <param name="entity">The entity to be deleted.</param>
         /// <param name="keyColumns">List of key columns.</param>
         /// <returns>Delete Query in string.</returns>
-        public string GenerateDeleteQuery<T>(T entity, List<string> keyColumns)
+        public string GenerateDeleteQuery<T>(T entity, List<string> keyColumns) where T : IDataContractComparer
         {
             queryBuilder.Clear();
 
@@ -168,7 +168,7 @@ namespace Sync.MSSQL
         /// <param name="keyColumns">List of key columns.</param>
         /// <param name="excludedColumns">List of excluded columns.</param>
         /// <returns>Insert Query in string.</returns>
-        public string GenerateInsertQuery<T>(T entity, List<string> keyColumns, List<string> excludedColumns)
+        public string GenerateInsertQuery<T>(T entity, List<string> keyColumns, List<string> excludedColumns) where T : IDataContractComparer
         {
             queryBuilder.Clear();
 
@@ -194,6 +194,31 @@ namespace Sync.MSSQL
             ReplacePlaceholder(ref queryBuilder, "@Values", values);
 
             return queryBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Generates a comment string in either single-line or multi-line format.
+        /// </summary>
+        /// <param name="comment">The content of the comment. If the comment contains line breaks, it will be treated as a multi-line comment; otherwise, it will be treated as a single-line comment.</param>
+        /// <returns>The generated comment string.</returns>
+
+        public string GenerateComment(string comment)
+        {
+            if (string.IsNullOrWhiteSpace(comment))            
+                return string.Empty;
+
+            bool isMultiLine = comment.Contains(Environment.NewLine);
+
+            if (!isMultiLine)
+                return "-- " + comment;
+
+
+            StringBuilder CommentBuilder = new StringBuilder();
+            CommentBuilder.AppendLine("/*");
+            CommentBuilder.AppendLine(comment);
+            CommentBuilder.AppendLine("*/");
+
+            return CommentBuilder.ToString();
         }
 
         #endregion

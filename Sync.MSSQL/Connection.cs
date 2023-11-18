@@ -5,15 +5,29 @@ using Sync.DB.Interface;
 
 namespace Sync.MSSQL
 {
-    public class Connection : IDatabase, IMetadata
+    /// <summary>
+    /// Represents a connection to a Microsoft SQL Server database.
+    /// </summary>
+    public class Connection : IDatabase
     {
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Connection"/> class.
+        /// </summary>
         public Connection()
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Connection"/> class with the specified connection parameters.
+        /// </summary>
+        /// <param name="dataSource">The data source or IP address.</param>
+        /// <param name="initialCatalog">The initial catalog or database name.</param>
+        /// <param name="integratedSecurity">Indicates whether to use integrated security.</param>
+        /// <param name="userID">The user ID for SQL authentication.</param>
+        /// <param name="password">The password for SQL authentication.</param>
         public Connection(string dataSource, string? initialCatalog, bool integratedSecurity, string? userID = "", string? password = "")
         {
             DataSource = dataSource;
@@ -23,6 +37,16 @@ namespace Sync.MSSQL
             Password = password;
         }
 
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Connection"/> class with the specified connection parameters.
+        /// </summary>
+        /// <param name="server">The server address.</param>
+        /// <param name="database">The database name.</param>
+        /// <param name="integratedSecurity">Indicates whether to use integrated security.</param>
+        /// <param name="userID">The user ID for SQL authentication.</param>
+        /// <param name="password">The password for SQL authentication.</param>
+        /// <param name="useServerAddress">Indicates whether to use the server address.</param>
         public Connection(string server, string? database, bool integratedSecurity, string? userID, string? password, bool useServerAddress)
         {
             UseServerAddress = useServerAddress;
@@ -37,66 +61,59 @@ namespace Sync.MSSQL
 
 
         #region Properties
-
+        /// <summary>
+        /// Gets or sets a value indicating whether to use the server address.
+        /// </summary>
         public bool UseServerAddress { get; set; }
+
+        /// <summary>
+        /// Gets or sets the data source or IP address.
+        /// </summary>
         public string? DataSource { get; set; }
+
+        /// <summary>
+        /// Gets or sets the server address.
+        /// </summary>
         public string? Server { get; set; }
+
+        /// <summary>
+        /// Gets or sets the database name.
+        /// </summary>
         public string? Database { get; set; }
+
+        /// <summary>
+        /// Gets or sets the initial catalog or database name.
+        /// </summary>
         public string? InitialCatalog { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user ID for SQL authentication.
+        /// </summary>
         public string? UserID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the password for SQL authentication.
+        /// </summary>
         public string? Password { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to use integrated security.
+        /// </summary>
         public bool IntegratedSecurity { get; set; }
+
+        /// <summary>
+        /// Gets the database provider type, which is MSSQL for this class.
+        /// </summary>
         public DatabaseProvider Provider => DatabaseProvider.MSSQL;
-
-        #region SQL Querries
-        private readonly string GET_TABLE_LIST = @"
-            SELECT 
-                name AS table_name, 
-                schema_id, 
-                SCHEMA_NAME(schema_id) AS schema_name, 
-                type, 
-                create_date, 
-                modify_date, 
-                max_column_id_used, 
-                uses_ansi_nulls 
-            FROM 
-                sys.tables 
-            WHERE 
-                type = 'U' 
-            ORDER BY 
-                name;
-        ";
-
-        string GET_DATATYPE_LIST = @"
-            SELECT 
-                name,
-                system_type_id,
-                user_type_id,
-                schema_id,
-                principal_id,
-                max_length,
-                [precision],
-                [scale],
-                collation_name,
-                is_nullable,
-                is_user_defined,
-                is_assembly_type,
-                default_object_id,
-                rule_object_id,
-                is_table_type
-            FROM 
-                sys.types 
-            ORDER BY 
-                name;
-        ";
-
-
-        #endregion
 
         #endregion
 
         #region Public Methods
 
+        /// <summary>
+        /// Tests the database connection.
+        /// </summary>
+        /// <returns>True if the connection is successful; otherwise, false.</returns>
         public bool TestConnection()
         {
             string connectionString = string.Empty;
@@ -123,6 +140,10 @@ namespace Sync.MSSQL
             }
         }
 
+        /// <summary>
+        /// Gets the connection string based on the provided parameters.
+        /// </summary>
+        /// <returns>The connection string.</returns>
         public string GetConnectionString()
         {
             string connectionString = string.Empty;
@@ -161,6 +182,13 @@ namespace Sync.MSSQL
         #endregion
 
         #region Static Method
+
+        /// <summary>
+        /// Executes a SQL query and returns the result as a DataSet.
+        /// </summary>
+        /// <param name="query">The SQL query string.</param>
+        /// <param name="tableName">The name to be assigned to the result table in the DataSet.</param>
+        /// <returns>A DataSet containing the result of the query.</returns>
         public DataSet ExecuteQuery(string query, string tableName)
         {
             using (SqlConnection sqlConnection = new SqlConnection(this.GetConnectionString()))
@@ -183,68 +211,6 @@ namespace Sync.MSSQL
                     throw new Exception("Error executing query: " + ex.Message);
                 }
             }
-        }
-
-        public ICollection<T> GetTables<T>()
-        {
-            var sqlQuerry = "";
-
-            throw new NotImplementedException();
-        }
-
-        public ICollection<T> GetColumns<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<T> GetColumns<T>(string tableName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<T> GetIndex<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<T> GetPrimary<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<T> GetForeign<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<T> GetIdentity<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<T> GetUniqueConstraint<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<T> GetDefaultConstraint<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<T> GetCheckConstraint<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<T> GetUserDataType<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<T> GetUserTableType<T>()
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

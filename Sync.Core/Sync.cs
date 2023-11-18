@@ -1,31 +1,29 @@
 ﻿using System.Reflection;
+using System.Text;
 using Sync.Core.Comparer;
 using Sync.Core.DataContract;
 using Sync.Core.Helper;
 using Sync.DB;
 using Sync.DB.Attributes;
+using Sync.DB.Helper;
 using Sync.DB.Interface;
 using Sync.DB.Utils;
 
 namespace Sync.Core
 {
-    public class Sync
+    public class Sync : QueryHelper
     {
-        private readonly IDatabase Source;
-        private readonly IDatabase Destination;
         //private readonly DatabaseMetadata dbSchema;
         private readonly QueryGenerationManager queryGenerationManager;
-        public Sync(IDatabase source, IDatabase destination,IQuerryGenerator querryGenerator)
+        public Sync(IQueryGenerator querryGenerator)
         {
-            Source = source;
-            Destination = destination;
             //dbSchema = new DatabaseMetadata();
             queryGenerationManager = new QueryGenerationManager(querryGenerator);
         }
 
-        public Result<T> SyncData<T>() where T : IDataContractComparer
+        public Result<T> SyncData<T>(IDatabase source, IDatabase destination) where T : IDataContractComparer
         {
-            string tableName = typeof(T).Assembly.GetName().Name!;
+            string tableName = GetTableName<T>();
 
             if(string.IsNullOrEmpty(tableName))
                 throw new ArgumentNullException(tableName,"Table Name Cannot be null");
@@ -33,23 +31,47 @@ namespace Sync.Core
             List<string> sourceColList = new List<string>();
             List<string> destinationColList = new List<string>();
 
-            var sourceList = GetDataFromDatabase<T>(tableName, Source,sourceColList);
-            var destinationList = GetDataFromDatabase<T>(tableName, Destination, destinationColList);
+            var sourceList = GetDataFromDatabase<T>(tableName, source, sourceColList);
+            var destinationList = GetDataFromDatabase<T>(tableName, destination, destinationColList);
 
             return DataMetadataComparisonHelper<T>.GetDifferences(sourceList,destinationList,GetKeyColumns<T>(),GetExcludedProperties<T>());
 
         }
 
-        private List<string> GetKeyColumns<T>()
+        public string GetSqlQueryForSyncData<T>(Result<T> result) where T : IDataContractComparer
         {
-            return typeof(T).GetProperties()
-                .Where(prop => !Attribute.IsDefined(prop, typeof(KeyPropertyAttribute))).Select(prop => prop.Name).ToList();
-        }
+            var inserts = new StringBuilder();
+            foreach (var entity in result.Added)
+            {
+                inserts.AppendLine(queryGenerationManager.GenerateInsertQuery(entity, GetKeyColumns<T>(), GetExcludedProperties<T>()));
+            }
 
-        private List<string> GetExcludedProperties<T>()
-        {
-            return typeof(T).GetProperties()
-               .Where(prop => !Attribute.IsDefined(prop, typeof(ExcludedPropertyAttribute))).Select(prop => prop.Name).ToList();
+            var delete = new StringBuilder();
+            foreach (var entity in result.Deleted)
+            {
+                delete.AppendLine(queryGenerationManager.GenerateDeleteQuery(entity, GetKeyColumns<T>()));
+            }
+
+            var edits = new StringBuilder();
+
+            foreach (var (entity, updatedProperties) in result.Edited)
+            {
+                edits.AppendLine(queryGenerationManager.GenerateUpdateQuery<T>(entity, GetKeyColumns<T>(), GetExcludedProperties<T>(), updatedProperties));
+            }
+
+
+            var query = new StringBuilder();
+
+            var TableName = GetTableName<T>();
+
+            query.AppendLine(queryGenerationManager.GenerateComment($"Insert Query for {TableName}"));
+            query.AppendLine(inserts.ToString());
+            query.AppendLine(queryGenerationManager.GenerateComment($"Delete Query for {TableName}"));
+            query.AppendLine(delete.ToString());
+            query.AppendLine(queryGenerationManager.GenerateComment($"Update Query for {TableName}"));
+            query.AppendLine(edits.ToString());
+
+            return query.ToString();
         }
 
         private HashSet<T> GetDataFromDatabase<T>(string tableName, IDatabase connection, List<string> columns) where T : IDataContractComparer
@@ -65,55 +87,5 @@ namespace Sync.Core
                 return DBManager.ExecuteQuery<T>(querry, tableName).ToHashSet(new KeyEqualityComparer<T>(GetKeyColumns<T>(), GetExcludedProperties<T>()));
             }
         }
-
-        //private void ProcessDifferences<T>(Result<T> result, Type contractType, ref Dictionary<string, long> changesCounter)
-        //{
-        //    // Your logic to process added, deleted, and edited entities
-        //    Console.WriteLine($"Processing differences for type: {contractType.Name}");
-
-        //    Console.WriteLine("Added:");
-        //    Type Type = typeof(T);
-
-        //    var tableName = Type.Name;
-        //    var withID = SyncConfiguation.Tables.TryGetValue(tableName, out var table);
-        //    if (table == null)
-        //    {
-        //        return;
-        //    }
-
-        //    var inserts = new StringBuilder();
-        //    foreach (var entity in result.Added)
-        //    {
-        //        inserts.AppendLine(queryGenerater.GenerateInsertQuery(entity, GetKeyColumns(tableName), GetExcludedProperties(tableName), table.WithIdentityInsert));
-        //    }
-        //    Console.WriteLine(inserts.ToString());
-
-
-
-        //    Console.WriteLine("\nDeleted:");
-        //    var delete = new StringBuilder();
-        //    foreach (var entity in result.Deleted)
-        //    {
-        //        delete.AppendLine(queryGenerater.GenerateDeleteQuery(entity, GetKeyColumns(tableName)));
-        //    }
-
-        //    Console.WriteLine(delete.ToString());
-        //    var edits = new StringBuilder();
-
-
-        //    Console.WriteLine("\nEdited:");
-        //    foreach (var (entity, updatedProperties) in result.Edited)
-        //    {
-        //        edits.AppendLine(queryGenerater.GenerateUpdateQuery(entity, GetKeyColumns(tableName), GetExcludedProperties(tableName), updatedProperties));
-        //        //Console.WriteLine($"Entity: {entity}, Updated Properties: {string.Join(", ", updatedProperties)}");
-        //    }
-
-        //    Console.WriteLine(edits.ToString());
-
-
-        //    changesCounter["Added"] += result.Added.Count;
-        //    changesCounter["Edited"] += result.Edited.Count;
-        //    changesCounter["Deleted"] += result.Deleted.Count;
-        //}
     }
 }

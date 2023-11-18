@@ -1,6 +1,8 @@
 using System.Reflection;
+using Sync.DB.Helper;
 using Sync.DB.Interface;
 using Sync.DB.Utils;
+using Sync.Test.SampleContract.DataContract;
 
 namespace Sync.Test
 {
@@ -13,8 +15,8 @@ namespace Sync.Test
             //IF the Assembly is not loaded please make sure its loaded at startup.
             var listOfAssm = new List<string>();
             listOfAssm.Add("Sync.MSSQL");
-            listOfAssm.Add("Sync.SQL");
-            listOfAssm.Add("Sync.SQLite");
+            listOfAssm.Add("Sync.MySql");
+            listOfAssm.Add("Sync.Postgre");
             listOfAssm.Add("Sync.Test.SampleContract");
 
             foreach (var assm in listOfAssm)
@@ -62,6 +64,22 @@ namespace Sync.Test
 
             }
             Console.WriteLine($"Found Total of {contracts.Count()} classes");
+        }
+
+        [TestMethod]
+        public void CheckAttributes()
+        {
+            var queryHelper = new QueryHelper();
+            var TableName = queryHelper.GetTableName<Album>();
+            var SchemaName = queryHelper.GetTableSchema<Album>();
+            var KeyAttribues = queryHelper.GetKeyColumns<Album>();
+            var ExcludeAttribues = queryHelper.GetExcludedProperties<Album>();
+            var withID = queryHelper.GetInsertWithID<Album>();
+
+            Console.WriteLine($"TableName: {TableName}, SchemaName: {SchemaName}");
+            Console.WriteLine("KeyAttributes: "+string.Join(", ",KeyAttribues));
+            Console.WriteLine("ExcludeAttribues: " + string.Join(", ", ExcludeAttribues));
+            Console.WriteLine("GenerateInsertwithID: " + withID);
         }
     }
 }
