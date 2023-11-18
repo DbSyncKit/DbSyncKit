@@ -26,30 +26,26 @@ namespace Sync.MSSQL
         private readonly string SELECT_TABLE_BASE_QUERY = "SELECT @Columns FROM @Schema.@TableName";
 
         private readonly string INSERT_QUERT_WITHOUT_ID = @"
-        IF NOT EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
-        BEGIN
-        INSERT INTO @Schema.@TableName (@Columns) VALUES (@Values)
-        END
-        ";
+IF NOT EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
+BEGIN
+INSERT INTO @Schema.@TableName (@Columns) VALUES (@Values)
+END";
 
         private readonly string INSERT_QUERT_WITH_ID = @"
-        IF NOT EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
-        BEGIN
-            SET IDENTITY_INSERT @Schema.@TableName ON
-                INSERT INTO @Schema.@TableName (@Columns) VALUES (@Values)
-            SET IDENTITY_INSERT @Schema.@TableName OFF
-        END
-        ";
+IF NOT EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
+BEGIN
+    SET IDENTITY_INSERT @Schema.@TableName ON
+        INSERT INTO @Schema.@TableName (@Columns) VALUES (@Values)
+    SET IDENTITY_INSERT @Schema.@TableName OFF
+END";
 
         private readonly string UPDATE_QUERY = @"
-        IF EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
-        UPDATE @Schema.@TableName SET @Set WHERE @Where}
-        ";
+IF EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
+UPDATE @Schema.@TableName SET @Set WHERE @Where}";
 
         private readonly string DELETE_QUERY = @"
-        IF EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
-        DELETE FROM @Schema.@TableName WHERE @Where
-        ";
+IF EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
+DELETE FROM @Schema.@TableName WHERE @Where";
 
         #endregion
 

@@ -63,30 +63,6 @@ namespace Sync.DB.Utils
             return stringBuilder.ToString();
         }
 
-#if DEBUG
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            // Get all properties of the Entity class &
-            // Filter out properties that are in the exclusion list
-            var filteredProperties = typeof(T).GetProperties()
-                .Where(prop => !Attribute.IsDefined(prop, typeof(ExcludedPropertyAttribute)));
-
-            // Create a string representation
-            StringBuilder stringBuilder = new StringBuilder(base.ToString());
-            foreach (var prop in filteredProperties)
-            {
-                var value = prop.GetValue(this);
-                stringBuilder.Append($",\t{prop.Name}: {value}");
-            }
-
-            return stringBuilder.ToString();
-        }
-#endif
-
         /// <summary>
         /// Checks if the current object is equal to another object, considering specified properties.
         /// </summary>
@@ -140,44 +116,6 @@ namespace Sync.DB.Utils
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Gets a list of property names representing the columns of the data contract class.
-        /// </summary>
-        /// <returns>A list of property names.</returns>
-        public List<string> GetColumns()
-        {
-            // Get all properties of the class
-            return typeof(T).GetProperties().Select(col => col.Name).ToList();
-        }
-
-        /// <summary>
-        /// Gets the name of the property with a specified attribute.
-        /// </summary>
-        /// <typeparam name="TAttribute">The type of the attribute.</typeparam>
-        /// <param name="type">The type of the data contract class.</param>
-        /// <returns>The name of the property with the specified attribute; null if not found.</returns>
-        public string GetPropertyNameWithAttribute<TAttribute>(Type type) where TAttribute : Attribute
-        {
-            var property = type.GetProperties()
-                .FirstOrDefault(prop => Attribute.IsDefined(prop, typeof(TAttribute)));
-
-            return property?.Name;
-        }
-
-        /// <summary>
-        /// Gets the value of the property with a specified attribute.
-        /// </summary>
-        /// <typeparam name="TAttribute">The type of the attribute.</typeparam>
-        /// <param name="type">The type of the data contract class.</param>
-        /// <returns>The value of the property with the specified attribute; null if not found.</returns>
-        public object GetPropertyValueWithAttribute<TAttribute>(Type type) where TAttribute : Attribute
-        {
-            var property = type.GetProperties()
-                .FirstOrDefault(prop => Attribute.IsDefined(prop, typeof(TAttribute)));
-
-            return property?.GetValue(property?.Name);
         }
     }
 }
