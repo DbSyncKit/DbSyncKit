@@ -1,5 +1,5 @@
-﻿using System.Data;
-using Sync.DB.Interface;
+﻿using Sync.DB.Interface;
+using System.Data;
 
 namespace Sync.MSSQL.DataContract
 {

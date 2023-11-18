@@ -1,7 +1,7 @@
-﻿using System.Data;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using Sync.DB.Enum;
 using Sync.DB.Interface;
+using System.Data;
 
 namespace Sync.Postgre
 {

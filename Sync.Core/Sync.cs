@@ -1,13 +1,10 @@
-﻿using System.Reflection;
-using System.Text;
-using Sync.Core.Comparer;
+﻿using Sync.Core.Comparer;
 using Sync.Core.DataContract;
 using Sync.Core.Helper;
 using Sync.DB;
-using Sync.DB.Attributes;
 using Sync.DB.Helper;
 using Sync.DB.Interface;
-using Sync.DB.Utils;
+using System.Text;
 
 namespace Sync.Core
 {
@@ -25,8 +22,8 @@ namespace Sync.Core
         {
             string tableName = GetTableName<T>();
 
-            if(string.IsNullOrEmpty(tableName))
-                throw new ArgumentNullException(tableName,"Table Name Cannot be null");
+            if (string.IsNullOrEmpty(tableName))
+                throw new ArgumentNullException(tableName, "Table Name Cannot be null");
 
             List<string> sourceColList = new List<string>();
             List<string> destinationColList = new List<string>();
@@ -34,7 +31,7 @@ namespace Sync.Core
             var sourceList = GetDataFromDatabase<T>(tableName, source, sourceColList);
             var destinationList = GetDataFromDatabase<T>(tableName, destination, destinationColList);
 
-            return DataMetadataComparisonHelper<T>.GetDifferences(sourceList,destinationList,GetKeyColumns<T>(),GetExcludedProperties<T>());
+            return DataMetadataComparisonHelper<T>.GetDifferences(sourceList, destinationList, GetKeyColumns<T>(), GetExcludedProperties<T>());
 
         }
 
@@ -80,7 +77,7 @@ namespace Sync.Core
                 .Where(prop => !GetExcludedProperties<T>().Contains(prop)).Select(col => $"[{col}]").ToList();
             var querry = $" SELECT {string.Join(",", columns)} FROM {tableName} ";
 
-            var query = queryGenerationManager.GenerateSelectQuery(tableName, columns,string.Empty);
+            var query = queryGenerationManager.GenerateSelectQuery(tableName, columns, string.Empty);
 
             using (var DBManager = new DatabaseManager<IDatabase>(connection))
             {

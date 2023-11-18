@@ -1,8 +1,8 @@
-using System.Reflection;
 using Sync.DB.Helper;
 using Sync.DB.Interface;
 using Sync.DB.Utils;
 using Sync.Test.SampleContract.DataContract;
+using System.Reflection;
 
 namespace Sync.Test
 {
@@ -77,7 +77,7 @@ namespace Sync.Test
             var withID = queryHelper.GetInsertWithID<Album>();
 
             Console.WriteLine($"TableName: {TableName}, SchemaName: {SchemaName}");
-            Console.WriteLine("KeyAttributes: "+string.Join(", ",KeyAttribues));
+            Console.WriteLine("KeyAttributes: " + string.Join(", ", KeyAttribues));
             Console.WriteLine("ExcludeAttribues: " + string.Join(", ", ExcludeAttribues));
             Console.WriteLine("GenerateInsertwithID: " + withID);
         }

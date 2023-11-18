@@ -1,5 +1,5 @@
-﻿using System.Data;
-using Sync.DB.Enum;
+﻿using Sync.DB.Enum;
+using System.Data;
 
 namespace Sync.DB.Interface
 {

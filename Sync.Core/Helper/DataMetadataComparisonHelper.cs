@@ -1,10 +1,8 @@
-﻿using System.Collections.Concurrent;
-using System.Reflection;
-using Sync.Core.Comparer;
-
+﻿using Sync.Core.Comparer;
 using Sync.Core.DataContract;
 using Sync.DB.Interface;
-using Sync.DB.Utils;
+using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace Sync.Core.Helper
 {

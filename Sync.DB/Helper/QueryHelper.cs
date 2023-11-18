@@ -1,11 +1,7 @@
 ﻿using Sync.DB.Attributes;
 using Sync.DB.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Sync.DB.Helper
 {

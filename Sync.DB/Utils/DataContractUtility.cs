@@ -1,7 +1,6 @@
-﻿using System.Text;
-
-using Sync.DB.Attributes;
+﻿using Sync.DB.Attributes;
 using Sync.DB.Interface;
+using System.Text;
 
 namespace Sync.DB.Utils
 {

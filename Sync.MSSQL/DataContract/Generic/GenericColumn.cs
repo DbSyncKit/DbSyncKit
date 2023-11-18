@@ -1,5 +1,4 @@
-﻿using Sync.DB.Extensions;
-using System.Data;
+﻿using System.Data;
 
 namespace Sync.MSSQL.DataContract.Generic
 {

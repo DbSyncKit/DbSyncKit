@@ -1,6 +1,5 @@
-﻿using System.Data;
-using Sync.DB.Interface;
-using Sync.DB.Utils;
+﻿using Sync.DB.Interface;
+using System.Data;
 
 
 namespace Sync.DB

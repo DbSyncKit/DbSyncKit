@@ -1,9 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Data;
-
-using Sync.DB.Attributes;
+﻿using Sync.DB.Attributes;
 using Sync.DB.Extensions;
 using Sync.DB.Utils;
+using System.Data;
 
 namespace Sync.Test.SampleContract.DataContract
 {

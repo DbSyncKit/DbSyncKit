@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Sync.DB.Interface;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-
-using Sync.DB.Interface;
-using Sync.DB.Utils;
 
 namespace Sync.Core.Comparer
 {

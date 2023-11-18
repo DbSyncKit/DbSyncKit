@@ -1,7 +1,7 @@
-﻿using System.Data;
-using System.Data.SqlClient;
-using Sync.DB.Enum;
+﻿using Sync.DB.Enum;
 using Sync.DB.Interface;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Sync.MSSQL
 {

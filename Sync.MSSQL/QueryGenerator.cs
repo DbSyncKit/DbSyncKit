@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Sync.DB.Helper;
+using Sync.DB.Interface;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Sync.DB.Attributes;
-using Sync.DB.Helper;
-using Sync.DB.Interface;
 
 namespace Sync.MSSQL
 {
     /// <summary>
     /// MSSQL Scepific Querry Generator
     /// </summary>
-    public class QueryGenerator : QueryHelper,IQueryGenerator
+    public class QueryGenerator : QueryHelper, IQueryGenerator
     {
         #region Properties
 
         private StringBuilder queryBuilder;
 
         #region Default Properties
-        
+
         private readonly string DEFAULT_SCHEMA_NAME = "dbo";
 
         #endregion
@@ -104,7 +98,7 @@ namespace Sync.MSSQL
             ReplacePlaceholder(ref queryBuilder, "@Columns", string.Join(", ", Columns));
 
             //var selectQuery = string.Format(SELECT_TABLE_BASE_QUERY, Columns, schemaName, tableName);
-            
+
             return queryBuilder.ToString();
         }
 
@@ -204,7 +198,7 @@ namespace Sync.MSSQL
 
         public string GenerateComment(string comment)
         {
-            if (string.IsNullOrWhiteSpace(comment))            
+            if (string.IsNullOrWhiteSpace(comment))
                 return string.Empty;
 
             bool isMultiLine = comment.Contains(Environment.NewLine);
