@@ -17,7 +17,7 @@ namespace Sync.Test.SampleContract.DataContract
         public int MediaTypeId { get; set; }
         public int GenreId { get; set; }
         public string Composer { get; set; }
-        public int Miliseconds { get; set; }
+        public int Milliseconds { get; set; }
         public int Bytes { get; set; }
         public decimal UnitPrice { get; set; }
         #endregion
@@ -40,7 +40,7 @@ namespace Sync.Test.SampleContract.DataContract
             MediaTypeId = trackInfo.GetValue<int>("MediaTypeId");
             GenreId = trackInfo.GetValue<int>("GenreId");
             Composer = trackInfo.GetValue<string>("Composer")!;
-            Miliseconds = trackInfo.GetValue<int>("Miliseconds");
+            Milliseconds = trackInfo.GetValue<int>("Milliseconds");
             Bytes = trackInfo.GetValue<int>("Bytes");
             UnitPrice = trackInfo.GetValue<decimal>("UnitPrice");
         }

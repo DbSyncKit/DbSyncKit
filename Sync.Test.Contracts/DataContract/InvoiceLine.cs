@@ -5,13 +5,13 @@ using System.Data;
 
 namespace Sync.Test.SampleContract.DataContract
 {
-    [TableName("Invoice"), TableSchema("dbo")]
+    [TableName("InvoiceLine"), TableSchema("dbo")]
     public class InvoiceLine : DataContractUtility<InvoiceLine>
     {
         #region Declerations
         [KeyProperty]
         public int InvoiceLineId { get; set; }
-        public int CustomerId { get; set; }
+        public int InvoiceId { get; set; }
         public int TrackId { get; set; }
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
@@ -27,7 +27,7 @@ namespace Sync.Test.SampleContract.DataContract
                 throw new ArgumentNullException(nameof(invoiceLineData));
 
             InvoiceLineId = invoiceLineData.GetValue<int>("InvoiceLineId");
-            CustomerId = invoiceLineData.GetValue<int>("CustomerId");
+            InvoiceId = invoiceLineData.GetValue<int>("InvoiceId");
             TrackId = invoiceLineData.GetValue<int>("TrackId");
 
             if (invoiceLineData.IsNull("UnitPrice"))
