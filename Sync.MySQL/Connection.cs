@@ -5,7 +5,7 @@ using MySql.Data.MySqlClient;
 using Sync.DB.Enum;
 using Sync.DB.Interface;
 
-namespace Sync.SQL
+namespace Sync.MySQL
 {
     public class Connection : IDatabase
     {

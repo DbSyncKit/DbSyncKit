@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 using Sync.DB.Enum;
 using Sync.DB.Interface;
 
-namespace Sync.SQLite
+namespace Sync.Postgre
 {
     public class Connection : IDatabase
     {

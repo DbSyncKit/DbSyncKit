@@ -16,20 +16,16 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
     <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
     <PackageReference Include="coverlet.collector" Version="3.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sync.Core\Sync.Core.csproj" />
     <ProjectReference Include="..\Sync.DB\Sync.DB.csproj" />
     <ProjectReference Include="..\Sync.MSSQL\Sync.MSSQL.csproj" />
-    <ProjectReference Include="..\Sync.MySQL\Sync.MySQL.csproj" />
-    <ProjectReference Include="..\Sync.Postgre\Sync.Postgre.csproj" />
-    <ProjectReference Include="..\Sync.SQLite\Sync.Postgre.csproj" />
-    <ProjectReference Include="..\Sync.SQL\Sync.MySQL.csproj" />
     <ProjectReference Include="..\Sync.Test.Contracts\Sync.Test.SampleContract.csproj" />
   </ItemGroup>
   <PropertyGroup>
