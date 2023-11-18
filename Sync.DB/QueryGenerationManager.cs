@@ -28,6 +28,16 @@ namespace Sync.DB
             return _querryGenerator.GenerateUpdateQuery<T>(DataContract,keyColumns,excludedColumns, editedProperties);
         }
 
+        public string GenerateDeleteQuery<T>(T entity, List<string> keyColumns)
+        {
+            return _querryGenerator.GenerateDeleteQuery<T>(entity,keyColumns);
+        }
+
+        public string GenerateInsertQuery<T>(T entity, List<string> keyColumns, List<string> excludedColumns)
+        {
+            return _querryGenerator.GenerateInsertQuery<T>(entity,keyColumns,excludedColumns);
+        }
+
         #endregion
     }
 }
