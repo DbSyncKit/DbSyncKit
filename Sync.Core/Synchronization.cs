@@ -8,11 +8,11 @@ using System.Text;
 
 namespace Sync.Core
 {
-    public class Sync : QueryHelper
+    public class Synchronization : QueryHelper
     {
         //private readonly DatabaseMetadata dbSchema;
         private readonly QueryGenerationManager queryGenerationManager;
-        public Sync(IQueryGenerator querryGenerator)
+        public Synchronization(IQueryGenerator querryGenerator)
         {
             //dbSchema = new DatabaseMetadata();
             queryGenerationManager = new QueryGenerationManager(querryGenerator);
@@ -24,9 +24,10 @@ namespace Sync.Core
 
             if (string.IsNullOrEmpty(tableName))
                 throw new ArgumentNullException(tableName, "Table Name Cannot be null");
+            List<string> excludedProperty = GetExcludedProperties<T>();
 
-            List<string> sourceColList = new List<string>();
-            List<string> destinationColList = new List<string>();
+            List<string> sourceColList = GetAllColumns<T>().Except(excludedProperty).ToList();
+            List<string> destinationColList = GetAllColumns<T>().Except(excludedProperty).ToList();
 
             var sourceList = GetDataFromDatabase<T>(tableName, source, sourceColList);
             var destinationList = GetDataFromDatabase<T>(tableName, destination, destinationColList);

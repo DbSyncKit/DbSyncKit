@@ -13,16 +13,6 @@ namespace Sync.Core.Comparer
 
         public KeyEqualityComparer(List<string> keyColumns, List<string> ignoredColumns)
         {
-            keyProperty = typeof(T).GetProperties()
-                .FirstOrDefault(prop => Attribute.IsDefined(prop, typeof(KeyAttribute)))!;
-
-            if (keyProperty == null)
-            {
-                throw new InvalidOperationException($"No property with KeyAttribute found in type {typeof(T).Name}");
-            }
-            if (!keyColumns.Contains(keyProperty.Name))
-                keyColumns.Add(keyProperty.Name);
-
             this.keyColumns = keyColumns;
             this.ignoredColumns = ignoredColumns;
         }
