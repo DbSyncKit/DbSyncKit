@@ -26,8 +26,10 @@
     <ProjectReference Include="..\Sync.Core\Sync.Core.csproj" />
     <ProjectReference Include="..\Sync.DB\Sync.DB.csproj" />
     <ProjectReference Include="..\Sync.MSSQL\Sync.MSSQL.csproj" />
-    <ProjectReference Include="..\Sync.SQLite\Sync.SQLite.csproj" />
-    <ProjectReference Include="..\Sync.SQL\Sync.SQL.csproj" />
+    <ProjectReference Include="..\Sync.MySQL\Sync.MySQL.csproj" />
+    <ProjectReference Include="..\Sync.Postgre\Sync.Postgre.csproj" />
+    <ProjectReference Include="..\Sync.SQLite\Sync.Postgre.csproj" />
+    <ProjectReference Include="..\Sync.SQL\Sync.MySQL.csproj" />
     <ProjectReference Include="..\Sync.Test.Contracts\Sync.Test.SampleContract.csproj" />
   </ItemGroup>
   <PropertyGroup>
