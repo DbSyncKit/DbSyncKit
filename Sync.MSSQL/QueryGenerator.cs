@@ -72,16 +72,21 @@ DELETE FROM @Schema.@TableName WHERE @Where";
         /// <param name="schemaName">Optional schema name, default is 'dbo'.</param>
         /// <returns>Select Query in string.</returns>
         /// <exception cref="ArgumentException">Thrown when table name or columns are null or empty.</exception>
-        public string GenerateSelectQuery(string tableName, List<string> listOfColumns, string schemaName)
+        public string GenerateSelectQuery<T>(string tableName, List<string> listOfColumns, string schemaName) where T : IDataContractComparer
         {
             if (string.IsNullOrEmpty(tableName) || listOfColumns == null || listOfColumns.Count == 0)
             {
                 throw new ArgumentException("Table name and columns cannot be null or empty.");
             }
 
+            if (string.IsNullOrEmpty(tableName))
+            {
+                tableName = GetTableName<T>();
+            }
+
             if (string.IsNullOrEmpty(schemaName))
             {
-                schemaName = "dbo";
+                schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
             }
             queryBuilder.Clear();
 

@@ -62,11 +62,12 @@ namespace Sync.Core
 
             var TableName = GetTableName<T>();
 
-            query.AppendLine(queryGenerationManager.GenerateComment($"Insert Query for {TableName}"));
+            query.AppendLine(queryGenerationManager.GenerateComment("==============" + TableName + "=============="));
+            query.AppendLine(queryGenerationManager.GenerateComment("==============Insert==============="));
             query.AppendLine(inserts.ToString());
-            query.AppendLine(queryGenerationManager.GenerateComment($"Delete Query for {TableName}"));
+            query.AppendLine(queryGenerationManager.GenerateComment("==============Delete==============="));
             query.AppendLine(delete.ToString());
-            query.AppendLine(queryGenerationManager.GenerateComment($"Update Query for {TableName}"));
+            query.AppendLine(queryGenerationManager.GenerateComment("==============Update==============="));
             query.AppendLine(edits.ToString());
 
             return query.ToString();
@@ -74,15 +75,11 @@ namespace Sync.Core
 
         private HashSet<T> GetDataFromDatabase<T>(string tableName, IDatabase connection, List<string> columns) where T : IDataContractComparer
         {
-            columns = columns
-                .Where(prop => !GetExcludedProperties<T>().Contains(prop)).Select(col => $"[{col}]").ToList();
-            var querry = $" SELECT {string.Join(",", columns)} FROM {tableName} ";
-
-            var query = queryGenerationManager.GenerateSelectQuery(tableName, columns, string.Empty);
+            var query = queryGenerationManager.GenerateSelectQuery<T>(tableName, columns, string.Empty);
 
             using (var DBManager = new DatabaseManager<IDatabase>(connection))
             {
-                return DBManager.ExecuteQuery<T>(querry, tableName).ToHashSet(new KeyEqualityComparer<T>(GetKeyColumns<T>(), GetExcludedProperties<T>()));
+                return DBManager.ExecuteQuery<T>(query, tableName).ToHashSet(new KeyEqualityComparer<T>(GetKeyColumns<T>(), GetExcludedProperties<T>()));
             }
         }
     }

@@ -2,7 +2,7 @@
 {
     public interface IQueryGenerator
     {
-        string GenerateSelectQuery(string tableName, List<string> ListOfColumns, string schemaName);
+        string GenerateSelectQuery<T>(string tableName, List<string> ListOfColumns, string schemaName) where T : IDataContractComparer;
 
         string GenerateUpdateQuery<T>(T DataContract, List<string> keyColumns, List<string> excludedColumns, Dictionary<string, object> editedProperties) where T : IDataContractComparer;
 

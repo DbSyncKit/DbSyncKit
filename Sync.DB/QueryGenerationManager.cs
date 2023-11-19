@@ -12,9 +12,9 @@ namespace Sync.DB
         }
 
         #region Public Methods
-        public string GenerateSelectQuery(string tableName, List<string> listOfColumns, string schemaName)
+        public string GenerateSelectQuery<T>(string tableName, List<string> listOfColumns, string schemaName) where T : IDataContractComparer
         {
-            return _querryGenerator.GenerateSelectQuery(tableName, listOfColumns, schemaName);
+            return _querryGenerator.GenerateSelectQuery<T>(tableName, listOfColumns, schemaName);
         }
 
         public string GenerateUpdateQuery<T>(T DataContract, List<string> keyColumns, List<string> excludedColumns, Dictionary<string, object> editedProperties) where T : IDataContractComparer
