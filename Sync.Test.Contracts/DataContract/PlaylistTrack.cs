@@ -11,6 +11,7 @@ namespace Sync.Test.SampleContract.DataContract
         #region Declerations
         [KeyProperty]
         public int PlaylistId { get; set; }
+        [KeyProperty]
         public int TrackId { get; set; }
 
         #endregion
