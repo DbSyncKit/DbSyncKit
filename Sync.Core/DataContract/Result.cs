@@ -21,5 +21,15 @@
         /// along with a dictionary of updated properties for each edited entity.
         /// </summary>
         public List<ValueTuple<T, Dictionary<string, object>>> Edited { get; set; }
+
+        /// <summary>
+        /// Gets or sets the count of data records in the source database.
+        /// </summary>
+        public long SourceDataCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the count of data records in the destination database.
+        /// </summary>
+        public long DestinaionDataCount { get; set; }
     }
 }

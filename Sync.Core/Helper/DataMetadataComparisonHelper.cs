@@ -56,6 +56,8 @@ namespace Sync.Core.Helper
             result.Added = added;
             result.Deleted = deleted;
             result.Edited = edited.ToList();
+            result.SourceDataCount = sourceList.Count;
+            result.DestinaionDataCount = destinationList.Count;
 
             return result;
         }
