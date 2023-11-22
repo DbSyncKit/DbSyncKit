@@ -21,10 +21,10 @@ namespace Sync.Core.Helper
             //Columns.Add(property.Name);
 
             // Identify added entries
-            added.AddRange(destinationList.Except(sourceList, keyComparer));
+            added.AddRange(sourceList.Except(destinationList, keyComparer));
 
             // Identify deleted entries
-            deleted.AddRange(sourceList.Except(destinationList, keyComparer));
+            deleted.AddRange(destinationList.Except(sourceList, keyComparer));
 
             // Identify edited entries
             var sourceKeyDictionary = sourceList
