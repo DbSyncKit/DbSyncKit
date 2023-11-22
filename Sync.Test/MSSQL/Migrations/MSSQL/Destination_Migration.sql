@@ -15840,3 +15840,8 @@ INSERT INTO [dbo].[PlaylistTrack] ([PlaylistId], [TrackId]) VALUES (17, 2096);
 INSERT INTO [dbo].[PlaylistTrack] ([PlaylistId], [TrackId]) VALUES (17, 3290);
 INSERT INTO [dbo].[PlaylistTrack] ([PlaylistId], [TrackId]) VALUES (18, 597);
 
+DELETE FROM PlaylistTrack WHERE TrackId IN ( SELECT TrackId FROM Track WHERE AlbumId > 345 )
+DELETE FROM Track WHERE AlbumId > 345
+DELETE FROM Album WHERE AlbumId > 345
+
+
