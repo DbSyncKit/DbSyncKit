@@ -25,7 +25,7 @@ namespace Sync.DB.Interface
         /// </summary>
         /// <param name="query">The SQL query to execute.</param>
         /// <param name="tableName">The name of the table associated with the query.</param>
-        /// <returns>A list of results of type <typeparamref name="DataSet"/>.</returns>
+        /// <returns>A list of results of type DataSet.</returns>
         DataSet ExecuteQuery(string query, string tableName);
 
 

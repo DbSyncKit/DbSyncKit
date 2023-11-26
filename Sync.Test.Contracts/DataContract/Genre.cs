@@ -10,7 +10,7 @@ namespace Sync.Test.SampleContract.DataContract
     {
 
         #region Decleration
-        [KeyProperty]
+        [KeyPropertyAttribute(isPrimaryKey: true)]
         public int GenreId { get; set; }
         public string Name { get; set; }
 

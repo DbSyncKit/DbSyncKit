@@ -10,7 +10,7 @@ namespace Sync.Test.SampleContract.DataContract
     public class Employee : DataContractUtility<Employee>
     {
         #region Decleration
-        [KeyProperty]
+        [KeyPropertyAttribute(isPrimaryKey: true)]
         public int EmployeeId { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }

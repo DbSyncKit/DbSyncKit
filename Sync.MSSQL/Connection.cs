@@ -128,13 +128,13 @@ namespace Sync.MSSQL
                         sqlConnection.Close();
                         return true;
                     }
-                    catch (SqlException sqlEx)
+                    catch (SqlException)
                     {
-                        throw sqlEx;
+                        throw;
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

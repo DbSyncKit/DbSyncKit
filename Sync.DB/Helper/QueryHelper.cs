@@ -30,7 +30,7 @@ namespace Sync.DB.Helper
         /// <returns>The table name.</returns>
         public string GetTableName<T>() where T : IDataContractComparer
         {
-            TableNameAttribute tableNameAttribute = (TableNameAttribute)Attribute.GetCustomAttribute(typeof(T), typeof(TableNameAttribute));
+            TableNameAttribute? tableNameAttribute = (TableNameAttribute?)Attribute.GetCustomAttribute(typeof(T), typeof(TableNameAttribute));
 
             if (tableNameAttribute != null)
                 return tableNameAttribute.TableName;
@@ -45,7 +45,7 @@ namespace Sync.DB.Helper
         /// <returns>The table schema name or null if not specified.</returns>
         public string? GetTableSchema<T>() where T : IDataContractComparer
         {
-            TableSchemaAttribute tableSchemaAttribute = (TableSchemaAttribute)Attribute.GetCustomAttribute(typeof(T), typeof(TableSchemaAttribute));
+            TableSchemaAttribute? tableSchemaAttribute = (TableSchemaAttribute?)Attribute.GetCustomAttribute(typeof(T), typeof(TableSchemaAttribute));
 
             if (tableSchemaAttribute != null)
                 return tableSchemaAttribute.SchemaName;
@@ -60,7 +60,7 @@ namespace Sync.DB.Helper
         /// <returns>True if the INSERT query should include ID, otherwise false.</returns>
         public bool GetInsertWithID<T>() where T : IDataContractComparer
         {
-            GenerateInsertWithIDAttribute tableSchemaAttribute = (GenerateInsertWithIDAttribute)Attribute.GetCustomAttribute(typeof(T), typeof(GenerateInsertWithIDAttribute));
+            GenerateInsertWithIDAttribute? tableSchemaAttribute = (GenerateInsertWithIDAttribute?)Attribute.GetCustomAttribute(typeof(T), typeof(GenerateInsertWithIDAttribute));
 
             if (tableSchemaAttribute != null)
                 return tableSchemaAttribute.GenerateWithID;
@@ -96,8 +96,6 @@ namespace Sync.DB.Helper
         /// <typeparam name="T">The type for which to get all properties. Must implement <see cref="IDataContractComparer"/>.</typeparam>
         /// <returns>A list of all property names.</returns>
         public List<string> GetAllColumns<T>() where T : IDataContractComparer
-
-
         {
             return typeof(T).GetProperties().Select(prop => prop.Name).ToList();
         }

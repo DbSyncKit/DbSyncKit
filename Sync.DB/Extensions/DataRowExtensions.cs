@@ -40,7 +40,7 @@ namespace Sync.DB.Extensions
             }
 
             // Handle the case when the column doesn't exist or the value is DBNull return a default value
-            return default(T);
+            return default(T)!;
         }
     }
 }

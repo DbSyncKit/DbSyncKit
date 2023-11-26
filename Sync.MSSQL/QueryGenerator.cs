@@ -1,4 +1,5 @@
-﻿using Sync.DB.Helper;
+﻿using Sync.DB.Attributes;
+using Sync.DB.Helper;
 using Sync.DB.Interface;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
@@ -92,8 +93,8 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
 
             queryBuilder.AppendLine(SELECT_TABLE_BASE_QUERY);
 
-            var Columns = listOfColumns.Select(col => $"[{col}]");
-
+            var Columns = listOfColumns.Select(col => EscapeColumn(col));
+                
             ReplacePlaceholder(ref queryBuilder, "@Schema", schemaName);
             ReplacePlaceholder(ref queryBuilder, "@TableName", tableName);
             ReplacePlaceholder(ref queryBuilder, "@Columns", string.Join(", ", Columns));
@@ -120,8 +121,8 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
 
             string tableName = GetTableName<T>();
             string schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
-            string setClause = string.Join(", ", editedProperties.Select(kv => $"{kv.Key} = '{EscapeValue(kv.Value.ToString())}'"));
-            string whereClause = GetKeyCondition(DataContract, keyColumns);
+            string setClause = string.Join(", ", editedProperties.Select(kv => $"{EscapeColumn(kv.Key)} = '{EscapeValue(kv.Value)}'"));
+            string whereClause = GetCondition(DataContract, keyColumns);
 
             ReplacePlaceholder(ref queryBuilder, "@Schema", schemaName);
             ReplacePlaceholder(ref queryBuilder, "@TableName", tableName);
@@ -144,7 +145,7 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
 
             string tableName = GetTableName<T>();
             string schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
-            string whereClause = GetKeyCondition(entity, keyColumns);
+            string whereClause = GetCondition(entity, keyColumns);
 
             queryBuilder.AppendLine(DELETE_QUERY);
 
@@ -173,9 +174,9 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
             string tableName = GetTableName<T>();
             string schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
             bool insertWithID = GetInsertWithID<T>();
-            string columns = string.Join(", ", properties.Select(p => p.Name));
-            string values = string.Join(", ", properties.Select(p => $"'{EscapeValue(p.GetValue(entity)?.ToString())}'"));
-            string whereClause = GetKeyCondition(entity, keyColumns);
+            string columns = string.Join(", ", properties.Select(p => EscapeColumn(p.Name)));
+            string values = string.Join(", ", properties.Select(p => $"'{EscapeValue(p.GetValue(entity))}'"));
+            string whereClause = GetCondition(entity, keyColumns);
 
             if (insertWithID)
                 queryBuilder.AppendLine(INSERT_QUERT_WITH_ID);
@@ -218,29 +219,47 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
 
         #endregion
 
-        #region Private Methods
-
-        private string GetKeyCondition<T>(T entity, List<string> keyColumns)
+        #region Helper Methods
+        /// <summary>
+        /// Generates a SQL WHERE clause based on the specified entity and key columns.
+        /// </summary>
+        /// <typeparam name="T">The type of the entity that implements IDataContractComparer.</typeparam>
+        /// <param name="entity">The entity for which the condition is generated.</param>
+        /// <param name="keyColumns">The list of key columns used to create the condition.</param>
+        /// <returns>A string representing the SQL WHERE clause based on the key columns of the entity.</returns>
+        public string GetCondition<T>(T entity, List<string> keyColumns) where T : IDataContractComparer
         {
             Type entityType = typeof(T);
-            PropertyInfo[] properties = entityType.GetProperties();
+            PropertyInfo[] keyProperties = entityType.GetProperties().
+                Where(p => keyColumns.Contains(p.Name)).ToArray();
 
-            var keyproperty = properties.FirstOrDefault(prop => Attribute.IsDefined(prop, typeof(KeyAttribute)))!;
+            string Condition = string.Join(" AND ", keyProperties.Select(p => $"{EscapeColumn(p.Name)} = '{EscapeValue(p.GetValue(entity))}'"));
 
-            if (keyproperty != null)
-                keyColumns.Add(keyproperty.Name);
-
-            var keyProperties = properties.Where(p => keyColumns.Contains(p.Name));
-            string keyCondition = string.Join(" AND ", keyProperties.Select(p => $"{p.Name} = '{EscapeValue(p.GetValue(entity)?.ToString())}'"));
-
-            return keyCondition;
+            return Condition;
         }
 
-        private string? EscapeValue(string? input)
+        /// <summary>
+        /// Escapes special characters in the input string to make it SQL-safe.
+        /// </summary>
+        /// <param name="input">The input object or string to be escaped.</param>
+        /// <returns>The escaped object or string.</returns>
+        public object? EscapeValue(object? input)
         {
-            return input?.Replace("'", "''");
+            if (input != null && input is string && (input as string)!.Contains("'"))    
+                return (input as string)!.Replace("'", "''");
+
+            return input;
         }
 
+        /// <summary>
+        /// Escapes the input column name to be used safely in SQL queries.
+        /// </summary>
+        /// <param name="input">The input column name to be escaped.</param>
+        /// <returns>The escaped column name enclosed in square brackets.</returns>
+        public string EscapeColumn(string? input)
+        {
+            return $"[{input}]";
+        }
 
         #endregion
     }

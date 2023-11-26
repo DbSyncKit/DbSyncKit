@@ -9,7 +9,7 @@ namespace Sync.Test.SampleContract.DataContract
     public class MediaType : DataContractUtility<MediaType>
     {
         #region Declerations
-        [KeyProperty]
+        [KeyPropertyAttribute(isPrimaryKey: true)]
         public int MediaTypeId { get; set; }
         public string Name { get; set; }
 

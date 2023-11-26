@@ -9,7 +9,7 @@ namespace Sync.Test.SampleContract.DataContract
     public class Playlist : DataContractUtility<Playlist>
     {
         #region Declerations
-        [KeyProperty]
+        [KeyPropertyAttribute(isPrimaryKey: true)]
         public int PlaylistId { get; set; }
         public string Name { get; set; }
 

@@ -8,16 +8,45 @@ using System.Text;
 
 namespace Sync.Core
 {
+    /// <summary>
+    /// Manages the synchronization of data between source and destination databases.
+    /// </summary>
     public class Synchronization : QueryHelper
     {
+        #region Decleration
+
         //private readonly DatabaseMetadata dbSchema;
+
+        /// <summary>
+        /// The query generation manager used for generating SQL queries.
+        /// </summary>
         private readonly QueryGenerationManager queryGenerationManager;
+
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Synchronization"/> class.
+        /// </summary>
+        /// <param name="querryGenerator">The query generator to be used for SQL query generation.</param>
         public Synchronization(IQueryGenerator querryGenerator)
         {
             //dbSchema = new DatabaseMetadata();
             queryGenerationManager = new QueryGenerationManager(querryGenerator);
         }
 
+        #endregion
+
+        #region Public Methods
+
+
+        /// <summary>
+        /// Synchronizes data of a specific type between source and destination databases.
+        /// </summary>
+        /// <typeparam name="T">The type of entity that implements IDataContractComparer.</typeparam>
+        /// <param name="source">The source database.</param>
+        /// <param name="destination">The destination database.</param>
+        /// <returns>A result object containing the differences between source and destination data.</returns>
         public Result<T> SyncData<T>(IDatabase source, IDatabase destination) where T : IDataContractComparer
         {
             string tableName = GetTableName<T>();
@@ -36,6 +65,12 @@ namespace Sync.Core
 
         }
 
+        /// <summary>
+        /// Generates SQL queries for synchronizing data based on the differences identified.
+        /// </summary>
+        /// <typeparam name="T">The type of entity that implements IDataContractComparer.</typeparam>
+        /// <param name="result">The result object containing the differences between source and destination data.</param>
+        /// <returns>A string representing the generated SQL queries for synchronization.</returns>
         public string GetSqlQueryForSyncData<T>(Result<T> result) where T : IDataContractComparer
         {
             var inserts = new StringBuilder();
@@ -73,6 +108,9 @@ namespace Sync.Core
             return query.ToString();
         }
 
+        #endregion
+
+        #region Private Methods
         private HashSet<T> GetDataFromDatabase<T>(string tableName, IDatabase connection, List<string> columns) where T : IDataContractComparer
         {
             var query = queryGenerationManager.GenerateSelectQuery<T>(tableName, columns, string.Empty);
@@ -82,5 +120,7 @@ namespace Sync.Core
                 return DBManager.ExecuteQuery<T>(query, tableName).ToHashSet(new KeyEqualityComparer<T>(GetKeyColumns<T>(), GetExcludedProperties<T>()));
             }
         }
+
+        #endregion
     }
 }

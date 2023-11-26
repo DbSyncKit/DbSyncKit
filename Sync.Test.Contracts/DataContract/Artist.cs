@@ -11,7 +11,7 @@ namespace Sync.Test.SampleContract.DataContract
     {
         #region Declerations
 
-        [KeyProperty]
+        [KeyPropertyAttribute(isPrimaryKey: true)]
         public int ArtistId { get; set; }
 
         public string Name { get; set; }

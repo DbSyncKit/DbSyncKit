@@ -9,7 +9,7 @@ namespace Sync.Test.SampleContract.DataContract
     public class InvoiceLine : DataContractUtility<InvoiceLine>
     {
         #region Declerations
-        [KeyProperty]
+        [KeyPropertyAttribute(isPrimaryKey: true)]
         public int InvoiceLineId { get; set; }
         public int InvoiceId { get; set; }
         public int TrackId { get; set; }
