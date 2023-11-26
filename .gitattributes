@@ -62,4 +62,4 @@
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
 
-**/Migrations/* linguist-vendored
+*.sql linguist-documentation
