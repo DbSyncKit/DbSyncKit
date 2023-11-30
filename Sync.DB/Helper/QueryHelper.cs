@@ -75,7 +75,7 @@ namespace Sync.DB.Helper
         /// <typeparam name="T">The type for which to get the key columns. Must implement <see cref="IDataContractComparer"/>.</typeparam>
         /// <returns>A list of key column names.</returns>
         public List<string> GetKeyColumns<T>() where T : IDataContractComparer
-        {
+        {            
             return TypePropertyCacheManager.GetTypeProperties(typeof(T))
                 .Where(prop => Attribute.IsDefined(prop, typeof(KeyPropertyAttribute))).Select(prop => prop.Name).ToList();
         }

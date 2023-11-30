@@ -8,10 +8,28 @@ using System.Reflection;
 
 namespace Sync.Core.Helper
 {
+    /// <summary>
+    /// Helper class for comparing metadata and data differences between two sets of data contracts.
+    /// </summary>
+    /// <typeparam name="T">Type of data contract implementing the IDataContractComparer interface.</typeparam>
     public class DataMetadataComparisonHelper<T> where T : IDataContractComparer
     {
-        public static Result<T> GetDifferences(HashSet<T> sourceList, HashSet<T> destinationList, List<string> keyProperties, List<string> excludedProperties)
+        #region Public Methods
+
+        /// <summary>
+        /// Compares metadata and data differences between two sets of data contracts.
+        /// </summary>
+        /// <param name="sourceList">Source set of data contracts.</param>
+        /// <param name="destinationList">Destination set of data contracts.</param>
+        /// <param name="keyProperties">List of properties to use as keys for comparison.</param>
+        /// <param name="excludedProperties">List of properties to exclude from comparison.</param>
+        /// <param name="direction">Represents Which Direction to compare db</param>
+        /// <returns>Result object containing added, deleted, and edited data contracts, as well as data counts.</returns>
+        public static Result<T> GetDifferences(HashSet<T> sourceList, HashSet<T> destinationList, List<string> keyProperties, List<string> excludedProperties, Direction direction = Direction.SourceToDestination)
         {
+            if(direction == Direction.BiDirectional)
+                throw new NotImplementedException();
+
             List<T> added = new List<T>();
             List<T> deleted = new List<T>();
             ConcurrentBag<(T edit, Dictionary<string, object> updatedProperties)> edited = new ConcurrentBag<(T, Dictionary<string, object>)>();
@@ -64,6 +82,9 @@ namespace Sync.Core.Helper
             return result;
         }
 
+        #endregion
+
+        #region Private Methods
         private static (bool isEdited, Dictionary<string, object> updatedProperties) GetEdited(T source, T destination, List<string> excludedProperties)
         {
             Dictionary<string, object> updatedProperties = new Dictionary<string, object>();
@@ -134,5 +155,7 @@ namespace Sync.Core.Helper
                     return ChangeType.None;
             }
         }
+        #endregion
+
     }
 }

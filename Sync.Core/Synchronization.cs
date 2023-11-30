@@ -1,5 +1,6 @@
 ﻿using Sync.Core.Comparer;
 using Sync.Core.DataContract;
+using Sync.Core.Enum;
 using Sync.Core.Helper;
 using Sync.DB;
 using Sync.DB.Helper;
@@ -46,8 +47,9 @@ namespace Sync.Core
         /// <typeparam name="T">The type of entity that implements IDataContractComparer.</typeparam>
         /// <param name="source">The source database.</param>
         /// <param name="destination">The destination database.</param>
+        /// <param name="direction">Represents Which Direction to compare db</param>
         /// <returns>A result object containing the differences between source and destination data.</returns>
-        public Result<T> SyncData<T>(IDatabase source, IDatabase destination) where T : IDataContractComparer
+        public Result<T> SyncData<T>(IDatabase source, IDatabase destination, Direction direction = Direction.SourceToDestination) where T : IDataContractComparer
         {
             string tableName = GetTableName<T>();
 
@@ -57,11 +59,29 @@ namespace Sync.Core
 
             List<string> sourceColList = GetAllColumns<T>().Except(excludedProperty).ToList();
             List<string> destinationColList = GetAllColumns<T>().Except(excludedProperty).ToList();
+            HashSet<T> sourceList, destinationList;
 
-            var sourceList = GetDataFromDatabase<T>(tableName, source, sourceColList);
-            var destinationList = GetDataFromDatabase<T>(tableName, destination, destinationColList);
+            switch (direction)
+            {
+                case Direction.SourceToDestination:
+                    break;
 
-            return DataMetadataComparisonHelper<T>.GetDifferences(sourceList, destinationList, GetKeyColumns<T>(), GetExcludedProperties<T>());
+                case Direction.DestinationToSource:
+                    IDatabase temp;
+                    temp = source;
+                    source = destination;
+                    destination = temp;
+                    break;
+
+                case Direction.BiDirectional:
+                    throw new NotImplementedException();
+                default:
+                    break;
+            }
+            sourceList = GetDataFromDatabase<T>(tableName, source, sourceColList);
+            destinationList = GetDataFromDatabase<T>(tableName, destination, destinationColList);
+
+            return DataMetadataComparisonHelper<T>.GetDifferences(sourceList, destinationList, GetKeyColumns<T>(), GetExcludedProperties<T>(), direction);
 
         }
 
