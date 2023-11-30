@@ -1,4 +1,6 @@
-﻿namespace Sync.Core.DataContract
+﻿using Sync.Core.Enum;
+
+namespace Sync.Core.DataContract
 {
     /// <summary>
     /// Represents the result of a synchronization operation for a specific data type.
@@ -31,5 +33,10 @@
         /// Gets or sets the count of data records in the destination database.
         /// </summary>
         public long DestinaionDataCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type of change represented by the synchronization result.
+        /// </summary>
+        public ChangeType ResultChangeType { get; set; }
     }
 }

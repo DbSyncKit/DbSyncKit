@@ -1,5 +1,6 @@
 ﻿using Sync.Core.Comparer;
 using Sync.Core.DataContract;
+using Sync.Core.Enum;
 using Sync.DB.Interface;
 using Sync.DB.Manager;
 using System.Collections.Concurrent;
@@ -59,7 +60,7 @@ namespace Sync.Core.Helper
             result.Edited = edited.ToList();
             result.SourceDataCount = sourceList.Count;
             result.DestinaionDataCount = destinationList.Count;
-
+            result.ResultChangeType = DetermineChangeType(result);
             return result;
         }
 
@@ -96,5 +97,42 @@ namespace Sync.Core.Helper
             return compositeKey;
         }
 
+        private static ChangeType DetermineChangeType(Result<T> result)
+        {
+            // Tuple representing combinations of hasAdded, hasEdited, and hasDeleted
+            var key = (result.Added?.Count > 0, result.Edited?.Count > 0, result.Deleted?.Count > 0);
+
+            // Switch based on the combinations
+            switch (key)
+            {
+                case (true, true, true):
+                    // Added, Edited, and Deleted present
+                    return ChangeType.All;
+
+                case (true, false, false):
+                    // Only Added present
+                    return ChangeType.Added;
+
+                case (true, true, false):
+                    // Added and Edited present
+                    return ChangeType.AddedWithEdited;
+
+                case (false, true, false):
+                    // Only Edited present
+                    return ChangeType.Edited;
+
+                case (false, true, true):
+                    // Edited and Deleted present
+                    return ChangeType.EditedWithDeleted;
+
+                case (false, false, true):
+                    // Only Deleted present
+                    return ChangeType.Deleted;
+
+                default:
+                    // No significant changes
+                    return ChangeType.None;
+            }
+        }
     }
 }
