@@ -1,5 +1,6 @@
 ﻿using Sync.DB.Attributes;
 using Sync.DB.Interface;
+using Sync.DB.Manager;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -75,7 +76,7 @@ namespace Sync.DB.Helper
         /// <returns>A list of key column names.</returns>
         public List<string> GetKeyColumns<T>() where T : IDataContractComparer
         {
-            return typeof(T).GetProperties()
+            return TypePropertyCacheManager.GetTypeProperties(typeof(T))
                 .Where(prop => Attribute.IsDefined(prop, typeof(KeyPropertyAttribute))).Select(prop => prop.Name).ToList();
         }
 
@@ -86,7 +87,7 @@ namespace Sync.DB.Helper
         /// <returns>A list of excluded property names.</returns>
         public List<string> GetExcludedProperties<T>() where T : IDataContractComparer
         {
-            return typeof(T).GetProperties()
+            return TypePropertyCacheManager.GetTypeProperties(typeof(T))
                .Where(prop => Attribute.IsDefined(prop, typeof(ExcludedPropertyAttribute))).Select(prop => prop.Name).ToList();
         }
 
@@ -97,7 +98,8 @@ namespace Sync.DB.Helper
         /// <returns>A list of all property names.</returns>
         public List<string> GetAllColumns<T>() where T : IDataContractComparer
         {
-            return typeof(T).GetProperties().Select(prop => prop.Name).ToList();
+            return TypePropertyCacheManager.GetTypeProperties(typeof(T))
+                .Select(prop => prop.Name).ToList();
         }
 
     }

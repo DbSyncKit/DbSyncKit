@@ -1,6 +1,7 @@
 ﻿using Sync.Core.Comparer;
 using Sync.Core.DataContract;
 using Sync.DB.Interface;
+using Sync.DB.Manager;
 using System.Collections.Concurrent;
 using System.Reflection;
 
@@ -71,7 +72,7 @@ namespace Sync.Core.Helper
                 return (isEdited, updatedProperties);
             }
 
-            foreach (PropertyInfo prop in typeof(T).GetProperties().Where(prop => !excludedProperties.Contains(prop.Name)))
+            foreach (PropertyInfo prop in TypePropertyCacheManager.GetTypeProperties(typeof(T)).Where(prop => !excludedProperties.Contains(prop.Name)))
             {
                 object sourceValue = prop.GetValue(source);
                 object destinationValue = prop.GetValue(destination);
