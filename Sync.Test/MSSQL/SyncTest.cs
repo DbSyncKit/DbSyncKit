@@ -14,8 +14,7 @@ namespace Sync.Test.MSSQL
         public IDatabase Destination { get; set; }
         public Synchronization Sync { get; set; }
 
-        [TestInitialize]
-        public void Initialize()
+        public SyncTest()
         {
             Source = new Connection("(localdb)\\MSSQLLocalDB", "SourceChinook", true);
             Destination = new Connection("(localdb)\\MSSQLLocalDB", "DestinationChinook", true);
