@@ -1,7 +1,5 @@
-﻿using Sync.DB.Attributes;
-using Sync.DB.Helper;
+﻿using Sync.DB.Helper;
 using Sync.DB.Interface;
-using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
 
@@ -94,7 +92,7 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
             queryBuilder.AppendLine(SELECT_TABLE_BASE_QUERY);
 
             var Columns = listOfColumns.Select(col => EscapeColumn(col));
-                
+
             ReplacePlaceholder(ref queryBuilder, "@Schema", schemaName);
             ReplacePlaceholder(ref queryBuilder, "@TableName", tableName);
             ReplacePlaceholder(ref queryBuilder, "@Columns", string.Join(", ", Columns));
@@ -245,7 +243,7 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
         /// <returns>The escaped object or string.</returns>
         public object? EscapeValue(object? input)
         {
-            if (input != null && input is string && (input as string)!.Contains("'"))    
+            if (input != null && input is string && (input as string)!.Contains("'"))
                 return (input as string)!.Replace("'", "''");
 
             return input;

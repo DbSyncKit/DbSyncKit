@@ -27,7 +27,7 @@ namespace Sync.Core.Helper
         /// <returns>Result object containing added, deleted, and edited data contracts, as well as data counts.</returns>
         public static Result<T> GetDifferences(HashSet<T> sourceList, HashSet<T> destinationList, List<string> keyProperties, List<string> excludedProperties, Direction direction = Direction.SourceToDestination)
         {
-            if(direction == Direction.BiDirectional)
+            if (direction == Direction.BiDirectional)
                 throw new NotImplementedException();
 
             List<T> added = new List<T>();

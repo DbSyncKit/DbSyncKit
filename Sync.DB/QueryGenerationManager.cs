@@ -1,5 +1,4 @@
 ﻿using Sync.DB.Interface;
-using System.Xml.Linq;
 
 namespace Sync.DB
 {
@@ -57,7 +56,7 @@ namespace Sync.DB
         /// <inheritdoc />
         public string GetCondition<T>(T entity, List<string> keyColumns) where T : IDataContractComparer
         {
-            return _querryGenerator.GetCondition<T>(entity,keyColumns);
+            return _querryGenerator.GetCondition<T>(entity, keyColumns);
         }
 
         /// <inheritdoc />
