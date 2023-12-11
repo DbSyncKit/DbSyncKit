@@ -10,17 +10,17 @@ Welcome to the Sync Library documentation! This comprehensive guide offers insig
 
 ### Overview of the Sync Library
 
-The Sync Library comprises three primary packages: `Sync.Core`, `Sync.DB`, and `Sync.MSSQL`, each serving distinct roles in enabling efficient data synchronization. Additionally, it anticipates future expansion with forthcoming packages, including `Sync.MySQL` and `Sync.PostgreSQL`, which are under development.
+The Sync Library comprises three primary packages: `DbSyncKit.Core`, `DbSyncKit.DB`, and `DbSyncKit.MSSQL`, each serving distinct roles in enabling efficient data synchronization. Additionally, it anticipates future expansion with forthcoming packages, including `DbSyncKit.MySQL` and `DbSyncKit.PostgreSQL`, which are under development.
 
 ### Package Descriptions
 
-- **Sync.Core:** This package forms the core functionality of the Sync Library, providing a robust set of tools and utilities for data synchronization tasks. It aims to optimize synchronization processes for efficiency and speed.
+- **DbSyncKit.Core:** This package forms the core functionality of the Sync Library, providing a robust set of tools and utilities for data synchronization tasks. It aims to optimize synchronization processes for efficiency and speed.
 
-- **Sync.DB:** As a foundational package, Sync.DB defines a set of interfaces and contracts to establish a consistent interaction layer across various database systems. It ensures a unified approach to database operations for seamless integration.
+- **DbSyncKit.DB:** As a foundational package, DbSyncKit.DB defines a set of interfaces and contracts to establish a consistent interaction layer across various database systems. It ensures a unified approach to database operations for seamless integration.
 
-- **Sync.MSSQL:** This specialized package offers tailored functionalities specifically for Microsoft SQL Server databases. It includes tools for query generation, connection management, and error handling optimized for MSSQL environments.
+- **DbSyncKit.MSSQL:** This specialized package offers tailored functionalities specifically for Microsoft SQL Server databases. It includes tools for query generation, connection management, and error handling optimized for MSSQL environments.
 
-- **Future Packages: Sync.MySQL and Sync.PostgreSQL:** These upcoming packages are dedicated to providing similar synchronization capabilities for MySQL and PostgreSQL databases, respectively. Although currently under development, they aim to align with the principles and features of the existing Sync Library packages.
+- **Future Packages: DbSyncKit.MySQL and DbSyncKit.PostgreSQL:** These upcoming packages are dedicated to providing similar synchronization capabilities for MySQL and PostgreSQL databases, respectively. Although currently under development, they aim to align with the principles and features of the existing Sync Library packages.
 
 Continue exploring this documentation to learn about installation procedures, usage examples, advanced configurations, FAQs, and more to leverage the Sync Library effectively in your projects.
 
@@ -28,7 +28,7 @@ Continue exploring this documentation to learn about installation procedures, us
 
 #### .NET Core Dependency Injection (DI)
 
-To incorporate the synchronization functionalities provided by Sync.Core into your application, you can establish Dependency Injection (DI) within your project's Startup class.
+To incorporate the synchronization functionalities provided by DbSyncKit.Core into your application, you can establish Dependency Injection (DI) within your project's Startup class.
 
 1. **Dependency Injection Setup:**
 
@@ -46,7 +46,7 @@ To incorporate the synchronization functionalities provided by Sync.Core into yo
     After registering in the DI container, you can inject these services into your classes or controllers:
 
     ```csharp
-    using Sync.Core;
+    using DbSyncKit.Core;
 
     private readonly Synchronization _sync;
 
@@ -57,18 +57,18 @@ To incorporate the synchronization functionalities provided by Sync.Core into yo
     
     ```
 
-    Incorporating these services via DI enables seamless integration of Sync.Core's synchronization features within your application architecture.
+    Incorporating these services via DI enables seamless integration of DbSyncKit.Core's synchronization features within your application architecture.
 
 ### Usage Guide
 
 #### Basic Synchronization
 
-To perform basic data synchronization using the Sync.Core package, follow these steps:
+To perform basic data synchronization using the DbSyncKit.Core package, follow these steps:
 
 1. **Instantiate Synchronization:**
 
     ```csharp
-    using Sync.Core;
+    using DbSyncKit.Core;
 
     // Instantiate the Synchronization class
     Synchronization _sync = new Synchronization(new QueryGenerator());
@@ -77,7 +77,7 @@ To perform basic data synchronization using the Sync.Core package, follow these 
     or with DI
 
     ```csharp
-    using Sync.Core;
+    using DbSyncKit.Core;
 
     private readonly Synchronization _sync;
 
@@ -94,7 +94,7 @@ To perform basic data synchronization using the Sync.Core package, follow these 
 2. **Create Database Instances:**
 
     ```csharp
-    using Sync.Core;
+    using DbSyncKit.Core;
 
     // Instantiate source database connection
     IDatabase sourceDatabase = new Connection("(localdb)\\MSSQLLocalDB", "SourceChinook", true);
@@ -107,12 +107,12 @@ To perform basic data synchronization using the Sync.Core package, follow these 
 
 3. **Entity Configuration Example (Album Entity):**
 
-    To configure entities like the `Album` entity, apply attributes from the `Sync.DB.Attributes` namespace to the entity class.
+    To configure entities like the `Album` entity, apply attributes from the `DbSyncKit.DB.Attributes` namespace to the entity class.
 
     ```csharp
-    using Sync.DB.Attributes;
-    using Sync.DB.Extensions;
-    using Sync.DB.Utils;
+    using DbSyncKit.DB.Attributes;
+    using DbSyncKit.DB.Extensions;
+    using DbSyncKit.DB.Utils;
     using System.Data;
 
     [TableName("Album"), TableSchema("dbo")]
@@ -179,7 +179,7 @@ Great! Here's the revised information:
 
 ### Contribution Guidelines
 
-Contributions to the Sync.Core, Sync.DB, and Sync.MSSQL packages are welcome! To contribute, follow these steps:
+Contributions to the DbSyncKit.Core, DbSyncKit.DB, and DbSyncKit.MSSQL packages are welcome! To contribute, follow these steps:
 
 1. **Fork the Repository:**
    Fork the repository to your GitHub account.
@@ -187,7 +187,7 @@ Contributions to the Sync.Core, Sync.DB, and Sync.MSSQL packages are welcome! To
 2. **Clone the Repository:**
    Clone the forked repository to your local machine:
    ```
-   git clone https://github.com/RohitM-IN/DBSync.git
+   git clone https://github.com/RohitM-IN/DbSyncKit.git
    ```
 
 3. **Create a Branch:**
@@ -216,11 +216,11 @@ Contributions to the Sync.Core, Sync.DB, and Sync.MSSQL packages are welcome! To
 
 ### Support and Contact Information
 
-For any support, queries, or feedback regarding the Sync.Core, Sync.DB, and Sync.MSSQL packages, feel free to contact us:
+For any support, queries, or feedback regarding the DbSyncKit.Core, DbSyncKit.DB, and DbSyncKit.MSSQL packages, feel free to contact us:
 
 - **Email:** support@rohit-mahajan.in
 - **GitHub Issues:** [Repository Issues](https://github.com/RohitM-IN/DBSync/issues)
 
 ### License Information
 
-Sync.Core, Sync.DB, and Sync.MSSQL packages are licensed under the MIT License. For detailed information, refer to the [LICENSE](https://github.com/RohitM-IN/DBSync/blob/main/LICENSE) file in the repository.
+DbSyncKit.Core, DbSyncKit.DB, and DbSyncKit.MSSQL packages are licensed under the MIT License. For detailed information, refer to the [LICENSE](https://github.com/RohitM-IN/DBSync/blob/main/LICENSE) file in the repository.
