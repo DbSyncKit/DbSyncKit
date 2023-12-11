@@ -1,4 +1,4 @@
-# Sync: Database Synchronization Library
+# DbSyncKit: Database Synchronization Library
 
 The Sync library is a comprehensive suite of packages designed to simplify and streamline the process of data synchronization across multiple database platforms. It offers a range of tools, utilities, and interfaces to facilitate efficient and consistent data synchronization operations.
 
