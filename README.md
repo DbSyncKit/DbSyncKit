@@ -2,8 +2,6 @@
 
 The Sync library is a comprehensive suite of packages designed to simplify and streamline the process of data synchronization across multiple database platforms. It offers a range of tools, utilities, and interfaces to facilitate efficient and consistent data synchronization operations.
 
-Understood! Here's a revised introduction without the Revision History:
-
 ## Introduction
 
 Welcome to the Sync Library documentation! This comprehensive guide offers insights into the functionalities and usage of the Sync Library, a collection of packages designed to streamline and simplify the process of data synchronization across diverse database systems.
