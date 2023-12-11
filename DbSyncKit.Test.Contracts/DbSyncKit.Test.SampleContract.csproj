@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sync.Core\DbSyncKit.Core.csproj" />
-    <ProjectReference Include="..\Sync.DB\DbSyncKit.DB.csproj" />
+    <ProjectReference Include="..\DbSyncKit.DB\DbSyncKit.DB.csproj" />
   </ItemGroup>
 
 </Project>

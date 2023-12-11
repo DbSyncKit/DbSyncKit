@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
@@ -6,12 +6,12 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <AssemblyVersion>0.0.0.1</AssemblyVersion>
-    <FileVersion>0.0.0.1</FileVersion>
-    <Version>0.0.0.1</Version>
+	<AssemblyVersion>0.0.0.1</AssemblyVersion>
+	<FileVersion>0.0.0.1</FileVersion>
+	<Version>0.0.0.1</Version>
 	<PackageProjectUrl>https://github.com/RohitM-IN/DbSyncKit</PackageProjectUrl>
-	<RepositoryUrl>https://github.com/RohitM-IN/DbSyncKit</RepositoryUrl>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<RepositoryUrl>https://github.com/RohitM-IN/DbSyncKit</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,11 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="8.2.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sync.DB\DbSyncKit.DB.csproj" />
+    <ProjectReference Include="..\DbSyncKit.DB\DbSyncKit.DB.csproj" />
   </ItemGroup>
 
 </Project>

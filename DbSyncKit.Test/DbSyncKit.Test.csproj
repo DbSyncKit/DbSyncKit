@@ -24,9 +24,10 @@
     <PackageReference Include="coverlet.collector" Version="3.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sync.DB\DbSyncKit.DB.csproj" />
-    <ProjectReference Include="..\Sync.MSSQL\DbSyncKit.MSSQL.csproj" />
-    <ProjectReference Include="..\Sync.Test.Contracts\DbSyncKit.Test.SampleContract.csproj" />
+    <ProjectReference Include="..\DbSyncKit.Core\DbSyncKit.Core.csproj" />
+    <ProjectReference Include="..\DbSyncKit.DB\DbSyncKit.DB.csproj" />
+    <ProjectReference Include="..\DbSyncKit.MSSQL\DbSyncKit.MSSQL.csproj" />
+    <ProjectReference Include="..\DbSyncKit.Test.Contracts\DbSyncKit.Test.SampleContract.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>
