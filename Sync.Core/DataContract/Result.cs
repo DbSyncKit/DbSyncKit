@@ -1,6 +1,6 @@
-﻿using Sync.Core.Enum;
+﻿using DbSyncKit.Core.Enum;
 
-namespace Sync.Core.DataContract
+namespace DbSyncKit.Core.DataContract
 {
     /// <summary>
     /// Represents the result of a synchronization operation for a specific data type.

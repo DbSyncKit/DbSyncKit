@@ -1,9 +1,9 @@
 ﻿using Microsoft.Data.Sqlite;
-using Sync.DB.Enum;
-using Sync.DB.Interface;
+using DbSyncKit.DB.Enum;
+using DbSyncKit.DB.Interface;
 using System.Data;
 
-namespace Sync.Postgre
+namespace DbSyncKit.Postgre
 {
     public class Connection : IDatabase
     {

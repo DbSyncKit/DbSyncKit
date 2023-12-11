@@ -1,10 +1,10 @@
-using Sync.DB.Helper;
-using Sync.DB.Interface;
-using Sync.DB.Utils;
-using Sync.Test.SampleContract.DataContract;
+using DbSyncKit.DB.Helper;
+using DbSyncKit.DB.Interface;
+using DbSyncKit.DB.Utils;
+using DbSyncKit.Test.SampleContract.DataContract;
 using System.Reflection;
 
-namespace Sync.Test
+namespace DbSyncKit.Test
 {
     [TestClass]
     public class GeneralTests
@@ -14,10 +14,10 @@ namespace Sync.Test
         {
             //IF the Assembly is not loaded please make sure its loaded at startup.
             var listOfAssm = new List<string>();
-            listOfAssm.Add("Sync.MSSQL");
-            listOfAssm.Add("Sync.MySql");
-            listOfAssm.Add("Sync.Postgre");
-            listOfAssm.Add("Sync.Test.SampleContract");
+            listOfAssm.Add("DbSyncKit.MSSQL");
+            listOfAssm.Add("DbSyncKit.MySql");
+            listOfAssm.Add("DbSyncKit.Postgre");
+            listOfAssm.Add("DbSyncKit.Test.SampleContract");
 
             foreach (var assm in listOfAssm)
             {

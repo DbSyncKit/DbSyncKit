@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Sync.MSSQL.DataContract.Generic
+namespace DbSyncKit.MSSQL.DataContract.Generic
 {
     public class GenericTable : Schema
     {

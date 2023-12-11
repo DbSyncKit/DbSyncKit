@@ -1,9 +1,9 @@
-﻿using Sync.DB.Helper;
-using Sync.DB.Interface;
+﻿using DbSyncKit.DB.Helper;
+using DbSyncKit.DB.Interface;
 using System.Reflection;
 using System.Text;
 
-namespace Sync.MSSQL
+namespace DbSyncKit.MSSQL
 {
     /// <summary>
     /// MSSQL Scepific Querry Generator

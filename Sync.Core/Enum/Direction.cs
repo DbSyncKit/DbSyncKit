@@ -1,4 +1,4 @@
-﻿namespace Sync.Core.Enum
+﻿namespace DbSyncKit.Core.Enum
 {
     /// <summary>
     /// Represents the direction of synchronization between source and destination.

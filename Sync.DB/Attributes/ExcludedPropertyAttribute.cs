@@ -1,4 +1,4 @@
-﻿namespace Sync.DB.Attributes
+﻿namespace DbSyncKit.DB.Attributes
 {
     /// <summary>
     /// Specifies whether a property should be excluded from certain operations, such as data fetching and query generation.

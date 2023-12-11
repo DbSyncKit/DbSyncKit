@@ -1,9 +1,9 @@
-﻿using Sync.DB.Enum;
-using Sync.DB.Interface;
+﻿using DbSyncKit.DB.Enum;
+using DbSyncKit.DB.Interface;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Sync.MSSQL
+namespace DbSyncKit.MSSQL
 {
     /// <summary>
     /// Represents a connection to a Microsoft SQL Server database.

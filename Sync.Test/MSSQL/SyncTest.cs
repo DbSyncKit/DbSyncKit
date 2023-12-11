@@ -1,10 +1,10 @@
-﻿using Sync.Core;
-using Sync.DB.Interface;
-using Sync.MSSQL;
-using Sync.Test.SampleContract.DataContract;
+﻿using DbSyncKit.Core;
+using DbSyncKit.DB.Interface;
+using DbSyncKit.MSSQL;
+using DbSyncKit.Test.SampleContract.DataContract;
 
 
-namespace Sync.Test.MSSQL
+namespace DbSyncKit.Test.MSSQL
 {
     [TestClass]
     public class SyncTest

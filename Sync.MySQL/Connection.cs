@@ -1,9 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
-using Sync.DB.Enum;
-using Sync.DB.Interface;
+using DbSyncKit.DB.Enum;
+using DbSyncKit.DB.Interface;
 using System.Data;
 
-namespace Sync.MySQL
+namespace DbSyncKit.MySQL
 {
     public class Connection : IDatabase
     {

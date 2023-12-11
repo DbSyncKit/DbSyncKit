@@ -1,10 +1,10 @@
-﻿using Sync.DB.Attributes;
-using Sync.DB.Interface;
-using Sync.DB.Manager;
+﻿using DbSyncKit.DB.Attributes;
+using DbSyncKit.DB.Interface;
+using DbSyncKit.DB.Manager;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Sync.DB.Helper
+namespace DbSyncKit.DB.Helper
 {
     /// <summary>
     /// Helper class for database queries and attribute retrieval.

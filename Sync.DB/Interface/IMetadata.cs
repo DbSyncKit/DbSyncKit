@@ -1,4 +1,4 @@
-﻿namespace Sync.DB.Interface
+﻿namespace DbSyncKit.DB.Interface
 {
     public interface IMetadata
     {

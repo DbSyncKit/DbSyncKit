@@ -1,4 +1,4 @@
-﻿namespace Sync.DB.Enum
+﻿namespace DbSyncKit.DB.Enum
 {
     /// <summary>
     /// Enumerates the supported database providers.

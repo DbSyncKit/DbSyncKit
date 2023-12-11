@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Sync.DB.Manager
+namespace DbSyncKit.DB.Manager
 {
     /// <summary>
     /// Provides a cache manager for storing and retrieving type properties.

@@ -1,4 +1,4 @@
-﻿namespace Sync.DB.Interface
+﻿namespace DbSyncKit.DB.Interface
 {
     /// <summary>
     /// Represents an interface for data contracts that require comparison functionality.

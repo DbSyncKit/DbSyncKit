@@ -1,4 +1,4 @@
-﻿namespace Sync.DB.Attributes
+﻿namespace DbSyncKit.DB.Attributes
 {
     /// <summary>
     /// Specifies whether a property should be considered as a key property.

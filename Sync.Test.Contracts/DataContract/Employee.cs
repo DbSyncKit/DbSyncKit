@@ -1,10 +1,10 @@
-﻿using Sync.DB.Attributes;
-using Sync.DB.Extensions;
-using Sync.DB.Utils;
+﻿using DbSyncKit.DB.Attributes;
+using DbSyncKit.DB.Extensions;
+using DbSyncKit.DB.Utils;
 using System.Data;
 
 
-namespace Sync.Test.SampleContract.DataContract
+namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("Employee"), TableSchema("dbo")]
     public class Employee : DataContractUtility<Employee>

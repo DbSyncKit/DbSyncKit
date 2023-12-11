@@ -1,8 +1,8 @@
-﻿using Sync.DB.Attributes;
-using Sync.DB.Interface;
+﻿using DbSyncKit.DB.Attributes;
+using DbSyncKit.DB.Interface;
 using System.Text;
 
-namespace Sync.DB.Utils
+namespace DbSyncKit.DB.Utils
 {
     /// <summary>
     /// Generic utility class for working with data contract classes.

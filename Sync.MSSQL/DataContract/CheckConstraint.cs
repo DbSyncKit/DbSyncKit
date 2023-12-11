@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Sync.MSSQL.DataContract
+namespace DbSyncKit.MSSQL.DataContract
 {
     public class CheckConstraint : Generic.GenericConstraint
     {

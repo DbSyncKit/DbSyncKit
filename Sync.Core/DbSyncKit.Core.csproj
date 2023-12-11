@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sync.DB\Sync.DB.csproj" />
+    <ProjectReference Include="..\Sync.DB\DbSyncKit.DB.csproj" />
   </ItemGroup>
 
 </Project>

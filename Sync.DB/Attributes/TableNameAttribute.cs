@@ -1,4 +1,4 @@
-﻿namespace Sync.DB.Attributes
+﻿namespace DbSyncKit.DB.Attributes
 {
     /// <summary>
     /// Specifies the name of the database table associated with a class.

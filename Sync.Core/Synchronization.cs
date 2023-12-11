@@ -1,13 +1,13 @@
-﻿using Sync.Core.Comparer;
-using Sync.Core.DataContract;
-using Sync.Core.Enum;
-using Sync.Core.Helper;
-using Sync.DB;
-using Sync.DB.Helper;
-using Sync.DB.Interface;
+﻿using DbSyncKit.Core.Comparer;
+using DbSyncKit.Core.DataContract;
+using DbSyncKit.Core.Enum;
+using DbSyncKit.Core.Helper;
+using DbSyncKit.DB;
+using DbSyncKit.DB.Helper;
+using DbSyncKit.DB.Interface;
 using System.Text;
 
-namespace Sync.Core
+namespace DbSyncKit.Core
 {
     /// <summary>
     /// Manages the synchronization of data between source and destination databases.

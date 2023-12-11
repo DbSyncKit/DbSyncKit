@@ -1,6 +1,6 @@
-﻿using Sync.DB.Interface;
+﻿using DbSyncKit.DB.Interface;
 
-namespace Sync.DB
+namespace DbSyncKit.DB
 {
     /// <summary>
     /// Manages the generation of SQL queries for data operations by delegating the query generation tasks

@@ -1,4 +1,4 @@
-﻿namespace Sync.DB.Attributes
+﻿namespace DbSyncKit.DB.Attributes
 {
     /// <summary>
     /// Specifies whether the insert query generation for a class should include the ID property or exclude it.

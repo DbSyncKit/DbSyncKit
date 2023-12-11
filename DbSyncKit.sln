@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sync.ConsoleApp", "Sync.ConsoleApp\Sync.ConsoleApp.csproj", "{2E2A27DC-F3D6-45FD-B818-F5DC7583FED7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.ConsoleApp", "Sync.ConsoleApp\DbSyncKit.ConsoleApp.csproj", "{2E2A27DC-F3D6-45FD-B818-F5DC7583FED7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sync.Core", "Sync.Core\Sync.Core.csproj", "{18E00FC4-F79C-4C93-9B00-0A3BD701F375}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Core", "Sync.Core\DbSyncKit.Core.csproj", "{18E00FC4-F79C-4C93-9B00-0A3BD701F375}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sync.DB", "Sync.DB\Sync.DB.csproj", "{D4F2D0D8-3024-459F-ADCB-4F7639FA9236}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.DB", "Sync.DB\DbSyncKit.DB.csproj", "{D4F2D0D8-3024-459F-ADCB-4F7639FA9236}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sync.MSSQL", "Sync.MSSQL\Sync.MSSQL.csproj", "{B32501EB-DB53-46C7-88DE-A0419AF52B38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.MSSQL", "Sync.MSSQL\DbSyncKit.MSSQL.csproj", "{B32501EB-DB53-46C7-88DE-A0419AF52B38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sync.Test", "Sync.Test\Sync.Test.csproj", "{CD21D927-9FB0-4FEB-91B2-A2BDE5DFF91D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Test", "Sync.Test\DbSyncKit.Test.csproj", "{CD21D927-9FB0-4FEB-91B2-A2BDE5DFF91D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sync.Test.SampleContract", "Sync.Test.Contracts\Sync.Test.SampleContract.csproj", "{902B8BB8-FEA5-4E1C-9151-5B919D403B26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Test.SampleContract", "Sync.Test.Contracts\DbSyncKit.Test.SampleContract.csproj", "{902B8BB8-FEA5-4E1C-9151-5B919D403B26}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sync.MySQL", "Sync.MySQL\Sync.MySQL.csproj", "{900BF1DB-5D0E-4B6C-A933-6059D6BD4476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.MySQL", "Sync.MySQL\DbSyncKit.MySQL.csproj", "{900BF1DB-5D0E-4B6C-A933-6059D6BD4476}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sync.Postgre", "Sync.Postgre\Sync.Postgre.csproj", "{8F32DA53-8095-4875-8BDB-25BD1296A920}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Postgre", "Sync.Postgre\DbSyncKit.Postgre.csproj", "{8F32DA53-8095-4875-8BDB-25BD1296A920}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

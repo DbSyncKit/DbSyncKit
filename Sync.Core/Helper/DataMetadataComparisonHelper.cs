@@ -1,12 +1,12 @@
-﻿using Sync.Core.Comparer;
-using Sync.Core.DataContract;
-using Sync.Core.Enum;
-using Sync.DB.Interface;
-using Sync.DB.Manager;
+﻿using DbSyncKit.Core.Comparer;
+using DbSyncKit.Core.DataContract;
+using DbSyncKit.Core.Enum;
+using DbSyncKit.DB.Interface;
+using DbSyncKit.DB.Manager;
 using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace Sync.Core.Helper
+namespace DbSyncKit.Core.Helper
 {
     /// <summary>
     /// Helper class for comparing metadata and data differences between two sets of data contracts.

@@ -1,7 +1,7 @@
-﻿using Sync.DB.Enum;
+﻿using DbSyncKit.DB.Enum;
 using System.Data;
 
-namespace Sync.DB.Interface
+namespace DbSyncKit.DB.Interface
 {
     /// <summary>
     /// Defines the contract for a database connection, providing methods to retrieve the connection string

@@ -1,4 +1,4 @@
-﻿namespace Sync.DB.Interface
+﻿namespace DbSyncKit.DB.Interface
 {
     /// <summary>
     /// Defines methods for generating SQL queries and handling query-related operations.

@@ -1,8 +1,8 @@
-﻿using Sync.DB.Interface;
+﻿using DbSyncKit.DB.Interface;
 using System.Data;
 
 
-namespace Sync.DB
+namespace DbSyncKit.DB
 {
     /// <summary>
     /// Manages database operations for a specific database provider implementing the IDatabase interface.

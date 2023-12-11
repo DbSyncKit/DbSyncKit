@@ -1,7 +1,7 @@
-﻿using Sync.DB.Interface;
+﻿using DbSyncKit.DB.Interface;
 using System.Data;
 
-namespace Sync.MSSQL.DataContract
+namespace DbSyncKit.MSSQL.DataContract
 {
     public class UserDataType : IDataContractComparer
     {

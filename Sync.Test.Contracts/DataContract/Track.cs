@@ -1,9 +1,9 @@
-﻿using Sync.DB.Attributes;
-using Sync.DB.Extensions;
-using Sync.DB.Utils;
+﻿using DbSyncKit.DB.Attributes;
+using DbSyncKit.DB.Extensions;
+using DbSyncKit.DB.Utils;
 using System.Data;
 
-namespace Sync.Test.SampleContract.DataContract
+namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("Track"), TableSchema("dbo")]
     public class Track : DataContractUtility<Track>

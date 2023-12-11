@@ -1,6 +1,6 @@
-﻿using Sync.DB.Interface;
+﻿using DbSyncKit.DB.Interface;
 
-namespace Sync.Core.Comparer
+namespace DbSyncKit.Core.Comparer
 {
     /// <summary>
     /// Compares instances of data contracts based on specified key properties.
