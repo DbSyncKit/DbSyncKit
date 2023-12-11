@@ -3,6 +3,6 @@
 ### Added
 
 - **Initial Release**
-  - `Sync.Core`: Core functionality for data synchronization.
-  - `Sync.DB`: Foundational package defining interfaces for database interactions.
-  - `Sync.MSSQL`: Specialized package for Microsoft SQL Server databases.
+  - `DbSyncKit.Core`: Core functionality for data synchronization.
+  - `DbSyncKit.DB`: Foundational package defining interfaces for database interactions.
+  - `DbSyncKit.MSSQL`: Specialized package for Microsoft SQL Server databases.
