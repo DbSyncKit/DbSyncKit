@@ -96,7 +96,7 @@ namespace DbSyncKit.Core
         {
             string batchStatement = queryGenerationManager.GenerateBatchSeparator();
             var inserts = new StringBuilder();
-            for (int i = 0; i < result.Added.Count; i = i++)
+            for (int i = 0; i < result.Added.Count; i++)
             {
                 inserts.AppendLine(queryGenerationManager.GenerateInsertQuery(result.Added[i], GetKeyColumns<T>(), GetExcludedProperties<T>()));
                 if (i != 0 && i % BatchSize == 0)
