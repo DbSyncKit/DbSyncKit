@@ -71,6 +71,12 @@ namespace DbSyncKit.DB
             return _querryGenerator.EscapeColumn(input);
         }
 
+        /// <inheritdoc />
+        public string GenerateBatchSeparator()
+        {
+            return _querryGenerator.GenerateBatchSeparator();
+        }
+
         #endregion
     }
 }

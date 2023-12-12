@@ -267,6 +267,15 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
             return $"[{input}]";
         }
 
+        /// <summary>
+        /// Generates a SQL batch separator ('GO' statement in MSSQL) used to execute batches of SQL statements in MSSQL environments.
+        /// </summary>
+        /// <returns>A string representing the generated batch separator ('GO' statement).</returns>
+        public string GenerateBatchSeparator()
+        {
+            return " GO ";
+        }
+
         #endregion
     }
 }
