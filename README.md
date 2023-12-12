@@ -138,8 +138,9 @@ To perform basic data synchronization using the DbSyncKit.Core package, follow t
     - `[TableSchema]`: Specifies the schema of the table.
     - `[KeyProperty]`: Defines a property as a key property.
     - `[ExcludedProperty]`: Excludes a property from specific operations.
-    - `[GenerateInsertWithID]`: Determines whether the ID property should be included in the insert query generation.
-
+    - `[GenerateInsertWithID]`: Controls the inclusion of the ID property in the insert query generation, allowing fine-tuning of insertion behavior.
+      - `GenerateWithID`: Determines whether the ID property should be included in the insert query generation. Possible values are `true` (to include the ID property) or `false` (to exclude the ID property).
+      - `IncludeIdentityInsert`: Indicates whether to include database-specific SQL statements during insert query generation affecting identity insert behavior. Default value is `true`.
 
 5. **Perform Synchronization for Specific Entity:**
 
