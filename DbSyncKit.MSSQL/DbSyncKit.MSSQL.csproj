@@ -6,13 +6,16 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<AssemblyVersion>0.1.1.0</AssemblyVersion>
-	<FileVersion>0.1.1.0</FileVersion>
-	<Version>0.1.1.0</Version>
+	<AssemblyVersion>0.1.2.0</AssemblyVersion>
+	<FileVersion>0.1.2.0</FileVersion>
+	<Version>0.1.2.0</Version>
 	<PackageProjectUrl>https://github.com/RohitM-IN/DbSyncKit</PackageProjectUrl>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<RepositoryUrl>https://github.com/RohitM-IN/DbSyncKit</RepositoryUrl>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	<PackageReleaseNotes>### Feature
+- Added Batching for running scripts now will include GO for MSSQL or similar statements for MYSQL or Postgres
+</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

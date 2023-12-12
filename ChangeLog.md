@@ -1,17 +1,21 @@
-# Change Log
+# Changelog
 
-All notable changes to the Sync Library will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
----
-## [0.1.1] - 2023-12-12
+## 0.1.2 - 2023-12-13
+
+### Feature
+- Added Batching for running scripts now will include GO for MSSQL or similar statements for MYSQL or Postgres
+
+
+## 0.1.1 - 2023-12-12
   
 ### Fixed
 - **Identity Insert Issue Resolved**:
   - Fixed an issue where the Identity Insert feature wasn't functioning correctly during synchronization, causing database inconsistencies.
 
 
----
-## [0.1.0.1] - 2023-12-12
+## 0.1.0 - 2023-12-12 (Reviesed)
 
 ### Changed
 - **Package Name Change**:
@@ -19,8 +23,7 @@ All notable changes to the Sync Library will be documented in this file. The for
   - Users should now reference the package as `DbSyncKit` instead of `Sync`.
 
 
----
-## [0.1.0] - 2023-12-11
+## 0.1.0 - 2023-12-11
 
 ### Added
 
@@ -28,5 +31,3 @@ All notable changes to the Sync Library will be documented in this file. The for
   - `DbSyncKit.Core`: Core functionality for data synchronization.
   - `DbSyncKit.DB`: Foundational package defining interfaces for database interactions.
   - `DbSyncKit.MSSQL`: Specialized package for Microsoft SQL Server databases.
-
----
