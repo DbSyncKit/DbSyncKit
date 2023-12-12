@@ -90,28 +90,37 @@ namespace DbSyncKit.Core
         /// </summary>
         /// <typeparam name="T">The type of entity that implements IDataContractComparer.</typeparam>
         /// <param name="result">The result object containing the differences between source and destination data.</param>
+        /// <param name="BatchSize">The size of each batch for SQL statements (default is 20).</param>
         /// <returns>A string representing the generated SQL queries for synchronization.</returns>
-        public string GetSqlQueryForSyncData<T>(Result<T> result) where T : IDataContractComparer
+        public string GetSqlQueryForSyncData<T>(Result<T> result,int BatchSize = 20) where T : IDataContractComparer
         {
+            string batchStatement = queryGenerationManager.GenerateBatchSeparator();
             var inserts = new StringBuilder();
-            foreach (var entity in result.Added)
+            for (int i = 0; i < result.Added.Count; i = i++)
             {
-                inserts.AppendLine(queryGenerationManager.GenerateInsertQuery(entity, GetKeyColumns<T>(), GetExcludedProperties<T>()));
+                inserts.AppendLine(queryGenerationManager.GenerateInsertQuery(result.Added[i], GetKeyColumns<T>(), GetExcludedProperties<T>()));
+                if (i != 0 && i % BatchSize == 0)
+                    inserts.AppendLine(batchStatement);
             }
 
+
             var delete = new StringBuilder();
-            foreach (var entity in result.Deleted)
+            for (int i = 0; i < result.Deleted.Count; i++)
             {
-                delete.AppendLine(queryGenerationManager.GenerateDeleteQuery(entity, GetKeyColumns<T>()));
+                delete.AppendLine(queryGenerationManager.GenerateDeleteQuery(result.Deleted[i], GetKeyColumns<T>()));
+                if (i != 0 && i % BatchSize == 0)
+                    delete.AppendLine(batchStatement);
+
             }
 
             var edits = new StringBuilder();
 
-            foreach (var (entity, updatedProperties) in result.Edited)
+            for (int i = 0; i < result.Edited.Count; i++)
             {
-                edits.AppendLine(queryGenerationManager.GenerateUpdateQuery<T>(entity, GetKeyColumns<T>(), GetExcludedProperties<T>(), updatedProperties));
+                edits.AppendLine(queryGenerationManager.GenerateUpdateQuery<T>(result.Edited[i].Item1, GetKeyColumns<T>(), GetExcludedProperties<T>(), result.Edited[i].Item2));
+                if (i != 0 && i % BatchSize == 0)
+                    edits.AppendLine(batchStatement);
             }
-
 
             var query = new StringBuilder();
 
@@ -120,10 +129,13 @@ namespace DbSyncKit.Core
             query.AppendLine(queryGenerationManager.GenerateComment("==============" + TableName + "=============="));
             query.AppendLine(queryGenerationManager.GenerateComment("==============Insert==============="));
             query.AppendLine(inserts.ToString());
+            if(result.Added.Count > 0 && result.Added.Count % BatchSize != 0) query.AppendLine(batchStatement);
             query.AppendLine(queryGenerationManager.GenerateComment("==============Delete==============="));
             query.AppendLine(delete.ToString());
+            if (result.Deleted.Count > 0 && result.Deleted.Count % BatchSize != 0) query.AppendLine(batchStatement);
             query.AppendLine(queryGenerationManager.GenerateComment("==============Update==============="));
             query.AppendLine(edits.ToString());
+            if (result.Edited.Count > 0 && result.Edited.Count % BatchSize != 0) query.AppendLine(batchStatement);
 
             return query.ToString();
         }

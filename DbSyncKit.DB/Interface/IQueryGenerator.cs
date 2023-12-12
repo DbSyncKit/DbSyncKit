@@ -74,5 +74,11 @@
         /// <param name="input">The input column name to be escaped.</param>
         /// <returns>The escaped column name.</returns>
         string EscapeColumn(string? input);
+
+        /// <summary>
+        /// Generates a SQL batch separator ('GO' statement in SQL Server) used to execute batches of SQL statements.
+        /// </summary>
+        /// <returns>A string representing the generated batch separator.</returns>
+        string GenerateBatchSeparator();
     }
 }
