@@ -70,6 +70,23 @@ namespace DbSyncKit.DB.Helper
         }
 
         /// <summary>
+        /// Gets whether the type specifies to include database-specific SQL statements for identity insert behavior
+        /// during insert query generation, considering the GenerateInsertWithIDAttribute if present.
+        /// </summary>
+        /// <typeparam name="T">The type for which to determine the inclusion of identity insert statements.
+        /// Must implement <see cref="IDataContractComparer"/>.</typeparam>
+        /// <returns><c>true</c> if identity insert statements should be included; otherwise, <c>false</c>.</returns>
+        public bool GetIncludeIdentityInsert<T>() where T : IDataContractComparer
+        {
+            GenerateInsertWithIDAttribute? attribute = (GenerateInsertWithIDAttribute?)Attribute.GetCustomAttribute(typeof(T), typeof(GenerateInsertWithIDAttribute));
+
+            if (attribute != null)
+                return attribute.IncludeIdentityInsert;
+
+            return false;
+        }
+
+        /// <summary>
         /// Gets the names of properties marked as key columns for a specified type.
         /// </summary>
         /// <typeparam name="T">The type for which to get the key columns. Must implement <see cref="IDataContractComparer"/>.</typeparam>

@@ -24,18 +24,23 @@ namespace DbSyncKit.MSSQL
 
         private readonly string SELECT_TABLE_BASE_QUERY = " SELECT @Columns FROM @Schema.@TableName ";
 
-        private readonly string INSERT_QUERT_WITHOUT_ID = @" 
+        private readonly string INSERT_QUERY_WITHOUT_ID = @" 
 IF NOT EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
 BEGIN
 INSERT INTO @Schema.@TableName (@Columns) VALUES (@Values)
 END ";
 
-        private readonly string INSERT_QUERT_WITH_ID = @" 
+        private readonly string INSERT_QUERY_WITH_ID = @" 
 IF NOT EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
 BEGIN
     SET IDENTITY_INSERT @Schema.@TableName ON
         INSERT INTO @Schema.@TableName (@Columns) VALUES (@Values)
     SET IDENTITY_INSERT @Schema.@TableName OFF
+END ";
+        private readonly string INSERT_QUERY_WITHOUT_IDENTITY_INSERT_WITH_ID = @" 
+IF NOT EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
+BEGIN
+    INSERT INTO @Schema.@TableName (@Columns) VALUES (@Values)
 END ";
 
         private readonly string UPDATE_QUERY = @" 
@@ -172,14 +177,17 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
             string tableName = GetTableName<T>();
             string schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
             bool insertWithID = GetInsertWithID<T>();
+            bool identityInsert = GetIncludeIdentityInsert<T>();
             string columns = string.Join(", ", properties.Select(p => EscapeColumn(p.Name)));
             string values = string.Join(", ", properties.Select(p => $"'{EscapeValue(p.GetValue(entity))}'"));
             string whereClause = GetCondition(entity, keyColumns);
 
-            if (insertWithID)
-                queryBuilder.AppendLine(INSERT_QUERT_WITH_ID);
+            if (insertWithID && identityInsert)
+                queryBuilder.AppendLine(INSERT_QUERY_WITH_ID);
+            else if(identityInsert && !identityInsert)
+                queryBuilder.AppendLine(INSERT_QUERY_WITHOUT_IDENTITY_INSERT_WITH_ID);
             else
-                queryBuilder.AppendLine(INSERT_QUERT_WITHOUT_ID);
+                queryBuilder.AppendLine(INSERT_QUERY_WITHOUT_ID);
 
             ReplacePlaceholder(ref queryBuilder, "@Schema", schemaName);
             ReplacePlaceholder(ref queryBuilder, "@TableName", tableName);
