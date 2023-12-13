@@ -113,7 +113,7 @@ To perform basic data synchronization using the DbSyncKit.Core package, follow t
     using DbSyncKit.DB.Utils;
     using System.Data;
 
-    [TableName("Album"), TableSchema("dbo")]
+    [TableName("Album"), ]
     public class Album : DataContractUtility<Album>
     {
         [KeyProperty(isPrimaryKey: true)]

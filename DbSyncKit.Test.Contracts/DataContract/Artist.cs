@@ -5,7 +5,7 @@ using System.Data;
 
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
-    [TableName("Artist"), TableSchema("dbo")]
+    [TableName("Artist")]
 
     public class Artist : DataContractUtility<Artist>
     {
