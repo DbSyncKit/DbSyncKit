@@ -13,16 +13,16 @@ namespace DbSyncKit.MySQL
         private readonly string DEFAULT_SCHEMA_NAME = string.Empty;
 
         private readonly string DELETE_QUERY = @"
-DELETE FROM @SchemaWithTableName WHERE @Where LIMIT 1; ";
+DELETE FROM `@SchemaWithTableName` WHERE @Where LIMIT 1; ";
 
         private readonly string UPDATE_QUERY = @" 
-UPDATE @SchemaWithTableName SET @Set WHERE @Where LIMIT 1; ";
+UPDATE `@SchemaWithTableName` SET @Set WHERE @Where LIMIT 1; ";
 
         private readonly string INSERT_QUERY = @"
-INSERT INTO @SchemaWithTableName (@Columns) SELECT @Values FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM @SchemaWithTableName WHERE @Where); ";
+INSERT INTO `@SchemaWithTableName` (@Columns) SELECT @Values FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM `@SchemaWithTableName` WHERE @Where); ";
 
         private readonly string SELECT_QUERY = @"
-SELECT @Columns FROM @SchemaWithTableName 
+SELECT @Columns FROM `@SchemaWithTableName` 
 ";
 
         #endregion
@@ -46,7 +46,7 @@ SELECT @Columns FROM @SchemaWithTableName
         public object? EscapeValue(object? input)
         {
             if(input is string)
-                return MySql.Data.MySqlClient.MySqlHelper.EscapeString(input as string);
+                return $"'{MySql.Data.MySqlClient.MySqlHelper.EscapeString(input as string)}'";
 
             return input;
         }
@@ -103,7 +103,7 @@ SELECT @Columns FROM @SchemaWithTableName
             bool insertWithID = GetInsertWithID<T>();
             bool identityInsert = GetIncludeIdentityInsert<T>();
             string columns = string.Join(", ", properties.Select(p => EscapeColumn(p.Name)));
-            string values = string.Join(", ", properties.Select(p => $"'{EscapeValue(p.GetValue(entity))}'"));
+            string values = string.Join(", ", properties.Select(p => $"{EscapeValue(p.GetValue(entity))}"));
             string whereClause = GetCondition(entity, keyColumns);
 
             queryBuilder.AppendLine(INSERT_QUERY);
@@ -157,7 +157,7 @@ SELECT @Columns FROM @SchemaWithTableName
 
             string tableName = GetTableName<T>();
             string schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
-            string setClause = string.Join(", ", editedProperties.Select(kv => $"{EscapeColumn(kv.Key)} = '{EscapeValue(kv.Value)}'"));
+            string setClause = string.Join(", ", editedProperties.Select(kv => $"{EscapeColumn(kv.Key)} = {EscapeValue(kv.Value)}"));
             string whereClause = GetCondition(DataContract, keyColumns);
 
             if (!string.IsNullOrEmpty(schemaName))
@@ -174,7 +174,13 @@ SELECT @Columns FROM @SchemaWithTableName
 
         public string GetCondition<T>(T entity, List<string> keyColumns) where T : IDataContractComparer
         {
-            throw new NotImplementedException();
+            Type entityType = typeof(T);
+            PropertyInfo[] keyProperties = entityType.GetProperties().
+                Where(p => keyColumns.Contains(p.Name)).ToArray();
+
+            string Condition = string.Join(" AND ", keyProperties.Select(p => $"{EscapeColumn(p.Name)} = {EscapeValue(p.GetValue(entity))}"));
+
+            return Condition;
         }
 
         /// <summary>
