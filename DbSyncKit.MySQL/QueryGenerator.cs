@@ -6,6 +6,9 @@ using DbSyncKit.DB.Interface;
 
 namespace DbSyncKit.MySQL
 {
+    /// <summary>
+    /// Helps generate SQL queries for MySQL database operations.
+    /// </summary>
     public class QueryGenerator : QueryHelper, IQueryGenerator
     {
         #region Declaration
@@ -38,11 +41,21 @@ SELECT @Columns FROM `@SchemaWithTableName`
 
         #endregion
 
+        /// <summary>
+        /// Escapes a column name with backticks for MySQL.
+        /// </summary>
+        /// <param name="input">The column name to escape.</param>
+        /// <returns>The escaped column name.</returns>
         public string EscapeColumn(string? input)
         {
             return $"`{input}`";
         }
 
+        /// <summary>
+        /// Escapes a value to be safely used in a SQL query.
+        /// </summary>
+        /// <param name="input">The value to escape.</param>
+        /// <returns>The escaped value formatted for SQL.</returns>
         public object? EscapeValue(object? input)
         {
             if(input is string)
@@ -51,6 +64,11 @@ SELECT @Columns FROM `@SchemaWithTableName`
             return input;
         }
 
+        /// <summary>
+        /// Generates a comment for SQL queries.
+        /// </summary>
+        /// <param name="comment">The comment to include in the SQL query.</param>
+        /// <returns>The formatted comment.</returns>
         public string GenerateComment(string comment)
         {
             if (string.IsNullOrWhiteSpace(comment))
@@ -70,6 +88,13 @@ SELECT @Columns FROM `@SchemaWithTableName`
             return CommentBuilder.ToString();
         }
 
+        /// <summary>
+        /// Generates a delete query for a given entity and key columns.
+        /// </summary>
+        /// <typeparam name="T">The type of entity.</typeparam>
+        /// <param name="entity">The entity object.</param>
+        /// <param name="keyColumns">The list of key columns for deletion.</param>
+        /// <returns>The generated SQL delete query.</returns>
         public string GenerateDeleteQuery<T>(T entity, List<string> keyColumns) where T : IDataContractComparer
         {
             queryBuilder.Clear();
@@ -91,6 +116,14 @@ SELECT @Columns FROM `@SchemaWithTableName`
             return queryBuilder.ToString();
         }
 
+        /// <summary>
+        /// Generates an insert query for a given entity, key columns, and excluded columns.
+        /// </summary>
+        /// <typeparam name="T">The type of entity.</typeparam>
+        /// <param name="entity">The entity object.</param>
+        /// <param name="keyColumns">The list of key columns for insertion.</param>
+        /// <param name="excludedColumns">The list of columns to exclude from insertion.</param>
+        /// <returns>The generated SQL insert query.</returns>
         public string GenerateInsertQuery<T>(T entity, List<string> keyColumns, List<string> excludedColumns) where T : IDataContractComparer
         {
             queryBuilder.Clear();
@@ -121,6 +154,14 @@ SELECT @Columns FROM `@SchemaWithTableName`
             return queryBuilder.ToString();
         }
 
+        /// <summary>
+        /// Generates a select query for a given entity and columns.
+        /// </summary>
+        /// <typeparam name="T">The type of entity.</typeparam>
+        /// <param name="tableName">The table name for the select query.</param>
+        /// <param name="ListOfColumns">The list of columns to select.</param>
+        /// <param name="schemaName">The schema name (if applicable).</param>
+        /// <returns>The generated SQL select query.</returns>
         public string GenerateSelectQuery<T>(string tableName, List<string> ListOfColumns, string schemaName) where T : IDataContractComparer
         {
             if (string.IsNullOrEmpty(tableName) || ListOfColumns == null || ListOfColumns.Count == 0)
@@ -149,6 +190,15 @@ SELECT @Columns FROM `@SchemaWithTableName`
             return queryBuilder.ToString();
         }
 
+        /// <summary>
+        /// Generates an update query for a given entity, key columns, excluded columns, and edited properties.
+        /// </summary>
+        /// <typeparam name="T">The type of entity.</typeparam>
+        /// <param name="DataContract">The entity object.</param>
+        /// <param name="keyColumns">The list of key columns for updating.</param>
+        /// <param name="excludedColumns">The list of columns to exclude from update.</param>
+        /// <param name="editedProperties">The dictionary containing edited properties.</param>
+        /// <returns>The generated SQL update query.</returns>
         public string GenerateUpdateQuery<T>(T DataContract, List<string> keyColumns, List<string> excludedColumns, Dictionary<string, object> editedProperties) where T : IDataContractComparer
         {
             queryBuilder.Clear();
@@ -172,6 +222,13 @@ SELECT @Columns FROM `@SchemaWithTableName`
             return queryBuilder.ToString();
         }
 
+        /// <summary>
+        /// Generates a condition for a given entity and key columns.
+        /// </summary>
+        /// <typeparam name="T">The type of entity.</typeparam>
+        /// <param name="entity">The entity object.</param>
+        /// <param name="keyColumns">The list of key columns for the condition.</param>
+        /// <returns>The generated SQL condition.</returns>
         public string GetCondition<T>(T entity, List<string> keyColumns) where T : IDataContractComparer
         {
             Type entityType = typeof(T);
@@ -184,9 +241,9 @@ SELECT @Columns FROM `@SchemaWithTableName`
         }
 
         /// <summary>
-        /// Batch Seperator dosent exists
+        /// Generates a batch separator for SQL queries (not used in this implementation).
         /// </summary>
-        /// <returns>Empty string</returns>
+        /// <returns>An empty string.</returns>
 
         public string GenerateBatchSeparator()
         {
