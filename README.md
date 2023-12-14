@@ -8,7 +8,7 @@ Welcome to the Sync Library documentation! This comprehensive guide offers insig
 
 ### Overview of the Sync Library
 
-The Sync Library comprises three primary packages: `DbSyncKit.Core`, `DbSyncKit.DB`, and `DbSyncKit.MSSQL`, each serving distinct roles in enabling efficient data synchronization. Additionally, it anticipates future expansion with forthcoming packages, including `DbSyncKit.MySQL` and `DbSyncKit.PostgreSQL`, which are under development.
+The Sync Library comprises four primary packages: `DbSyncKit.Core`, `DbSyncKit.DB`, `DbSyncKit.MSSQL`, and `DbSyncKit.MySQL`, each serving distinct roles in enabling efficient data synchronization.
 
 ### Package Descriptions
 
@@ -18,7 +18,9 @@ The Sync Library comprises three primary packages: `DbSyncKit.Core`, `DbSyncKit.
 
 - **DbSyncKit.MSSQL:** This specialized package offers tailored functionalities specifically for Microsoft SQL Server databases. It includes tools for query generation, connection management, and error handling optimized for MSSQL environments.
 
-- **Future Packages: DbSyncKit.MySQL and DbSyncKit.PostgreSQL:** These upcoming packages are dedicated to providing similar synchronization capabilities for MySQL and PostgreSQL databases, respectively. Although currently under development, they aim to align with the principles and features of the existing Sync Library packages.
+- **DbSyncKit.MySQL:** This specialized package offers tailored functionalities specifically for Microsoft SQL Server databases. It includes tools for query generation, connection management, and error handling optimized for My SQL environments.
+  
+- **Future Packages: DbSyncKit.PostgreSQL:** These upcoming packages are dedicated to providing similar synchronization capabilities for PostgreSQL databases. Although currently under development, they aim to align with the principles and features of the existing Sync Library packages.
 
 Continue exploring this documentation to learn about installation procedures, usage examples, advanced configurations, FAQs, and more to leverage the Sync Library effectively in your projects.
 
@@ -215,11 +217,11 @@ Contributions to the DbSyncKit.Core, DbSyncKit.DB, and DbSyncKit.MSSQL packages 
 
 ### Support and Contact Information
 
-For any support, queries, or feedback regarding the DbSyncKit.Core, DbSyncKit.DB, and DbSyncKit.MSSQL packages, feel free to contact us:
+To contribute to DbSyncKit.Core, DbSyncKit.DB, DbSyncKit.MSSQL, or DbSyncKit.MySQL packages:
 
 - **Email:** support@rohit-mahajan.in
 - **GitHub Issues:** [Repository Issues](https://github.com/RohitM-IN/DBSync/issues)
 
 ### License Information
 
-DbSyncKit.Core, DbSyncKit.DB, and DbSyncKit.MSSQL packages are licensed under the MIT License. For detailed information, refer to the [LICENSE](https://github.com/RohitM-IN/DBSync/blob/main/LICENSE) file in the repository.
+DbSyncKit packages are licensed under the MIT License. For detailed information, refer to the [LICENSE](https://github.com/RohitM-IN/DBSync/blob/main/LICENSE) file in the repository.
