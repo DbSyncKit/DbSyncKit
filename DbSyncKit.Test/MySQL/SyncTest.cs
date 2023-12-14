@@ -1,27 +1,25 @@
 ﻿using DbSyncKit.Core;
 using DbSyncKit.DB.Interface;
-using DbSyncKit.MSSQL;
+using DbSyncKit.MySQL;
 using DbSyncKit.Test.SampleContract.DataContract;
 
-
-namespace DbSyncKit.Test.MSSQL
+namespace DbSyncKit.Test.MySQL
 {
     [TestClass]
     public class SyncTest
     {
-
         public IDatabase Source { get; set; }
         public IDatabase Destination { get; set; }
         public Synchronization Sync { get; set; }
 
         public SyncTest()
         {
-            Source = new Connection("(localdb)\\MSSQLLocalDB", "SourceChinook", true);
-            Destination = new Connection("(localdb)\\MSSQLLocalDB", "DestinationChinook", true);
+            Source = new Connection("localhost",3306,"SourceChinook","root","");
+            Destination = new Connection("localhost", 3306, "DestinationChinook", "root", "");
             Sync = new Synchronization(new QueryGenerator());
         }
 
-        [TestMethod]
+                [TestMethod]
         public void ConnectionTest()
         {
             var sourceTest = Source.TestConnection();

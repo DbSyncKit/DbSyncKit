@@ -5,7 +5,7 @@ using System.Data;
 
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
-    [TableName("MediaType"), TableSchema("dbo")]
+    [TableName("MediaType")]
     public class MediaType : DataContractUtility<MediaType>
     {
         #region Declerations

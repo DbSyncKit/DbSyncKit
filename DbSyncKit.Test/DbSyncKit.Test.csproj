@@ -27,6 +27,7 @@
     <ProjectReference Include="..\DbSyncKit.Core\DbSyncKit.Core.csproj" />
     <ProjectReference Include="..\DbSyncKit.DB\DbSyncKit.DB.csproj" />
     <ProjectReference Include="..\DbSyncKit.MSSQL\DbSyncKit.MSSQL.csproj" />
+    <ProjectReference Include="..\DbSyncKit.MySQL\DbSyncKit.MySQL.csproj" />
     <ProjectReference Include="..\DbSyncKit.Test.Contracts\DbSyncKit.Test.SampleContract.csproj" />
   </ItemGroup>
   <PropertyGroup>

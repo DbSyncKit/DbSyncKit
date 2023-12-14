@@ -6,7 +6,7 @@ using System.Data;
 
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
-    [TableName("Employee"), TableSchema("dbo")]
+    [TableName("Employee")]
     public class Employee : DataContractUtility<Employee>
     {
         #region Decleration
