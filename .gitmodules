@@ -1,0 +1,9 @@
+[submodule "DbSyncKit.ConsoleApp/input/theme"]
+	path = DbSyncKit.ConsoleApp/input/theme
+	url = https://github.com/statiqdev/Docable.git
+[submodule "DbSyncKit.ConsoleApp/theme"]
+	path = DbSyncKit.ConsoleApp/theme
+	url = https://github.com/statiqdev/Docable.git
+[submodule "DbSyncKit.Docs/theme"]
+	path = DbSyncKit.Docs/theme
+	url = https://github.com/statiqdev/Docable.git
