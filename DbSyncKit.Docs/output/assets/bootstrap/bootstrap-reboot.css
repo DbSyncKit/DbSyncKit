@@ -39,9 +39,9 @@ sub { bottom: -.25em; }
 
 sup { top: -.5em; }
 
-a { color: #007bff; text-decoration: none; background-color: transparent; }
+a { color: #0190df; text-decoration: none; background-color: transparent; }
 
-a:hover { color: #0056b3; text-decoration: underline; }
+a:hover { color: #015f93; text-decoration: underline; }
 
 a:not([href]) { color: inherit; text-decoration: none; }
 
