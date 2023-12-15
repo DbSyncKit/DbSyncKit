@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "DbSyncKit.Docs": {
+      "commandName": "Project"
+    },
+    "Preview": {
+      "commandName": "Project",
+      "commandLineArgs": "preview -s \\\"SourceFiles=\\\" -s IgnoreInvalidXrefs=true"
+    }
+  }
+}

@@ -26,7 +26,7 @@
         <meta name="msapplication-TileColor" content="#e9ecef">
 <meta name="theme-color" content="#e9ecef">
 
-        <title>DbSyncKit - Input</title>
+        <title>DbSyncKit - DbSyncKit.DB</title>
     </head>
     <body class="d-flex flex-column">
         <div class="flex-grow-1 d-flex flex-column">
@@ -96,7 +96,7 @@
                                         </div>
                                         <div class="text-white m-0 text-break title">
 
-Input
+DbSyncKit.DB
                                         </div>
                                     </div>
                                         <div class="navbar navbar-expand-md navbar-dark p-0">
@@ -127,207 +127,10 @@ Input
                         <div class="container-xl flex-grow-1 d-flex flex-column">
                             <div class="row flex-grow-1 align-items-stretch">
                                         <div id="content" class="offset-lg-2 col-12 col-lg-8 p-4 pt-md-0 bg-white">
-<h1 id="dbsynckit-database-synchronization-library">DbSyncKit: Database Synchronization Library</h1>
-<p>The Sync library is a comprehensive suite of packages designed to simplify and streamline the process of data synchronization across multiple database platforms. It offers a range of tools, utilities, and interfaces to facilitate efficient and consistent data synchronization operations.</p>
-<h2 id="introduction">Introduction</h2>
-<p>Welcome to the Sync Library documentation! This comprehensive guide offers insights into the functionalities and usage of the Sync Library, a collection of packages designed to streamline and simplify the process of data synchronization across diverse database systems.</p>
-<h3 id="overview-of-the-sync-library">Overview of the Sync Library</h3>
-<p>The Sync Library comprises four primary packages: <code>DbSyncKit.Core</code>, <code>DbSyncKit.DB</code>, <code>DbSyncKit.MSSQL</code>, and <code>DbSyncKit.MySQL</code>, each serving distinct roles in enabling efficient data synchronization.</p>
-<h3 id="package-descriptions">Package Descriptions</h3>
-<ul>
-<li><p><strong>DbSyncKit.Core:</strong> This package forms the core functionality of the Sync Library, providing a robust set of tools and utilities for data synchronization tasks. It aims to optimize synchronization processes for efficiency and speed.</p>
-</li>
-<li><p><strong>DbSyncKit.DB:</strong> As a foundational package, DbSyncKit.DB defines a set of interfaces and contracts to establish a consistent interaction layer across various database systems. It ensures a unified approach to database operations for seamless integration.</p>
-</li>
-<li><p><strong>DbSyncKit.MSSQL:</strong> This specialized package offers tailored functionalities specifically for Microsoft SQL Server databases. It includes tools for query generation, connection management, and error handling optimized for MSSQL environments.</p>
-</li>
-<li><p><strong>DbSyncKit.MySQL:</strong> This specialized package offers tailored functionalities specifically for Microsoft SQL Server databases. It includes tools for query generation, connection management, and error handling optimized for My SQL environments.</p>
-</li>
-<li><p><strong>Future Packages: DbSyncKit.PostgreSQL:</strong> These upcoming packages are dedicated to providing similar synchronization capabilities for PostgreSQL databases. Although currently under development, they aim to align with the principles and features of the existing Sync Library packages.</p>
-</li>
-</ul>
-<p>Continue exploring this documentation to learn about installation procedures, usage examples, advanced configurations, FAQs, and more to leverage the Sync Library effectively in your projects.</p>
-<h3 id="configuration-and-setup">Configuration and Setup</h3>
-<h4 id="net-core-dependency-injection-di">.NET Core Dependency Injection (DI)</h4>
-<p>To incorporate the synchronization functionalities provided by DbSyncKit.Core into your application, you can establish Dependency Injection (DI) within your project's Startup class.</p>
-<ol>
-<li><p><strong>Dependency Injection Setup:</strong></p>
-<p>Open your <code>Startup.cs</code> file and configure the DI container to register the <code>Synchronization</code> and <code>QueryGenerator</code> services:</p>
-<pre><code class="language-csharp">services.AddScoped&lt;QueryGenerator&gt;();
-services.AddScoped&lt;Synchronization&gt;();
-</code></pre>
-<p>Utilizing <code>services.AddScoped</code> registers these services, allowing them to be injected into your application components as needed.</p>
-</li>
-<li><p><strong>Usage Example:</strong></p>
-<p>After registering in the DI container, you can inject these services into your classes or controllers:</p>
-<pre><code class="language-csharp">using DbSyncKit.Core;
-
-private readonly Synchronization _sync;
-
-public YourServiceOrController(Synchronization sync)
-{
-    _sync = sync;
-}
-
-</code></pre>
-<p>Incorporating these services via DI enables seamless integration of DbSyncKit.Core's synchronization features within your application architecture.</p>
-</li>
-</ol>
-<h3 id="usage-guide">Usage Guide</h3>
-<h4 id="basic-synchronization">Basic Synchronization</h4>
-<p>To perform basic data synchronization using the DbSyncKit.Core package, follow these steps:</p>
-<ol>
-<li><p><strong>Instantiate Synchronization:</strong></p>
-<pre><code class="language-csharp">using DbSyncKit.Core;
-
-// Instantiate the Synchronization class
-Synchronization _sync = new Synchronization(new QueryGenerator());
-</code></pre>
-<p>or with DI</p>
-<pre><code class="language-csharp">using DbSyncKit.Core;
-
-private readonly Synchronization _sync;
-
-public YourServiceOrController(Synchronization sync)
-{
-    _sync = sync;
-}
-
-</code></pre>
-<p>This creates an instance of the <code>Synchronization</code> class with a <code>QueryGenerator</code> necessary for generating SQL queries.</p>
-</li>
-<li><p><strong>Create Database Instances:</strong></p>
-<pre><code class="language-csharp">using DbSyncKit.Core;
-
-// Instantiate source database connection
-IDatabase sourceDatabase = new Connection(&quot;(localdb)\\MSSQLLocalDB&quot;, &quot;SourceChinook&quot;, true);
-
-// Instantiate destination database connection
-IDatabase destinationDatabase = new Connection(&quot;(localdb)\\MSSQLLocalDB&quot;, &quot;DestinationChinook&quot;, true);
-</code></pre>
-<p>Replace <code>&quot;(localdb)\\MSSQLLocalDB&quot;</code> with your specific server address, and <code>&quot;SourceChinook&quot;</code> and <code>&quot;DestinationChinook&quot;</code> with the names of your source and destination databases, respectively. The last parameter <code>true</code> indicates the usage of integrated security for authentication. Adjust the parameters based on your authentication requirements.</p>
-</li>
-<li><p><strong>Entity Configuration Example (Album Entity):</strong></p>
-<p>To configure entities like the <code>Album</code> entity, apply attributes from the <code>DbSyncKit.DB.Attributes</code> namespace to the entity class.</p>
-<pre><code class="language-csharp">using DbSyncKit.DB.Attributes;
-using DbSyncKit.DB.Extensions;
-using DbSyncKit.DB.Utils;
-using System.Data;
-
-[TableName(&quot;Album&quot;), ]
-public class Album : DataContractUtility&lt;Album&gt;
-{
-    [KeyProperty(isPrimaryKey: true)]
-    public int AlbumId { get; set; }
-    public string Title { get; set; }
-    public int ArtistId { get; set; }
-
-    public Album(DataRow albumInfo)
-    {
-        // Initialization code for Album properties from DataRow
-    }
-}
-</code></pre>
-<ul>
-<li><code>[TableName]</code>: Specifies the name of the table corresponding to this entity in the database.</li>
-<li><code>[TableSchema]</code>: Specifies the schema of the table.</li>
-<li><code>[KeyProperty]</code>: Defines a property as the primary key for the entity.</li>
-</ul>
-</li>
-<li><p><strong>Available Attributes for Configuration:</strong></p>
-<ul>
-<li><code>[TableName]</code>: Specifies the name of the table.</li>
-<li><code>[TableSchema]</code>: Specifies the schema of the table.</li>
-<li><code>[KeyProperty]</code>: Defines a property as a key property.</li>
-<li><code>[ExcludedProperty]</code>: Excludes a property from specific operations.</li>
-<li><code>[GenerateInsertWithID]</code>: Controls the inclusion of the ID property in the insert query generation, allowing fine-tuning of insertion behavior.
-<ul>
-<li><code>GenerateWithID</code>: Determines whether the ID property should be included in the insert query generation. Possible values are <code>true</code> (to include the ID property) or <code>false</code> (to exclude the ID property).</li>
-<li><code>IncludeIdentityInsert</code>: Indicates whether to include database-specific SQL statements during insert query generation affecting identity insert behavior. Default value is <code>true</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>Perform Synchronization for Specific Entity:</strong></p>
-<pre><code class="language-csharp">// Example: Synchronize data for a specific entity
-var entityData = _sync.SyncData&lt;YourEntity&gt;(sourceDatabase, destinationDatabase);
-</code></pre>
-<p>Replace <code>&lt;YourEntity&gt;</code> with the specific entity type you want to synchronize. <code>sourceDatabase</code> and <code>destinationDatabase</code> should be instances of the <code>IDatabase</code> interface representing your source and destination databases.</p>
-</li>
-<li><p><strong>Access Synchronization Results:</strong></p>
-<pre><code class="language-csharp">// Example: Access synchronization results for added, edited, and deleted records
-Console.WriteLine($&quot;Added: {entityData.Added.Count} Edited: {entityData.Edited.Count} Deleted: {entityData.Deleted.Count}&quot;);
-Console.WriteLine($&quot;Total Source Data: {entityData.SourceDataCount}&quot;);
-Console.WriteLine($&quot;Total Destination Data: {entityData.DestinaionDataCount}&quot;);
-
-// Retrieve SQL query generated during synchronization
-var query = sync.GetSqlQueryForSyncData(entityData);
-Console.WriteLine(query);
-</code></pre>
-<p>This snippet showcases how to access statistics related to added, edited, and deleted records, as well as the total counts of source and destination data. Additionally, it retrieves the SQL query generated during synchronization.</p>
-</li>
-<li><p><strong>Repeat for Other Entities:</strong></p>
-<p>Repeat the synchronization process (steps 3-4) for other entity types as needed by replacing <code>&lt;YourEntity&gt;</code> with the desired entity type.</p>
-</li>
-<li><p><strong>Handle Errors:</strong></p>
-<p>Ensure to handle any exceptions that might occur during the synchronization process using appropriate error handling mechanisms.</p>
-</li>
-</ol>
-<p>Great! Here's the revised information:</p>
-<h3 id="contribution-guidelines">Contribution Guidelines</h3>
-<p>Contributions to the DbSyncKit.Core, DbSyncKit.DB, and DbSyncKit.MSSQL packages are welcome! To contribute, follow these steps:</p>
-<ol>
-<li><p><strong>Fork the Repository:</strong>
-Fork the repository to your GitHub account.</p>
-</li>
-<li><p><strong>Clone the Repository:</strong>
-Clone the forked repository to your local machine:</p>
-<pre><code>git clone https://github.com/RohitM-IN/DbSyncKit.git
-</code></pre>
-</li>
-<li><p><strong>Create a Branch:</strong>
-Create a new branch for your changes:</p>
-<pre><code>git checkout -b feature/your-feature-name
-</code></pre>
-</li>
-<li><p><strong>Make Changes:</strong>
-Make necessary changes in the codebase.</p>
-</li>
-<li><p><strong>Commit Changes:</strong>
-Commit your changes and provide descriptive commit messages:</p>
-<pre><code>git commit -m &quot;Add your descriptive message here&quot;
-</code></pre>
-</li>
-<li><p><strong>Push Changes:</strong>
-Push your changes to your forked repository:</p>
-<pre><code>git push origin feature/your-feature-name
-</code></pre>
-</li>
-<li><p><strong>Create Pull Request:</strong>
-Create a Pull Request (PR) from your forked repository to the original repository.</p>
-</li>
-</ol>
-<h3 id="support-and-contact-information">Support and Contact Information</h3>
-<p>To contribute to DbSyncKit.Core, DbSyncKit.DB, DbSyncKit.MSSQL, or DbSyncKit.MySQL packages:</p>
-<ul>
-<li><strong>Email:</strong> support&#64;rohit-mahajan.in</li>
-<li><strong>GitHub Issues:</strong> <a href="https://github.com/RohitM-IN/DBSync/issues">Repository Issues</a></li>
-</ul>
-<h3 id="license-information">License Information</h3>
-<p>DbSyncKit packages are licensed under the MIT License. For detailed information, refer to the <a href="https://github.com/RohitM-IN/DBSync/blob/main/LICENSE">LICENSE</a> file in the repository.</p>
 
                                         </div>
                                 <div class="col-lg-2 p-md-0 m-md-0 bg-body">
                                     <div id="right-sidebar" class="sidebar px-0 px-md-3 pt-3">
-        <div class=" mb-3 sidebar-root">
-            <div class="sidebar-nav-item sidebar-header">On This Page</div>
-            <div class="sidebar-nav-children">
-                    <div class="sidebar-nav-item"><a href="#dbsynckit-database-synchronization-library">DbSyncKit: Database Synchronization Library</a></div>
-                        <div class="sidebar-nav-children">
-                                <div class="sidebar-nav-item"><a href="#introduction">Introduction</a></div>
-                        </div>
-            </div>
-        </div>
                                     </div>
                                 </div>
                             </div>
