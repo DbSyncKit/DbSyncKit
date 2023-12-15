@@ -1,8 +1,8 @@
 ﻿﻿Title: DbSyncKit.Core
-Order: 1
 BreadcrumbTitle: Core
-NavigationTitle: Core
+ShowInNavigation: false
 ShowInSidebar: false
+NoSidebar: true
 Xref: core
 ---
 
