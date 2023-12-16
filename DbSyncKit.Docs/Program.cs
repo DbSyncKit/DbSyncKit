@@ -9,6 +9,7 @@ namespace DbSyncKit.ConsoleApp
             await Bootstrapper
             .Factory
             .CreateDocs(args)
+            .AddProjectFiles("../DbSyncKit.Core/**/*.{cs,xml}")
             .RunAsync();
     }
 }
