@@ -365,3 +365,4 @@ FodyWeavers.xsd
 **/cache/
 
 /DbSyncKit.Docs/output
+/DbSyncKit.Docs/appsettings.json
