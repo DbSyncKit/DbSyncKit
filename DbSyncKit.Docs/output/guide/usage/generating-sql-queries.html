@@ -26,7 +26,7 @@
         <meta name="msapplication-TileColor" content="#e9ecef">
 <meta name="theme-color" content="#e9ecef">
 
-        <title>DbSyncKit - DbSyncKit.Core</title>
+        <title>DbSyncKit - Generating SQL Queries</title>
     </head>
     <body class="d-flex flex-column">
         <div class="flex-grow-1 d-flex flex-column">
@@ -77,12 +77,19 @@
                                     <div class="flex-grow-1">
                                         <div class="breadcrumbs d-flex flex-column flex-md-row text-break">
 
+        <span><a href="/guide">Guide</a></span>
+        <span><a href="/guide/usage">Usage Guide</a></span>
                                         </div>
                                         <div class="text-white m-0 text-break title">
 
-DbSyncKit.Core
+Generating SQL Queries
                                         </div>
                                     </div>
+                                        <div class="navbar navbar-expand-md navbar-dark p-0">
+                                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#left-sidebar" aria-controls="left-sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                                                <span class="navbar-toggler-icon"></span>
+                                            </button>
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +98,9 @@ DbSyncKit.Core
                     <div id="undertitle">
                         <div class="container-xl">
                             <div class="row">
-                                    <div class="offset-lg-2 col-12 col-lg-8 bg-white">
+                                    <div class="col-md-3 col-lg-2">
+                                    </div>
+                                    <div class="col-md-9 col-lg-8 bg-white">
                                     </div>
                                 <div class="col-lg-2 d-none d-lg-block">
                                 </div>
@@ -103,79 +112,91 @@ DbSyncKit.Core
                 <div class="flex-grow-1 d-flex flex-column">
                         <div class="container-xl flex-grow-1 d-flex flex-column">
                             <div class="row flex-grow-1 align-items-stretch">
-                                        <div id="content" class="offset-lg-2 col-12 col-lg-8 p-4 pt-md-0 bg-white">
-<h1 id="introduction">Introduction</h1>
-<p>The <a href="xref:api-DbSyncKit.Core"><code>DbSyncKit.Core</code></a> package is a fundamental component of the Database Synchronization Library (<code>DbSyncKit</code>). It provides a versatile set of tools, utilities, and interfaces designed to streamline and simplify the process of data synchronization across diverse database systems. This library is built to ensure efficiency, consistency, and reliability in managing database synchronization tasks.</p>
-<h1 id="overview">Overview</h1>
-<p>The <a href="xref:api-DbSyncKit.Core"><code>DbSyncKit.Core</code></a> package encapsulates core functionalities essential for seamless data synchronization operations. It serves as the backbone of the entire <code>DbSyncKit</code> ecosystem, offering an extensible framework to cater to various database synchronization requirements.</p>
-<h2 id="key-features">Key Features</h2>
+                                        <div class="col-md-3 col-lg-2 p-md-0 m-md-0 bg-body">
+                                            <div id="left-sidebar" class="sidebar collapse px-0 px-md-3 pt-3">
+
+<div class="sidebar-root">
+
+<div class="sidebar-nav-item has-children">
+    <a href="/guide/overview">Overview</a>
+</div>                <div class="sidebar-nav-children">
+
+<div class="sidebar-nav-item">
+    <a href="/guide/overview/introduction">Introduction</a>
+</div>
+<div class="sidebar-nav-item">
+    <a href="/guide/overview/key-features">Key Features</a>
+</div>
+<div class="sidebar-nav-item">
+    <a href="/guide/overview/getting-started">Getting Started</a>
+</div>                </div>
+
+<div class="sidebar-nav-item has-children">
+    <a href="/guide/configuration">Configuration</a>
+</div>                <div class="sidebar-nav-children">
+
+<div class="sidebar-nav-item">
+    <a href="/guide/configuration/di-setup">Dependency Injection Setup</a>
+</div>
+<div class="sidebar-nav-item">
+    <a href="/guide/configuration/manual-setup">Manual Setup</a>
+</div>
+<div class="sidebar-nav-item">
+    <a href="/guide/configuration/datacontract-configuration">DataContract Configuration</a>
+</div>                </div>
+
+<div class="sidebar-nav-item has-children">
+    <a href="/guide/usage">Usage Guide</a>
+</div>                <div class="sidebar-nav-children">
+
+<div class="sidebar-nav-item">
+    <a href="/guide/usage/basic-synchronization">Basic Synchronization</a>
+</div>
+<div class="sidebar-nav-item">
+    <a href="/guide/usage/synchronization-results">Synchronization Results</a>
+</div>
+<div class="sidebar-nav-item active">
+    <a href="/guide/usage/generating-sql-queries">Generating SQL Queries</a>
+</div>                </div>
+
+<div class="sidebar-nav-item">
+    <a href="/guide/exceptions">Handling Exceptions</a>
+</div></div>                                            </div>
+                                        </div>
+                                        <div id="content" class="col-md-9 col-lg-8 p-4 pt-md-0 bg-white">
+<h1 id="generating-sql-queries-with-dbsynckit">Generating SQL Queries with DbSyncKit</h1>
+<p>In addition to synchronizing data, DbSyncKit allows you to generate SQL queries based on the changes detected during synchronization. This feature is valuable for understanding the exact SQL statements that will be executed in the destination database.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before generating SQL queries, ensure that you have:</p>
 <ul>
-<li><strong>Data Synchronization:</strong> Provides robust mechanisms to synchronize data between different databases.</li>
-<li><strong>Query Generation:</strong> Offers tools for generating database-specific SQL queries necessary for synchronization operations.</li>
-<li><strong>DI (Dependency Injection) Compatibility:</strong> Designed to seamlessly integrate with DI containers, enabling effortless incorporation into diverse application architectures.</li>
-<li><strong>Error Handling:</strong> Implements error-handling strategies to manage and log exceptions encountered during synchronization tasks.</li>
-<li><strong>Configurability:</strong> Facilitates configuration for entities, tables, schemas, and key properties to adapt to various database structures.</li>
+<li>Performed a synchronization operation using DbSyncKit (Refer to <a href="/guide/usage/basic-synchronization">Basic Synchronization</a>).</li>
+<li>Received a synchronization result (<a href="xref:api-DbSyncKit.Core.DataContract.Result"><code>Result&lt;T&gt;</code></a>) object.</li>
 </ul>
-<h1 id="getting-started">Getting Started</h1>
-<p>To incorporate <a href="xref:api-DbSyncKit.Core"><code>DbSyncKit.Core</code></a> into your project, follow these steps:</p>
-<h2 id="installation">Installation</h2>
-<p>Install the package via NuGet Package Manager or Package Manager Console:</p>
-<pre><code class="language-bash">PM&gt; Install-Package DbSyncKit.Core
+<h2 id="generate-sql-queries">Generate SQL Queries</h2>
+<p>Once you have the synchronization result, you can generate SQL queries using the <a href="xref:api-DbSyncKit.Core.Synchronization.GetSqlQueryForSyncData"><code>GetSqlQueryForSyncData</code></a> method. Replace <code>YourEntity</code> with the appropriate entity type.</p>
+<pre><code class="language-csharp">// Perform synchronization
+Result&lt;YourEntity&gt; syncResult = Sync.SyncData&lt;YourEntity&gt;(SourceDatabase, DestinationDatabase);
+
+// Generate SQL queries
+string sqlQueries = Sync.GetSqlQueryForSyncData&lt;YourEntity&gt;(syncResult);
+
+Console.WriteLine(sqlQueries);
+
 </code></pre>
-<h2 id="usage">Usage</h2>
+<p>The <a href="xref:api-DbSyncKit.Core.Synchronization.GetSqlQueryForSyncData"><code>GetSqlQueryForSyncData</code></a> method takes the synchronization result as input and returns a list of SQL queries corresponding to the changes detected during synchronization.</p>
+<h2 id="understanding-generated-sql-queries">Understanding Generated SQL Queries</h2>
+<p>The generated SQL queries fall into three categories:</p>
 <ol>
-<li><p><strong>Dependency Injection Setup:</strong></p>
-<p>In your application's Startup class, register the required services:</p>
-<pre><code class="language-csharp">services.AddScoped&lt;QueryGenerator&gt;();
-services.AddScoped&lt;Synchronization&gt;();
-</code></pre>
+<li><p><strong>Insert Queries</strong>: SQL statements for adding new records to the destination database.</p>
 </li>
-<li><p><strong>Entity Configuration:</strong></p>
-<p>Configure entities with necessary attributes from the <code>DbSyncKit.DB.Attributes</code> namespace for synchronization:</p>
-<pre><code class="language-csharp">using DbSyncKit.DB.Attributes;
-
-[TableName(&quot;YourEntityTable&quot;)]
-public class YourEntity
-{
-    // Define properties and attributes
-}
-</code></pre>
+<li><p><strong>Update Queries</strong>: SQL statements for modifying existing records in the destination database.</p>
 </li>
-<li><p><strong>Performing Synchronization:</strong></p>
-<p>Utilize the <code>Synchronization</code> class for data synchronization operations:</p>
-<pre><code class="language-csharp">using DbSyncKit.Core;
-
-// Instantiate Synchronization class
-Synchronization _sync = new Synchronization(new QueryGenerator());
-
-// Perform synchronization for a specific entity
-var entityData = _sync.SyncData&lt;YourEntity&gt;(sourceDatabase, destinationDatabase);
-</code></pre>
-</li>
-<li><p><strong>Accessing Synchronization Results:</strong></p>
-<p>Retrieve synchronization results and associated SQL queries:</p>
-<pre><code class="language-csharp">Console.WriteLine($&quot;Added: {entityData.Added.Count} Edited: {entityData.Edited.Count} Deleted: {entityData.Deleted.Count}&quot;);
-var query = _sync.GetSqlQueryForSyncData(entityData);
-Console.WriteLine(query);
-</code></pre>
+<li><p><strong>Delete Queries</strong>: SQL statements for removing records from the destination database.</p>
 </li>
 </ol>
-<p>For more advanced usage, refer to the documentation and code examples available in the <a href="https://github.com/YourRepo/DbSyncKit.Core/wiki">Wiki</a> or directly within the library's source code.</p>
-<h1 id="contribution-guidelines">Contribution Guidelines</h1>
-<p>Contributions to <a href="xref:api-DbSyncKit.Core"><code>DbSyncKit.Core</code></a> are welcome! To contribute, follow these steps:</p>
-<ol>
-<li>Fork the repository.</li>
-<li>Create a new branch for your changes.</li>
-<li>Make necessary modifications in the codebase.</li>
-<li>Commit your changes and create a Pull Request (PR) to the original repository.</li>
-</ol>
-<h1 id="support-and-contact-information">Support and Contact Information</h1>
-<p>For support, queries, or feedback regarding <a href="xref:api-DbSyncKit.Core"><code>DbSyncKit.Core</code></a>, feel free to contact us:</p>
-<ul>
-<li><strong>GitHub Issues:</strong> <a href="https://github.com/YourRepo/DbSyncKit.Core/issues">Repository Issues</a></li>
-</ul>
-<h1 id="license-information">License Information</h1>
-<p><a href="xref:api-DbSyncKit.Core"><code>DbSyncKit.Core</code></a> is licensed under the MIT License. For detailed information, refer to the <a href="https://github.com/YourRepo/DbSyncKit.Core/blob/main/LICENSE">LICENSE</a> file in the repository.</p>
+<p>By examining these queries, you gain insights into the exact modifications that will be applied to the destination database.</p>
+<p>Continue exploring other topics in the <a href="xref:usage">Usage Guide</a>.</p>
+
 
                                         </div>
                                 <div class="col-lg-2 p-md-0 m-md-0 bg-body">
@@ -183,22 +204,15 @@ Console.WriteLine(query);
         <div class="border-bottom mb-3 sidebar-root">
             <div class="sidebar-nav-item sidebar-header">On This Page</div>
             <div class="sidebar-nav-children">
-                    <div class="sidebar-nav-item"><a href="#introduction">Introduction</a></div>
-                    <div class="sidebar-nav-item"><a href="#overview">Overview</a></div>
+                    <div class="sidebar-nav-item"><a href="#generating-sql-queries-with-dbsynckit">Generating SQL Queries with DbSyncKit</a></div>
                         <div class="sidebar-nav-children">
-                                <div class="sidebar-nav-item"><a href="#key-features">Key Features</a></div>
+                                <div class="sidebar-nav-item"><a href="#prerequisites">Prerequisites</a></div>
+                                <div class="sidebar-nav-item"><a href="#generate-sql-queries">Generate SQL Queries</a></div>
+                                <div class="sidebar-nav-item"><a href="#understanding-generated-sql-queries">Understanding Generated SQL Queries</a></div>
                         </div>
-                    <div class="sidebar-nav-item"><a href="#getting-started">Getting Started</a></div>
-                        <div class="sidebar-nav-children">
-                                <div class="sidebar-nav-item"><a href="#installation">Installation</a></div>
-                                <div class="sidebar-nav-item"><a href="#usage">Usage</a></div>
-                        </div>
-                    <div class="sidebar-nav-item"><a href="#contribution-guidelines">Contribution Guidelines</a></div>
-                    <div class="sidebar-nav-item"><a href="#support-and-contact-information">Support and Contact Information</a></div>
-                    <div class="sidebar-nav-item"><a href="#license-information">License Information</a></div>
             </div>
         </div>
-        <p class="small font-weight-bold"><a href="https://github.com/statiqdev/Website/edit/main/input/DbSyncKit.Core.md" data-no-validate=""><i class="fad fa-pencil"></i> Edit This Page</a></p>
+        <p class="small font-weight-bold"><a href="https://github.com/statiqdev/Website/edit/main/input/guide/usage/generating-sql-queries.md" data-no-validate=""><i class="fad fa-pencil"></i> Edit This Page</a></p>
                                     </div>
                                 </div>
                             </div>
