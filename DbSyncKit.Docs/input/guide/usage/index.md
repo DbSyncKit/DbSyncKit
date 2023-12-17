@@ -3,7 +3,7 @@ Order: 3
 BreadcrumbTitle: Usage Guide
 NavigationTitle: Usage Guide
 ShowInSidebar: true
-Xref: usage/index
+Xref: usage
 ---
 
 # DbSyncKit Usage Guide
