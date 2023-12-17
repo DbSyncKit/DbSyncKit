@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-	<id>https://dbsynckit.dev/</id>
-	<title>DbSyncKit</title>
-	<link rel="self" href="https://dbsynckit.dev/" />
-	<rights>2023</rights>
-	<updated>2023-12-17T14:48:13Z</updated>
-</feed>

@@ -1,11 +1,16 @@
 {
   "profiles": {
     "DbSyncKit.Docs": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "-s IgnoreInvalidXrefs=true"
     },
     "Preview": {
       "commandName": "Project",
       "commandLineArgs": "preview -s \\\"SourceFiles=\\\" -s IgnoreInvalidXrefs=true"
+    },
+    "Deploy": {
+      "commandName": "Project",
+      "commandLineArgs": "deploy -s IgnoreInvalidXrefs=true"
     }
   }
 }

@@ -9,8 +9,6 @@ namespace DbSyncKit.ConsoleApp
             await Bootstrapper
             .Factory
             .CreateDocs(args)
-            .AddSetting(WebKeys.NetlifyRedirects, true)
-            .AddSourceFiles("../../DbSyncKit.Core/**/{!.git,!bin,!obj,!packages,!*.Tests,}/**/*.cs")
             .RunAsync();
     }
 }
