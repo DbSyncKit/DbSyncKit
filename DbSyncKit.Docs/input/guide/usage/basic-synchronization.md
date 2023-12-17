@@ -20,7 +20,7 @@ Before we start, ensure that you have the following:
 
 ## Setup
 
-To begin, let's set up the necessary variables. For detailed setup instructions, refer to the [Setup Guide](xref:configuration/setup).
+To begin, let's set up the necessary variables. For detailed setup instructions, refer to the [Setup Guide](xref:configuration).
 
 Here's a brief summary of the variables:
 
@@ -28,7 +28,7 @@ Here's a brief summary of the variables:
 - `IDatabase DestinationDatabase`: Represents the destination database connection.
 - `Synchronization Sync`: Represents the DbSyncKit synchronization instance.
 
-For detailed instructions on setting up these variables, refer to the [Setup Guide](xref:configuration/setup).
+For detailed instructions on setting up these variables, refer to the [Setup Guide](xref:configuration).
 
 ## Perform Synchronization
 

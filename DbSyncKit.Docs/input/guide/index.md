@@ -23,11 +23,11 @@ Welcome to the DbSyncKit guide! This guide is designed to help you navigate thro
 
 ## Introduction <a name="introduction"></a>
 
-Briefly learn about what [DbSyncKit](xref:usage/Introduction) is and its key features.
+Briefly learn about what [DbSyncKit](xref:overview/Introduction) is and its key features.
 
 ## Getting Started <a name="getting-started"></a>
 
-Get started with DbSyncKit by following our [Getting Started](xref:usage/getting-started) guide.
+Get started with DbSyncKit by following our [Getting Started](xref:overview/getting-started) guide.
 
 ## Configuration <a name="configuration"></a>
 

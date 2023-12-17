@@ -16,7 +16,7 @@ DbSyncKit offers a modular and extensible architecture through a set of packages
 
 The core package provides the fundamental components and infrastructure for database synchronization operations. It includes essential classes, interfaces, and utilities to streamline synchronization tasks.
 
-For detailed information, visit the [DbSyncKit.Core Documentation](xref:api-DbSyncKit.Core).
+For detailed information, visit the [DbSyncKit.Core Documentation](xref:packages/DbSyncKit.Core).
 
 ## Database Provider Packages
 
@@ -28,7 +28,7 @@ Choose the appropriate database provider package based on the database system yo
 
 This package includes functionalities and components specific to Microsoft SQL Server. Install this package when working with MSSQL databases.
 
-For detailed information, visit the [DbSyncKit.MSSQL Documentation](xref:api-DbSyncKit.MSSQL).
+For detailed information, visit the [DbSyncKit.MSSQL Documentation](xref:packages/DbSyncKit.MSSQL).
 
 ### MySQL Package
 
@@ -36,7 +36,7 @@ For detailed information, visit the [DbSyncKit.MSSQL Documentation](xref:api-DbS
 
 Use this package when working with MySQL databases. It contains functionalities and components tailored for MySQL database synchronization.
 
-For detailed information, visit the [DbSyncKit.MySQL Documentation](xref:api-DbSyncKit.MySQL).
+For detailed information, visit the [DbSyncKit.MySQL Documentation](xref:packages/DbSyncKit.MySQL).
 
 ### PostgreSQL Package (Coming Soon)
 
@@ -50,4 +50,4 @@ Explore additional packages under development or in planning, which aim to enhan
 
 - [In-Development Packages](xref:packages/in-development)
 
-Continue exploring other topics in the [Usage Guide](xref:usage/index).
+Continue exploring other topics in the [Usage Guide](xref:usage).

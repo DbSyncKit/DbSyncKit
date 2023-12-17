@@ -3,7 +3,7 @@ Order: 4
 BreadcrumbTitle: Getting Started
 NavigationTitle: Getting Started
 ShowInSidebar: true
-Xref: getting-started
+Xref: overview/getting-started
 ---
 
 # Getting Started with DbSyncKit
@@ -16,16 +16,16 @@ DbSyncKit consists of several packages tailored to different aspects of database
 
 ### Core Packages
 
-- [DbSyncKit.Core](xref:packages/dbsynckitcore)
-- [DbSyncKit.DB](xref:packages/dbsynckitdb)
+- [DbSyncKit.Core](xref:packages/dbsynckit.core)
+- [DbSyncKit.DB](xref:packages/dbsynckit.db)
 
 ### Database-Specific Packages
 
 Choose the appropriate package based on the database system you are working with:
 
-- For Microsoft SQL Server: [DbSyncKit.MSSQL](xref:packages/dbsynckitmssql)
-- For MySQL: [DbSyncKit.MySQL](xref:packages/dbsynckitmysql)
-- Future package for PostgreSQL: [DbSyncKit.PostgreSQL] (Note: This package is under development and will be available soon.)
+- For Microsoft SQL Server: [DbSyncKit.MSSQL](xref:packages/dbsynckit.mssql)
+- For MySQL: [DbSyncKit.MySQL](xref:packages/dbsynckit.mysql)
+- Future package for PostgreSQL: [DbSyncKit.PostgreSQL](xref:packages/dbsynckit.postgresql) (Note: This package is under development and will be available soon.)
 
 Install these packages using your preferred package manager. For example, using NuGet:
 

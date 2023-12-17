@@ -3,7 +3,7 @@ Order: 4
 BreadcrumbTitle: Handling Exceptions
 NavigationTitle: Handling Exceptions
 ShowInSidebar: true
-Xref: exceptions/handle-errors
+Xref: exceptions
 ---
 
 # Handling Exceptions in DbSyncKit

@@ -21,4 +21,4 @@ Welcome to the DbSyncKit Usage Guide! This guide will walk you through the vario
 3. [Generating SQL Queries](xref:usage/generating-sql-queries)
    - Discover how to generate SQL queries from synchronization results for further analysis.
 
-Proceed to each section to gain a comprehensive understanding of DbSyncKit's usage. If you're new to DbSyncKit, start with the [Getting Started Guide](xref:getting-started).
+Proceed to each section to gain a comprehensive understanding of DbSyncKit's usage. If you're new to DbSyncKit, start with the [Getting Started Guide](xref:overview/getting-started).
