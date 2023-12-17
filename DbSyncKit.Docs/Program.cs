@@ -9,6 +9,10 @@ namespace DbSyncKit.ConsoleApp
             await Bootstrapper
             .Factory
             .CreateDocs(args)
+            .DeployToNetlify(
+                Config.FromSetting<string>("NetlifySiteId"),
+                Config.FromSetting<string>("NetlifyAccessToken")
+            )
             .RunAsync();
     }
 }
