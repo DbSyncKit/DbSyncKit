@@ -1,7 +1,9 @@
 ﻿using DbSyncKit.Core;
+using DbSyncKit.Core.DataContract;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.MySQL;
 using DbSyncKit.Test.SampleContract.DataContract;
+using System.Diagnostics;
 
 namespace DbSyncKit.Test.MySQL
 {
@@ -11,15 +13,17 @@ namespace DbSyncKit.Test.MySQL
         public IDatabase Source { get; set; }
         public IDatabase Destination { get; set; }
         public Synchronization Sync { get; set; }
+        Stopwatch stopwatch { get; }
 
         public SyncTest()
         {
             Source = new Connection("localhost",3306,"SourceChinook","root","");
             Destination = new Connection("localhost", 3306, "DestinationChinook", "root", "");
             Sync = new Synchronization(new QueryGenerator());
+            stopwatch = new Stopwatch();
         }
 
-                [TestMethod]
+        [TestMethod]
         public void ConnectionTest()
         {
             var sourceTest = Source.TestConnection();
@@ -38,13 +42,36 @@ namespace DbSyncKit.Test.MySQL
 
         private void DataSync<T>() where T : IDataContractComparer
         {
-            var data = Sync.SyncData<T>(Source, Destination);
+            stopwatch.Start();
+            Result<T> data = Sync.SyncData<T>(Source, Destination);
+            stopwatch.Stop();
             Console.WriteLine($"Added: {data.Added.Count} Edited: {data.Edited.Count} Deleted: {data.Deleted.Count}");
             Console.WriteLine($"Total Source Data: {data.SourceDataCount}");
             Console.WriteLine($"Total Destination Data: {data.DestinaionDataCount}");
+            Console.WriteLine($"Time took to compare: {GetFormattedTime(stopwatch.Elapsed)}");
 
+            stopwatch.Restart();
             var query = Sync.GetSqlQueryForSyncData(data);
+            stopwatch.Stop();
+            Console.WriteLine($"Time took to Generate Query: {GetFormattedTime(stopwatch.Elapsed)}");
+
             Console.WriteLine(query);
+        }
+
+        private string GetFormattedTime(TimeSpan elapsed)
+        {
+            if (elapsed.TotalMinutes >= 1)
+            {
+                return $"{elapsed.TotalMinutes:F2} m";
+            }
+            else if (elapsed.TotalSeconds >= 1)
+            {
+                return $"{elapsed.TotalSeconds:F2} s";
+            }
+            else
+            {
+                return $"{elapsed.TotalMilliseconds:F2} ms";
+            }
         }
 
         [TestMethod]
