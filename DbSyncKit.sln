@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.ConsoleApp", "DbSyncKit.ConsoleApp\DbSyncKit.ConsoleApp.csproj", "{2E2A27DC-F3D6-45FD-B818-F5DC7583FED7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.DB", "DbSyncKit.DB\DbSyncKit.DB.csproj", "{D4F2D0D8-3024-459F-ADCB-4F7639FA9236}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.MSSQL", "DbSyncKit.MSSQL\DbSyncKit.MSSQL.csproj", "{B32501EB-DB53-46C7-88DE-A0419AF52B38}"
@@ -19,16 +17,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Postgre", "DbSync
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Core", "DbSyncKit.Core\DbSyncKit.Core.csproj", "{AC79A3B2-B2C7-4B41-8CF0-9E88F5D3F646}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Docs", "DbSyncKit.Docs\DbSyncKit.Docs.csproj", "{990A6285-233E-44F4-9523-9D6A6B8D2933}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2E2A27DC-F3D6-45FD-B818-F5DC7583FED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E2A27DC-F3D6-45FD-B818-F5DC7583FED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E2A27DC-F3D6-45FD-B818-F5DC7583FED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E2A27DC-F3D6-45FD-B818-F5DC7583FED7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D4F2D0D8-3024-459F-ADCB-4F7639FA9236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D4F2D0D8-3024-459F-ADCB-4F7639FA9236}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4F2D0D8-3024-459F-ADCB-4F7639FA9236}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +53,10 @@ Global
 		{AC79A3B2-B2C7-4B41-8CF0-9E88F5D3F646}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC79A3B2-B2C7-4B41-8CF0-9E88F5D3F646}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC79A3B2-B2C7-4B41-8CF0-9E88F5D3F646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{990A6285-233E-44F4-9523-9D6A6B8D2933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{990A6285-233E-44F4-9523-9D6A6B8D2933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{990A6285-233E-44F4-9523-9D6A6B8D2933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{990A6285-233E-44F4-9523-9D6A6B8D2933}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
