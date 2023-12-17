@@ -18,4 +18,4 @@ For detailed terms and conditions, refer to the [MIT License](https://opensource
 
 Please read and understand the terms of the MIT License before using DbSyncKit. If you have any questions or concerns, feel free to reach out through the [Support & Contact](xref:support) section.
 
-Proceed to the [Main Landing Page](xref:index.cshtml) to explore more about DbSyncKit and its documentation.
+Proceed to the [Main Landing Page](xref:home) to explore more about DbSyncKit and its documentation.

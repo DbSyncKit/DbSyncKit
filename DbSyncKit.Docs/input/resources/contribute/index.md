@@ -30,10 +30,6 @@ DbSyncKit is an open-source project, and we welcome contributions from the commu
 
 ## Code Style Guidelines
 
-When contributing code, please adhere to the [DbSyncKit Code Style Guidelines](xref:contribute/code-style-guidelines).
-
-## Code Style Guidelines
-
 Maintaining a consistent code style across the project is essential for readability and collaboration. Before contributing code to DbSyncKit, please review and follow the [Code Style Guidelines](https://github.com/dbsynckit/docs/contribute/code-style-guidelines).
 
 Thank you for contributing to DbSyncKit! Your support helps make the project better for everyone.
