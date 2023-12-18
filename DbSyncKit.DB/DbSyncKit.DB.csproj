@@ -5,17 +5,14 @@
 	<ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-	<AssemblyVersion>0.1.2.0</AssemblyVersion>
-	<FileVersion>0.1.2.0</FileVersion>
-	<Version>0.1.2.0</Version>
+	<AssemblyVersion>0.2.0.0</AssemblyVersion>
+	<FileVersion>0.2.0.0</FileVersion>
+	<Version>0.2.0.0</Version>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<RepositoryUrl>https://github.com/RohitM-IN/DbSyncKit</RepositoryUrl>
+	<RepositoryUrl>https://dbsynckit.rohit-mahajan.in/</RepositoryUrl>
 	<PackageProjectUrl>https://github.com/RohitM-IN/DbSyncKit</PackageProjectUrl>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<PackageReleaseNotes>### Feature
-- Added Batching for running scripts now will include GO for MSSQL or similar statements for MYSQL or Postgres
-</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
