@@ -1,24 +1,29 @@
 ﻿using DbSyncKit.Core;
 using DbSyncKit.Core.DataContract;
 using DbSyncKit.DB.Interface;
-using DbSyncKit.MySQL;
 using DbSyncKit.Test.SampleContract.DataContract;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DbSyncKit.Test.MySQL
+namespace DbSyncKit.Test.CrossDatabase
 {
     [TestClass]
-    public class SyncTest
+
+    public class MssqlToMySqlSyncTests
     {
         public IDatabase Source { get; set; }
         public IDatabase Destination { get; set; }
         public Synchronization Sync { get; set; }
         Stopwatch stopwatch { get; }
 
-        public SyncTest()
+        public MssqlToMySqlSyncTests()
         {
-            Source = new Connection("localhost",3306,"SourceChinook","root","");
-            Destination = new Connection("localhost", 3306, "DestinationChinook", "root", "");
+            Source = new DbSyncKit.MSSQL.Connection("(localdb)\\MSSQLLocalDB", "SourceChinook", true);
+            Destination = new DbSyncKit.MySQL.Connection("localhost", 3306, "DestinationChinook", "root", "");
             Sync = new Synchronization();
             stopwatch = new Stopwatch();
         }

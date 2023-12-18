@@ -10,7 +10,7 @@ Xref: configuration/manual-setup
 
 DbSyncKit can be configured manually without using Dependency Injection (DI). This guide outlines the steps to set up DbSyncKit manually in your application.
 
-## 1. Query Generator Setup
+## 1. Query Generator Setup (Optional)
 
 ### For MSSQL
 API Reference: [QueryGenerator](xref:api-DbSyncKit.MSSQL.QueryGenerator)
@@ -34,8 +34,16 @@ API Reference: [Synchronization](xref:api-DbSyncKit.Core.Synchronization)
 
 ```csharp
 // manual synchronization setup
-Synchronization Sync = new Synchronization(queryGenerator);
+Synchronization Sync = new Synchronization();
 ```
+
+Or With QueryGenerator
+
+```csharp
+Synchronization Sync = new Synchronization(sourceQueryGenerator,destinationQueryGenerator);
+```
+
+Where `sourceQueryGenerator` & `destinationQueryGenerator` are instance of `IQueryGenerator`
 
 ## 3. Database Configuration
 

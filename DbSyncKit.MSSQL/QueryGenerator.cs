@@ -45,7 +45,7 @@ END ";
 
         private readonly string UPDATE_QUERY = @" 
 IF EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
-UPDATE @Schema.@TableName SET @Set WHERE @Where} ";
+UPDATE @Schema.@TableName SET @Set WHERE @Where ";
 
         private readonly string DELETE_QUERY = @" 
 IF EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)

@@ -3,6 +3,7 @@ using DbSyncKit.Core.DataContract;
 using DbSyncKit.Core.Enum;
 using DbSyncKit.Core.Helper;
 using DbSyncKit.DB;
+using DbSyncKit.DB.Factory;
 using DbSyncKit.DB.Helper;
 using DbSyncKit.DB.Interface;
 using System.Text;
@@ -16,12 +17,15 @@ namespace DbSyncKit.Core
     {
         #region Decleration
 
-        //private readonly DatabaseMetadata dbSchema;
+        /// <summary>
+        /// Gets or sets the IQueryGenerator instance for the source database.
+        /// </summary>
+        public IQueryGenerator sourceQueryGenerationManager {  get; private set; }
 
         /// <summary>
-        /// The query generation manager used for generating SQL queries.
+        /// Gets or sets the IQueryGenerator instance for the destination database.
         /// </summary>
-        private readonly QueryGenerationManager queryGenerationManager;
+        public IQueryGenerator destinationQueryGenerationManager { get; private set; }
 
         #endregion
 
@@ -29,11 +33,19 @@ namespace DbSyncKit.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="Synchronization"/> class.
         /// </summary>
-        /// <param name="querryGenerator">The query generator to be used for SQL query generation.</param>
-        public Synchronization(IQueryGenerator querryGenerator)
+        public Synchronization()
         {
-            //dbSchema = new DatabaseMetadata();
-            queryGenerationManager = new QueryGenerationManager(querryGenerator);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Synchronization"/> class with specified IQueryGenerator instances.
+        /// </summary>
+        /// <param name="source">The IQueryGenerator for the source database.</param>
+        /// <param name="destination">The IQueryGenerator for the destination database.</param>
+        public Synchronization(IQueryGenerator source, IQueryGenerator destination)
+        {
+            sourceQueryGenerationManager = source;
+            destinationQueryGenerationManager = destination;
         }
 
         #endregion
@@ -78,8 +90,12 @@ namespace DbSyncKit.Core
                 default:
                     break;
             }
-            sourceList = GetDataFromDatabase<T>(tableName, source, sourceColList);
-            destinationList = GetDataFromDatabase<T>(tableName, destination, destinationColList);
+
+            sourceQueryGenerationManager = new QueryGenerationManager(QueryGeneratorFactory.GetQueryGenerator(source.Provider));
+            destinationQueryGenerationManager = new QueryGenerationManager(QueryGeneratorFactory.GetQueryGenerator(destination.Provider));
+
+            sourceList = GetDataFromDatabase<T>(tableName, source, sourceQueryGenerationManager, sourceColList);
+            destinationList = GetDataFromDatabase<T>(tableName, destination, destinationQueryGenerationManager, destinationColList);
 
             return DataMetadataComparisonHelper<T>.GetDifferences(sourceList, destinationList, GetKeyColumns<T>(), GetExcludedProperties<T>(), direction);
 
@@ -92,13 +108,25 @@ namespace DbSyncKit.Core
         /// <param name="result">The result object containing the differences between source and destination data.</param>
         /// <param name="BatchSize">The size of each batch for SQL statements (default is 20).</param>
         /// <returns>A string representing the generated SQL queries for synchronization.</returns>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when the IQueryGenerator instance is missing.
+        /// Make sure to set it either by providing it through the constructor or by calling
+        /// the SyncData method before calling this method.
+        /// </exception>
         public string GetSqlQueryForSyncData<T>(Result<T> result,int BatchSize = 20) where T : IDataContractComparer
         {
-            string batchStatement = queryGenerationManager.GenerateBatchSeparator();
+            if (destinationQueryGenerationManager == null)
+            {
+                throw new InvalidOperationException(
+                    $"The IQueryGenerator instance is missing. " +
+                    $"Make sure to set it either by providing it through the constructor or by calling the SyncData method before calling this method.");
+            }
+
+            string batchStatement = destinationQueryGenerationManager.GenerateBatchSeparator();
             var inserts = new StringBuilder();
             for (int i = 0; i < result.Added.Count; i++)
             {
-                inserts.AppendLine(queryGenerationManager.GenerateInsertQuery(result.Added[i], GetKeyColumns<T>(), GetExcludedProperties<T>()));
+                inserts.AppendLine(destinationQueryGenerationManager.GenerateInsertQuery(result.Added[i], GetKeyColumns<T>(), GetExcludedProperties<T>()));
                 if (i != 0 && i % BatchSize == 0)
                     inserts.AppendLine(batchStatement);
             }
@@ -107,7 +135,7 @@ namespace DbSyncKit.Core
             var delete = new StringBuilder();
             for (int i = 0; i < result.Deleted.Count; i++)
             {
-                delete.AppendLine(queryGenerationManager.GenerateDeleteQuery(result.Deleted[i], GetKeyColumns<T>()));
+                delete.AppendLine(destinationQueryGenerationManager.GenerateDeleteQuery(result.Deleted[i], GetKeyColumns<T>()));
                 if (i != 0 && i % BatchSize == 0)
                     delete.AppendLine(batchStatement);
 
@@ -117,7 +145,7 @@ namespace DbSyncKit.Core
 
             for (int i = 0; i < result.Edited.Count; i++)
             {
-                edits.AppendLine(queryGenerationManager.GenerateUpdateQuery<T>(result.Edited[i].Item1, GetKeyColumns<T>(), GetExcludedProperties<T>(), result.Edited[i].Item2));
+                edits.AppendLine(destinationQueryGenerationManager.GenerateUpdateQuery<T>(result.Edited[i].Item1, GetKeyColumns<T>(), GetExcludedProperties<T>(), result.Edited[i].Item2));
                 if (i != 0 && i % BatchSize == 0)
                     edits.AppendLine(batchStatement);
             }
@@ -126,14 +154,14 @@ namespace DbSyncKit.Core
 
             var TableName = GetTableName<T>();
 
-            query.AppendLine(queryGenerationManager.GenerateComment("==============" + TableName + "=============="));
-            query.AppendLine(queryGenerationManager.GenerateComment("==============Insert==============="));
+            query.AppendLine(destinationQueryGenerationManager.GenerateComment("==============" + TableName + "=============="));
+            query.AppendLine(destinationQueryGenerationManager.GenerateComment("==============Insert==============="));
             query.AppendLine(inserts.ToString());
             if(result.Added.Count > 0 && result.Added.Count % BatchSize != 0) query.AppendLine(batchStatement);
-            query.AppendLine(queryGenerationManager.GenerateComment("==============Delete==============="));
+            query.AppendLine(destinationQueryGenerationManager.GenerateComment("==============Delete==============="));
             query.AppendLine(delete.ToString());
             if (result.Deleted.Count > 0 && result.Deleted.Count % BatchSize != 0) query.AppendLine(batchStatement);
-            query.AppendLine(queryGenerationManager.GenerateComment("==============Update==============="));
+            query.AppendLine(destinationQueryGenerationManager.GenerateComment("==============Update==============="));
             query.AppendLine(edits.ToString());
             if (result.Edited.Count > 0 && result.Edited.Count % BatchSize != 0) query.AppendLine(batchStatement);
 
@@ -143,9 +171,9 @@ namespace DbSyncKit.Core
         #endregion
 
         #region Private Methods
-        private HashSet<T> GetDataFromDatabase<T>(string tableName, IDatabase connection, List<string> columns) where T : IDataContractComparer
+        private HashSet<T> GetDataFromDatabase<T>(string tableName, IDatabase connection, IQueryGenerator manager, List<string> columns) where T : IDataContractComparer
         {
-            var query = queryGenerationManager.GenerateSelectQuery<T>(tableName, columns, string.Empty);
+            var query = manager.GenerateSelectQuery<T>(tableName, columns, string.Empty);
 
             using (var DBManager = new DatabaseManager<IDatabase>(connection))
             {
