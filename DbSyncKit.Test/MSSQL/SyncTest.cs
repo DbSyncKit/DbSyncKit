@@ -21,7 +21,7 @@ namespace DbSyncKit.Test.MSSQL
         {
             Source = new Connection("(localdb)\\MSSQLLocalDB", "SourceChinook", true);
             Destination = new Connection("(localdb)\\MSSQLLocalDB", "DestinationChinook", true);
-            Sync = new Synchronization(new QueryGenerator());
+            Sync = new Synchronization();
             stopwatch = new Stopwatch();
         }
 

@@ -15840,7 +15840,7 @@ INSERT INTO [dbo].[PlaylistTrack] ([PlaylistId], [TrackId]) VALUES (17, 2096);
 INSERT INTO [dbo].[PlaylistTrack] ([PlaylistId], [TrackId]) VALUES (17, 3290);
 INSERT INTO [dbo].[PlaylistTrack] ([PlaylistId], [TrackId]) VALUES (18, 597);
 
-
+GO
 /* 
 =============================
 Some Deletes For Comparison
@@ -15854,4 +15854,304 @@ DELETE FROM InvoiceLine WHERE InvoiceId IN (SELECT InvoiceId FROM Invoice WHERE 
 DELETE FROM Invoice WHERE CustomerId = 59
 DELETE FROM Customer  WHERE CustomerId = 59
 
+UPDATE Album
+SET Title = REPLACE(REPLACE(Title, 'a', 'z'), 'i', 'p')
+WHERE AlbumID BETWEEN 1 AND 5;
+
+UPDATE Artist
+SET Name = REPLACE(REPLACE(Name, 'a', 'z'), 'i', 'p')
+WHERE ArtistID BETWEEN 1 AND 5;
+
+UPDATE Customer
+SET Address = REPLACE(REPLACE(Address, 'a', 'z'), 'i', 'p')
+WHERE CustomerID BETWEEN 1 AND 20;
+
+UPDATE Employee
+SET Email = REPLACE(REPLACE(Email, 'a', 'z'), 'i', 'p')
+WHERE EmployeeID BETWEEN 1 AND 3;
+
+UPDATE Genre
+SET Name = REPLACE(REPLACE(Name, 'a', 'z'), 'i', 'p')
+WHERE GenreID BETWEEN 7 AND 9;
+
+UPDATE Invoice
+SET BillingAddress = REPLACE(REPLACE(BillingAddress, 'a', 'z'), 'i', 'p')
+WHERE InvoiceID BETWEEN 9 AND 50;
+
+UPDATE Track
+SET Name = REPLACE(REPLACE(Name, 'a', 'z'), 'i', 'p')
+WHERE TrackID BETWEEN 100 AND 300;
+
+
+IF EXISTS (SELECT 1 FROM dbo.Album WHERE [AlbumId] = '1')
+UPDATE dbo.Album SET [Title] = 'For Those About To Rock We Szlute You' WHERE [AlbumId] = '1' 
+
+IF EXISTS (SELECT 1 FROM dbo.Artist WHERE [ArtistId] = '4')
+UPDATE dbo.Artist SET [Name] = 'Alznps Morpssette' WHERE [ArtistId] = '4' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Artist WHERE [ArtistId] = '1')
+UPDATE dbo.Artist SET [Name] = 'AC/DC' WHERE [ArtistId] = '1' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Artist WHERE [ArtistId] = '2')
+UPDATE dbo.Artist SET [Name] = 'Accept' WHERE [ArtistId] = '2' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Artist WHERE [ArtistId] = '5')
+UPDATE dbo.Artist SET [Name] = 'Alpce In Chzpns' WHERE [ArtistId] = '5' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Artist WHERE [ArtistId] = '3')
+UPDATE dbo.Artist SET [Name] = 'Aerosmpth' WHERE [ArtistId] = '3' 
+
+  
+IF EXISTS (SELECT 1 FROM dbo.Customer WHERE [CustomerId] = '20')
+UPDATE dbo.Customer SET [Address] = '541 Del Medpo Avenue' WHERE [CustomerId] = '20' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Customer WHERE [CustomerId] = '19')
+UPDATE dbo.Customer SET [Address] = '1 Infpnpte Loop' WHERE [CustomerId] = '19' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Customer WHERE [CustomerId] = '7')
+UPDATE dbo.Customer SET [Address] = 'Rotenturmstrzße 4, 1010 Innere Stzdt' WHERE [CustomerId] = '7' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Customer WHERE [CustomerId] = '11')
+UPDATE dbo.Customer SET [Address] = 'Av. Pzulpstz, 2022' WHERE [CustomerId] = '11' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Customer WHERE [CustomerId] = '1')
+UPDATE dbo.Customer SET [Address] = 'Av. Brpgzdepro Fzrpz Lpmz, 2170' WHERE [CustomerId] = '1' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Customer WHERE [CustomerId] = '16')
+UPDATE dbo.Customer SET [Address] = '1600 Amphptheztre Pzrkwzy' WHERE [CustomerId] = '16' 
+
+ IF EXISTS (SELECT 1 FROM dbo.Invoice WHERE [InvoiceId] = '26')
+UPDATE dbo.Invoice SET [BillingAddress] = '1 Infpnpte Loop' WHERE [InvoiceId] = '26' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Invoice WHERE [InvoiceId] = '13')
+UPDATE dbo.Invoice SET [BillingAddress] = '1600 Amphptheztre Pzrkwzy' WHERE [InvoiceId] = '13' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Invoice WHERE [InvoiceId] = '28')
+UPDATE dbo.Invoice SET [BillingAddress] = 'Ruz dz Assunção 53' WHERE [InvoiceId] = '28' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Invoice WHERE [InvoiceId] = '15')
+UPDATE dbo.Invoice SET [BillingAddress] = '1 Infpnpte Loop' WHERE [InvoiceId] = '15' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Invoice WHERE [InvoiceId] = '39')
+UPDATE dbo.Invoice SET [BillingAddress] = '1033 N Pzrk Ave' WHERE [InvoiceId] = '39' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Invoice WHERE [InvoiceId] = '18')
+UPDATE dbo.Invoice SET [BillingAddress] = '194A Chzpn Lzke Drpve' WHERE [InvoiceId] = '18' 
+
+ IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '249')
+UPDATE dbo.Track SET [Name] = 'Quplombo Groove [Instrumentzl]' WHERE [TrackId] = '249' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '240')
+UPDATE dbo.Track SET [Name] = 'Meu Czro Ampgo' WHERE [TrackId] = '240' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '283')
+UPDATE dbo.Track SET [Name] = 'A Sombrz Dz Mzldzde' WHERE [TrackId] = '283' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '238')
+UPDATE dbo.Track SET [Name] = 'Com Açúczr E Com Afeto' WHERE [TrackId] = '238' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '236')
+UPDATE dbo.Track SET [Name] = 'A Bzndz' WHERE [TrackId] = '236' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '235')
+UPDATE dbo.Track SET [Name] = 'Apeszr De Você' WHERE [TrackId] = '235' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '254')
+UPDATE dbo.Track SET [Name] = 'O Encontro De Iszzc Aspmov Com Szntos Dumont No Céu' WHERE [TrackId] = '254' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '253')
+UPDATE dbo.Track SET [Name] = 'Mzrzcztu Atômpco' WHERE [TrackId] = '253' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '194')
+UPDATE dbo.Track SET [Name] = 'Fprst Tpme I Met The Blues' WHERE [TrackId] = '194' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '192')
+UPDATE dbo.Track SET [Name] = 'The Alchempst' WHERE [TrackId] = '192' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '152')
+UPDATE dbo.Track SET [Name] = 'N.I.B.' WHERE [TrackId] = '152' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '170')
+UPDATE dbo.Track SET [Name] = 'A Stztpstpc' WHERE [TrackId] = '170' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '167')
+UPDATE dbo.Track SET [Name] = 'Body Count''s In The House' WHERE [TrackId] = '167' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '203')
+UPDATE dbo.Track SET [Name] = 'Too Mzny Wzys (Alternzte)' WHERE [TrackId] = '203' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '139')
+UPDATE dbo.Track SET [Name] = 'A.N.D.R.O.T.A.Z.' WHERE [TrackId] = '139' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '290')
+UPDATE dbo.Track SET [Name] = 'A Estrzdz' WHERE [TrackId] = '290' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '114')
+UPDATE dbo.Track SET [Name] = 'Twpst And Shout' WHERE [TrackId] = '114' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '234')
+UPDATE dbo.Track SET [Name] = 'Morenz De Angolz' WHERE [TrackId] = '234' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '231')
+UPDATE dbo.Track SET [Name] = 'Atrzs Dz Portz' WHERE [TrackId] = '231' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '183')
+UPDATE dbo.Track SET [Name] = 'Kpng In Crpmson' WHERE [TrackId] = '183' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '146')
+UPDATE dbo.Track SET [Name] = 'Lpke A Bprd' WHERE [TrackId] = '146' 
+
+ GO 
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '3499')
+UPDATE dbo.Track SET [Name] = 'Pini Di Roma (Pinien Von Rom)  I Pini Della Via Appia' WHERE [TrackId] = '3499' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '3485')
+UPDATE dbo.Track SET [Name] = 'Symphony No. 3 Op. 36 for Orchestra and Soprano "Symfonia Piesni Zalosnych"  Lento E Largo - Tranquillissimo' WHERE [TrackId] = '3485' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '3448')
+UPDATE dbo.Track SET [Name] = 'Lamentations of Jeremiah, First Set  Incipit Lamentatio' WHERE [TrackId] = '3448' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '262')
+UPDATE dbo.Track SET [Name] = 'Interlude Zumbp' WHERE [TrackId] = '262' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '259')
+UPDATE dbo.Track SET [Name] = 'Bzpão Ambpentzl [Instrumentzl]' WHERE [TrackId] = '259' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '134')
+UPDATE dbo.Track SET [Name] = 'All For You' WHERE [TrackId] = '134' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '3435')
+UPDATE dbo.Track SET [Name] = 'Cavalleria Rusticana  Act  Intermezzo Sinfonico' WHERE [TrackId] = '3435' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '281')
+UPDATE dbo.Track SET [Name] = 'Computzdores Fzzem Arte' WHERE [TrackId] = '281' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '180')
+UPDATE dbo.Track SET [Name] = 'Body Count Anthem' WHERE [TrackId] = '180' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '106')
+UPDATE dbo.Track SET [Name] = 'Mzn Or Anpmzl' WHERE [TrackId] = '106' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '221')
+UPDATE dbo.Track SET [Name] = 'Atrás Dz Verd-E-Rosz Só Não Vzp Quem Já Morreu' WHERE [TrackId] = '221' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '220')
+UPDATE dbo.Track SET [Name] = 'A Luz De Tpetz' WHERE [TrackId] = '220' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '202')
+UPDATE dbo.Track SET [Name] = 'My Tpme After Awhple' WHERE [TrackId] = '202' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '201')
+UPDATE dbo.Track SET [Name] = 'Keep It To Myself (Akz Keep It To Yourself)' WHERE [TrackId] = '201' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '200')
+UPDATE dbo.Track SET [Name] = 'She Supts Me To A Tee' WHERE [TrackId] = '200' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '199')
+UPDATE dbo.Track SET [Name] = 'Lezve My Gprl Alone' WHERE [TrackId] = '199' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '131')
+UPDATE dbo.Track SET [Name] = 'Intro/ Low Down' WHERE [TrackId] = '131' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '268')
+UPDATE dbo.Track SET [Name] = 'Mzrzcztu Atômpco [Trpp Hop]' WHERE [TrackId] = '268' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '267')
+UPDATE dbo.Track SET [Name] = 'Mzrzcztu Atômpco [Rzggz Mpx]' WHERE [TrackId] = '267' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '143')
+UPDATE dbo.Track SET [Name] = 'The Begpnpng... At Lzst' WHERE [TrackId] = '143' 
+
+ GO 
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '298')
+UPDATE dbo.Track SET [Name] = 'A Cor Do Sol' WHERE [TrackId] = '298' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '266')
+UPDATE dbo.Track SET [Name] = 'Mzrzcztu Atômpco [Atompc Verspon]' WHERE [TrackId] = '266' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '265')
+UPDATE dbo.Track SET [Name] = 'Szmpdzrpsh [Instrumentzl]' WHERE [TrackId] = '265' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '264')
+UPDATE dbo.Track SET [Name] = 'Amor De Mupto' WHERE [TrackId] = '264' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '148')
+UPDATE dbo.Track SET [Name] = 'The Begpnnpng...At Lzst' WHERE [TrackId] = '148' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '147')
+UPDATE dbo.Track SET [Name] = 'Blood In The Wzll' WHERE [TrackId] = '147' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '278')
+UPDATE dbo.Track SET [Name] = 'Antene Se' WHERE [TrackId] = '278' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '275')
+UPDATE dbo.Track SET [Name] = 'Dz Lzmz Ao Czos' WHERE [TrackId] = '275' 
+
+ 
+IF EXISTS (SELECT 1 FROM dbo.Track WHERE [TrackId] = '125')
+UPDATE dbo.Track SET [Name] = 'Spznpsh moss-"A sound portrzpt"-Spznpsh moss' WHERE [TrackId] = '125' 
+
+	
 

@@ -15841,3 +15841,8 @@ INSERT INTO [dbo].[PlaylistTrack] ([PlaylistId], [TrackId]) VALUES (17, 2096);
 INSERT INTO [dbo].[PlaylistTrack] ([PlaylistId], [TrackId]) VALUES (17, 3290);
 INSERT INTO [dbo].[PlaylistTrack] ([PlaylistId], [TrackId]) VALUES (18, 597);
 
+GO
+
+DELETE FROM PlaylistTrack WHERE TrackId IN (14);
+DELETE FROM InvoiceLine WHERE TrackId IN (14);
+DELETE FROM Track WHERE TrackId = 14;
