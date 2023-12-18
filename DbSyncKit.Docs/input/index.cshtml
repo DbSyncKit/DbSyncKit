@@ -3,6 +3,10 @@ NoContainer: true
 NoTitle: true
 xref: home
 ---
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha384-xqDyExWIVekFNP2zT2ZD1Ds1q3gq7QQJx8HhRTtQZBr4wC1Mq6wIqf8v7K5+e25M" crossorigin="anonymous">
+</head>
+
 @section Splash {
     <!-- Jumbotron -->
     <div id="hero" class="jumbotron jumbotron-fluid mb-0">
@@ -38,16 +42,14 @@ xref: home
 
 
 
-
 <!-- Features Section -->
-<section id="features" class="bg-light my-5 py-4" style="background-color: #f8f9fa;">
+<section id="features" class="bg-light my-5 py-4 animate__animated animate__fadeIn" style="background-color: #f8f9fa;">
     <div class="container">
         <h2 class="text-center mb-4">Key Features</h2>
         <div class="row">
-
             <!-- Feature 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card text-center">
+            <div class="col-md-6 mb-4">
+                <div class="card text-center h-100">
                     <div class="card-body">
                         <i class="fas fa-clock fa-3x mb-3 text-primary"></i>
                         <h4 class="card-title text-primary">Efficient Synchronization</h4>
@@ -57,8 +59,8 @@ xref: home
             </div>
 
             <!-- Feature 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card text-center">
+            <div class="col-md-6 mb-4">
+                <div class="card text-center h-100">
                     <div class="card-body">
                         <i class="fas fa-layer-group fa-3x mb-3 text-success"></i>
                         <h4 class="card-title text-success">Platform Compatibility</h4>
@@ -68,8 +70,8 @@ xref: home
             </div>
 
             <!-- Feature 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card text-center">
+            <div class="col-md-6 mb-4">
+                <div class="card text-center h-100">
                     <div class="card-body">
                         <i class="fas fa-toolbox fa-3x mb-3 text-warning"></i>
                         <h4 class="card-title text-warning">Comprehensive Toolset</h4>
@@ -78,6 +80,16 @@ xref: home
                 </div>
             </div>
 
+            <!-- Feature 4 -->
+            <div class="col-md-6 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-cogs fa-3x mb-3 text-danger"></i>
+                        <h4 class="card-title text-danger">Cross-Database Migration</h4>
+                        <p class="card-text">DbSyncKit supports cross-database migration, making it versatile for managing data across different database platforms.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -86,14 +98,15 @@ xref: home
 
 
 
+
 <!-- Packages Section -->
-<section id="packages" class="my-5">
+<section id="packages" class="my-5 animate__animated animate__fadeIn">
     <div class="container">
         <h2 class="text-center mb-4">Packages</h2>
         <p class="lead text-center">Explore the individual packages within DbSyncKit:</p>
         <div class="row">
-            <div class="col">
-                <div class="card text-center">
+            <div class="col-md-4">
+                <div class="card text-center h-100">
                     <div class="card-body">
                         <i class="fas fa-cube fa-3x mb-3 text-primary"></i>
                         <h4 class="card-title"><a href="xref:packages/DbSyncKit.Core">DbSyncKit.Core</a></h4>
@@ -102,7 +115,7 @@ xref: home
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card text-center">
+                <div class="card text-center h-100">
                     <div class="card-body">
                         <i class="fas fa-database fa-3x mb-3 text-primary"></i>
                         <h4 class="card-title"><a href="xref:packages/DbSyncKit.DB">DbSyncKit.DB</a></h4>
@@ -110,8 +123,8 @@ xref: home
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
-                <div class="card text-center">
+            <div class="col-md-4">
+                <div class="card text-center h-100">
                     <div class="card-body">
                         <i class="fas fa-server fa-3x mb-3 text-primary"></i>
                         <h4 class="card-title"><a href="xref:providers">Database Providers</a></h4>
@@ -128,33 +141,33 @@ xref: home
 
 
 <!-- Why DbSyncKit Section -->
-<section id="why-dbsynckit" class="bg-light py-5">
+<section id="why-dbsynckit" class="bg-light py-5 animate__animated animate__fadeIn">
     <div class="container">
         <h2 class="text-center mb-4">Why DbSyncKit?</h2>
         <div class="row">
             <div class="col-md-4 text-center">
-                <i class="fas fa-tachometer-alt fa-3x mb-3"></i>
-                <h4>Speed</h4>
-                <p>DbSyncKit is designed for performance, ensuring your synchronization processes run quickly and efficiently.</p>
-            </div>
+                    <i class="fas fa-tachometer-alt fa-3x mb-3"></i>
+                    <h4>Speed</h4>
+                    <p>DbSyncKit is designed for performance, ensuring your synchronization processes run quickly and efficiently.</p>
+                </div>
             <div class="col-md-4 text-center">
-                <i class="fas fa-cogs fa-3x mb-3"></i>
-                <h4>Flexibility</h4>
-                <p>With support for various database platforms, DbSyncKit adapts to your specific environment.</p>
-            </div>
+                    <i class="fas fa-cogs fa-3x mb-3"></i>
+                    <h4>Flexibility</h4>
+                    <p>With support for various database platforms, DbSyncKit adapts to your specific environment.</p>
+                </div>
             <div class="col-md-4 text-center">
-                <i class="fas fa-users fa-3x mb-3"></i>
-                <h4>Ease of Use</h4>
-                <p>Whether you're a seasoned developer or just getting started, DbSyncKit's comprehensive toolset makes data synchronization accessible to all.</p>
+                    <i class="fas fa-users fa-3x mb-3"></i>
+                    <h4>Ease of Use</h4>
+                    <p>Whether you're a seasoned developer or just getting started, DbSyncKit's comprehensive toolset makes data synchronization accessible to all.</p>
+                </div>
             </div>
         </div>
-    </div>
 </section>
 
 
 
 <!-- How Fast Section -->
-<section id="how-fast" class="bg-primary text-white py-5">
+<section id="how-fast" class="bg-primary text-white py-5 animate__animated animate__fadeIn">
     <div class="container">
         <h2 class="text-center text-white mb-4">How Fast is DbSyncKit?</h2>
         <p class="lead text-center">DbSyncKit prides itself on being a fast and efficient solution for database synchronization. Check out our</p>
