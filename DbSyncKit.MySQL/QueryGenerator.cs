@@ -25,7 +25,7 @@ UPDATE `@SchemaWithTableName` SET @Set WHERE @Where LIMIT 1; ";
 INSERT INTO `@SchemaWithTableName` (@Columns) SELECT @Values FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM `@SchemaWithTableName` WHERE @Where); ";
 
         private readonly string SELECT_QUERY = @"
-SELECT @Columns FROM `@SchemaWithTableName` 
+SELECT @Columns FROM `@SchemaWithTableName`;
 ";
 
         #endregion
