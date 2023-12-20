@@ -16,11 +16,11 @@ namespace DbSyncKit.Templates.MSSQL
 
         #region Private Properties
 
-        private static Lazy<HandlebarsTemplate<object, object>> _selectQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateSelectQueryTemplate);
-        private static Lazy<HandlebarsTemplate<object, object>> _insertQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateInsertQueryTemplate);
-        private readonly Lazy<HandlebarsTemplate<object, object>> _updateQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateUpdateQueryTemplate);
-        private readonly Lazy<HandlebarsTemplate<object, object>> _deleteQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateDeleteQueryTemplate);
-        private readonly Lazy<HandlebarsTemplate<object, object>> _commentQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateCommentQueryTemplate);
+        private static readonly Lazy<HandlebarsTemplate<object, object>> _selectQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateSelectQueryTemplate);
+        private static readonly Lazy<HandlebarsTemplate<object, object>> _insertQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateInsertQueryTemplate);
+        private static readonly Lazy<HandlebarsTemplate<object, object>> _updateQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateUpdateQueryTemplate);
+        private static readonly Lazy<HandlebarsTemplate<object, object>> _deleteQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateDeleteQueryTemplate);
+        private static readonly Lazy<HandlebarsTemplate<object, object>> _commentQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateCommentQueryTemplate);
         #endregion
 
         #region Templates
