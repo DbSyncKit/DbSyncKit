@@ -72,11 +72,13 @@ END";
 
         private static HandlebarsTemplate<object, object> CreateCommentQueryTemplate()
         {
-            var str = @"{{#if !isMultiLine}} -- {{comment}}
-{{else}}
+            var str = @"
+{{#if isMultiLine}}
 /* 
 {{comment}}
 */
+{{else}}
+-- {{comment}}
 {{/if}}";
 
             return Handlebars.Compile(str);

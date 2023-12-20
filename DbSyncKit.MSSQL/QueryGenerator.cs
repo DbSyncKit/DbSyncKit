@@ -135,8 +135,8 @@ namespace DbSyncKit.MSSQL
             Type EntityType = typeof(T);
             PropertyInfo[] properties = EntityType.GetProperties().Where(prop => !excludedColumns.Contains(prop.Name) || (insertWithID && identityColumns.Contains(prop.Name))).ToArray();
 
-            string columns = string.Join(", ", properties.Select(p => EscapeColumn(p.Name)));
-            string values = string.Join(", ", properties.Select(p => $"'{EscapeValue(p.GetValue(entity))}'"));
+            List<string> columns = properties.Select(p => EscapeColumn(p.Name)).ToList();
+            List<string> values = properties.Select(p => $"'{EscapeValue(p.GetValue(entity))}'").ToList();
 
             return _template.INSERT_QUERY(new
             {

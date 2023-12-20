@@ -59,11 +59,13 @@ DELETE FROM {{TableName}} WHERE {{And Where}} LIMIT 1;  ";
 
         private static HandlebarsTemplate<object, object> CreateCommentQueryTemplate()
         {
-            var str = @"{{#if !isMultiLine}} -- {{comment}}
-{{else}}
+            var str = @"
+{{#if isMultiLine}}
 /* 
 {{comment}}
 */
+{{else}}
+-- {{comment}}
 {{/if}}";
 
             return Handlebars.Compile(str);
