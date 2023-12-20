@@ -2,6 +2,7 @@
 using DbSyncKit.Core.DataContract;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.MySQL;
+using DbSyncKit.Templates.Helpers;
 using DbSyncKit.Test.SampleContract.DataContract;
 using System.Diagnostics;
 
@@ -17,6 +18,7 @@ namespace DbSyncKit.Test.MySQL
 
         public SyncTest()
         {
+            HandlebarHelpers.Register();
             Source = new Connection("localhost",3306,"SourceChinook","root","");
             Destination = new Connection("localhost", 3306, "DestinationChinook", "root", "");
             Sync = new Synchronization();

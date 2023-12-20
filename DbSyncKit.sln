@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Core", "DbSyncKit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Docs", "DbSyncKit.Docs\DbSyncKit.Docs.csproj", "{990A6285-233E-44F4-9523-9D6A6B8D2933}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbSyncKit.Templates", "DbSyncKit.Templates\DbSyncKit.Templates.csproj", "{C8CDEDB4-C908-40E2-9D34-639CAF8CEBBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{990A6285-233E-44F4-9523-9D6A6B8D2933}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{990A6285-233E-44F4-9523-9D6A6B8D2933}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{990A6285-233E-44F4-9523-9D6A6B8D2933}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8CDEDB4-C908-40E2-9D34-639CAF8CEBBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8CDEDB4-C908-40E2-9D34-639CAF8CEBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8CDEDB4-C908-40E2-9D34-639CAF8CEBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8CDEDB4-C908-40E2-9D34-639CAF8CEBBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

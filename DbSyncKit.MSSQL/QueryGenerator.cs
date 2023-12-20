@@ -1,5 +1,6 @@
 ﻿using DbSyncKit.DB.Helper;
 using DbSyncKit.DB.Interface;
+using DbSyncKit.Templates.MSSQL;
 using System.Reflection;
 using System.Text;
 
@@ -11,45 +12,11 @@ namespace DbSyncKit.MSSQL
     public class QueryGenerator : QueryHelper, IQueryGenerator
     {
         #region Properties
-
-        private StringBuilder queryBuilder;
+        private QueryTemplates _template;
 
         #region Default Properties
 
         private readonly string DEFAULT_SCHEMA_NAME = "dbo";
-
-        #endregion
-
-        #region SQL Query Template
-
-        private readonly string SELECT_TABLE_BASE_QUERY = " SELECT @Columns FROM @Schema.@TableName ";
-
-        private readonly string INSERT_QUERY_WITHOUT_ID = @" 
-IF NOT EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
-BEGIN
-INSERT INTO @Schema.@TableName (@Columns) VALUES (@Values)
-END ";
-
-        private readonly string INSERT_QUERY_WITH_ID = @" 
-IF NOT EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
-BEGIN
-    SET IDENTITY_INSERT @Schema.@TableName ON
-        INSERT INTO @Schema.@TableName (@Columns) VALUES (@Values)
-    SET IDENTITY_INSERT @Schema.@TableName OFF
-END ";
-        private readonly string INSERT_QUERY_WITHOUT_IDENTITY_INSERT_WITH_ID = @" 
-IF NOT EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
-BEGIN
-    INSERT INTO @Schema.@TableName (@Columns) VALUES (@Values)
-END ";
-
-        private readonly string UPDATE_QUERY = @" 
-IF EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
-UPDATE @Schema.@TableName SET @Set WHERE @Where ";
-
-        private readonly string DELETE_QUERY = @" 
-IF EXISTS (SELECT 1 FROM @Schema.@TableName WHERE @Where)
-DELETE FROM @Schema.@TableName WHERE @Where ";
 
         #endregion
 
@@ -61,7 +28,7 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
         /// </summary>
         public QueryGenerator()
         {
-            this.queryBuilder = new StringBuilder();
+            _template = new QueryTemplates();
         }
 
         #endregion
@@ -92,19 +59,14 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
             {
                 schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
             }
-            queryBuilder.Clear();
 
-            queryBuilder.AppendLine(SELECT_TABLE_BASE_QUERY);
-
-            var Columns = listOfColumns.Select(col => EscapeColumn(col));
-
-            ReplacePlaceholder(ref queryBuilder, "@Schema", schemaName);
-            ReplacePlaceholder(ref queryBuilder, "@TableName", tableName);
-            ReplacePlaceholder(ref queryBuilder, "@Columns", string.Join(", ", Columns));
-
-            //var selectQuery = string.Format(SELECT_TABLE_BASE_QUERY, Columns, schemaName, tableName);
-
-            return queryBuilder.ToString();
+            return _template.SELECT_QUERY(new
+            {
+                TableName = tableName,
+                Schema = schemaName,
+                Columns = listOfColumns
+            });
+            
         }
 
         /// <summary>
@@ -118,21 +80,18 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
         /// <returns>Update Query in string.</returns>
         public string GenerateUpdateQuery<T>(T DataContract, List<string> keyColumns, List<string> excludedColumns, Dictionary<string, object> editedProperties) where T : IDataContractComparer
         {
-            queryBuilder.Clear();
-
-            queryBuilder.AppendLine(UPDATE_QUERY);
-
             string tableName = GetTableName<T>();
             string schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
-            string setClause = string.Join(", ", editedProperties.Select(kv => $"{EscapeColumn(kv.Key)} = '{EscapeValue(kv.Value)}'"));
-            string whereClause = GetCondition(DataContract, keyColumns);
+            List<string> SetClause = editedProperties.Select(kv => $"{EscapeColumn(kv.Key)} = '{EscapeValue(kv.Value)}'").ToList();
+            List<string> condition = GetCondition(DataContract, keyColumns);
 
-            ReplacePlaceholder(ref queryBuilder, "@Schema", schemaName);
-            ReplacePlaceholder(ref queryBuilder, "@TableName", tableName);
-            ReplacePlaceholder(ref queryBuilder, "@Where", whereClause);
-            ReplacePlaceholder(ref queryBuilder, "@Set", setClause);
-
-            return queryBuilder.ToString();
+            return _template.UPDATE_QUERY(new
+            {
+                TableName = tableName,
+                Schema = schemaName,
+                Set = SetClause,
+                Where = condition
+            });
         }
 
         /// <summary>
@@ -144,19 +103,16 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
         /// <returns>Delete Query in string.</returns>
         public string GenerateDeleteQuery<T>(T entity, List<string> keyColumns) where T : IDataContractComparer
         {
-            queryBuilder.Clear();
-
             string tableName = GetTableName<T>();
             string schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
-            string whereClause = GetCondition(entity, keyColumns);
+            List<string> condition = GetCondition(entity, keyColumns);
 
-            queryBuilder.AppendLine(DELETE_QUERY);
-
-            ReplacePlaceholder(ref queryBuilder, "@Schema", schemaName);
-            ReplacePlaceholder(ref queryBuilder, "@TableName", tableName);
-            ReplacePlaceholder(ref queryBuilder, "@Where", whereClause);
-
-            return queryBuilder.ToString();
+            return _template.DELETE_QUERY(new
+            {
+                TableName = tableName,
+                Schema = schemaName,
+                Where = condition
+            });
         }
 
         /// <summary>
@@ -169,33 +125,28 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
         /// <returns>Insert Query in string.</returns>
         public string GenerateInsertQuery<T>(T entity, List<string> keyColumns, List<string> excludedColumns) where T : IDataContractComparer
         {
-            queryBuilder.Clear();
-
-            Type EntityType = typeof(T);
-            PropertyInfo[] properties = EntityType.GetProperties().Where(prop => !excludedColumns.Contains(prop.Name)).ToArray();
-
             string tableName = GetTableName<T>();
             string schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
             bool insertWithID = GetInsertWithID<T>();
             bool identityInsert = GetIncludeIdentityInsert<T>();
+            List<string> condition = GetCondition(entity, keyColumns);
+            List<string> identityColumns = GetIdentityColumns<T>();
+
+            Type EntityType = typeof(T);
+            PropertyInfo[] properties = EntityType.GetProperties().Where(prop => !excludedColumns.Contains(prop.Name) || (insertWithID && identityColumns.Contains(prop.Name))).ToArray();
+
             string columns = string.Join(", ", properties.Select(p => EscapeColumn(p.Name)));
             string values = string.Join(", ", properties.Select(p => $"'{EscapeValue(p.GetValue(entity))}'"));
-            string whereClause = GetCondition(entity, keyColumns);
 
-            if (insertWithID && identityInsert)
-                queryBuilder.AppendLine(INSERT_QUERY_WITH_ID);
-            else if(identityInsert && !identityInsert)
-                queryBuilder.AppendLine(INSERT_QUERY_WITHOUT_IDENTITY_INSERT_WITH_ID);
-            else
-                queryBuilder.AppendLine(INSERT_QUERY_WITHOUT_ID);
-
-            ReplacePlaceholder(ref queryBuilder, "@Schema", schemaName);
-            ReplacePlaceholder(ref queryBuilder, "@TableName", tableName);
-            ReplacePlaceholder(ref queryBuilder, "@Where", whereClause);
-            ReplacePlaceholder(ref queryBuilder, "@Columns", columns);
-            ReplacePlaceholder(ref queryBuilder, "@Values", values);
-
-            return queryBuilder.ToString();
+            return _template.INSERT_QUERY(new
+            {
+                TableName = tableName,
+                Schema = schemaName,
+                IsIdentityInsert = identityInsert,
+                Columns = columns,
+                Values = values,
+                Where = condition
+            });
         }
 
         /// <summary>
@@ -209,18 +160,13 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
             if (string.IsNullOrWhiteSpace(comment))
                 return string.Empty;
 
-            bool isMultiLine = comment.Contains(Environment.NewLine);
+            bool _isMultiLine = comment.Contains(Environment.NewLine);
 
-            if (!isMultiLine)
-                return "-- " + comment;
-
-
-            StringBuilder CommentBuilder = new StringBuilder();
-            CommentBuilder.AppendLine("/*");
-            CommentBuilder.AppendLine(comment);
-            CommentBuilder.AppendLine("*/");
-
-            return CommentBuilder.ToString();
+            return _template.COMMENT_QUERY(new
+            {
+                isMultiLine = _isMultiLine,
+                Comment = comment
+            });
         }
 
         #endregion
@@ -233,15 +179,13 @@ DELETE FROM @Schema.@TableName WHERE @Where ";
         /// <param name="entity">The entity for which the condition is generated.</param>
         /// <param name="keyColumns">The list of key columns used to create the condition.</param>
         /// <returns>A string representing the SQL WHERE clause based on the key columns of the entity.</returns>
-        public string GetCondition<T>(T entity, List<string> keyColumns) where T : IDataContractComparer
+        public List<string> GetCondition<T>(T entity, List<string> keyColumns) where T : IDataContractComparer
         {
             Type entityType = typeof(T);
             PropertyInfo[] keyProperties = entityType.GetProperties().
                 Where(p => keyColumns.Contains(p.Name)).ToArray();
 
-            string Condition = string.Join(" AND ", keyProperties.Select(p => $"{EscapeColumn(p.Name)} = '{EscapeValue(p.GetValue(entity))}'"));
-
-            return Condition;
+            return keyProperties.Select(p => $"{EscapeColumn(p.Name)} = '{EscapeValue(p.GetValue(entity))}'").ToList();
         }
 
         /// <summary>

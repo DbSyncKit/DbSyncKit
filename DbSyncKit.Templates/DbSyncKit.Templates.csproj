@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
 	<ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  <Nullable>enable</Nullable>
+  <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	<AssemblyVersion>0.2.0.0</AssemblyVersion>
 	<FileVersion>0.2.0.0</FileVersion>
@@ -27,12 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DbSyncKit.DB\DbSyncKit.DB.csproj" />
-    <ProjectReference Include="..\DbSyncKit.Templates\DbSyncKit.Templates.csproj" />
+    <PackageReference Include="Handlebars.Net" Version="2.1.4" />
   </ItemGroup>
 
 </Project>
