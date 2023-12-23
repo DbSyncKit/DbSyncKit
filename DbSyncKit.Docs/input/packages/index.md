@@ -48,6 +48,19 @@ This package, under development, will offer functionalities for PostgreSQL datab
 
 Explore additional packages under development or in planning, which aim to enhance DbSyncKit's capabilities and compatibility with various databases.
 
-- [In-Development Packages](xref:packages/in-development)
+### DbSyncKit.Templates Package
+
+This package introduces templating support for SQL queries in DbSyncKit, enhancing readability and maintainability. It provides templates for different types of SQL queries, supporting MSSQL and MySQL databases.
+
+Explore the capabilities of the [`DbSyncKit.Templates`](xref:api-DbSyncKit.Templates) package and enhance your SQL query generation experience.
+
+For detailed information, visit the [DbSyncKit.Templates Documentation](xref:packages/dbsynckit.templates).
+
+### In-Development Packages
+
+Discover upcoming features and functionalities in our in-development packages. Stay tuned for updates and new releases.
+
+For more details, visit [In-Development Packages](xref:packages/in-development).
 
 Continue exploring other topics in the [Usage Guide](xref:usage).
+
