@@ -11,29 +11,29 @@ namespace DbSyncKit.Templates.MSSQL
         #region Public Properties
 
         /// <summary>
-        /// Gets the template for a SELECT query.
+        /// Gets the template for a SELECT template.
         /// </summary>
-        public IFluidTemplate SELECT_QUERY => _selectQueryTemplate.Value;
+        public IFluidTemplate SelectTemplate => _selectQueryTemplate.Value;
 
         /// <summary>
-        /// Gets the template for an INSERT query.
+        /// Gets the template for an INSERT template.
         /// </summary>
-        public IFluidTemplate INSERT_QUERY => _insertQueryTemplate.Value;
+        public IFluidTemplate InsertTemplate => _insertQueryTemplate.Value;
 
         /// <summary>
-        /// Gets the template for an UPDATE query.
+        /// Gets the template for an UPDATE template.
         /// </summary>
-        public IFluidTemplate UPDATE_QUERY => _updateQueryTemplate.Value;
+        public IFluidTemplate UpdateTemplate => _updateQueryTemplate.Value;
 
         /// <summary>
-        /// Gets the template for a DELETE query.
+        /// Gets the template for a DELETE template.
         /// </summary>
-        public IFluidTemplate DELETE_QUERY => _deleteQueryTemplate.Value;
+        public IFluidTemplate DeleteTemplate => _deleteQueryTemplate.Value;
 
         /// <summary>
-        /// Gets the template for a COMMENT query.
+        /// Gets the template for a COMMENT template.
         /// </summary>
-        public IFluidTemplate COMMENT_QUERY => _commentQueryTemplate.Value;
+        public IFluidTemplate CommentTemplate => _commentQueryTemplate.Value;
 
 
         #endregion

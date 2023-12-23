@@ -67,7 +67,7 @@ namespace DbSyncKit.MySQL
 
             bool _isMultiLine = comment.Contains(Environment.NewLine);
 
-            return _template.COMMENT_QUERY.Render(new TemplateContext(new
+            return _template.CommentTemplate.Render(new TemplateContext(new
             {
                 isMultiLine = _isMultiLine,
                 Comment = comment
@@ -88,7 +88,7 @@ namespace DbSyncKit.MySQL
             string schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
             List<string> whereClause = GetCondition(entity, keyColumns);
 
-            return _template.DELETE_QUERY.Render(new TemplateContext(new
+            return _template.DeleteTemplate.Render(new TemplateContext(new
             {
                 TableName = tableName,
                 Where = whereClause
@@ -120,7 +120,7 @@ namespace DbSyncKit.MySQL
             List<string> values = properties.Select(p => $"{EscapeValue(p.GetValue(entity))}").ToList();
             List<string> whereClause = GetCondition(entity, keyColumns);
 
-            return _template.INSERT_QUERY.Render(new TemplateContext(new
+            return _template.InsertTemplate.Render(new TemplateContext(new
             {
                 TableName = tableName,
                 Columns = columns,
@@ -149,7 +149,7 @@ namespace DbSyncKit.MySQL
                 tableName = GetTableName<T>();
             }
 
-            return _template.SELECT_QUERY.Render(new TemplateContext(new
+            return _template.SelectTemplate.Render(new TemplateContext(new
             {
                 TableName = tableName,
                 Columns = ListOfColumns
@@ -173,7 +173,7 @@ namespace DbSyncKit.MySQL
             List<string> setClause = editedProperties.Select(kv => $"{EscapeColumn(kv.Key)} = {EscapeValue(kv.Value)}").ToList();
             List<string> whereClause = GetCondition(DataContract, keyColumns);
 
-            return _template.UPDATE_QUERY.Render(new TemplateContext(new
+            return _template.UpdateTemplate.Render(new TemplateContext(new
             {
                 TableName = tableName,
                 Set = setClause,

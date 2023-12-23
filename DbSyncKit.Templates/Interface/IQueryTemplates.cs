@@ -8,28 +8,28 @@ namespace DbSyncKit.Templates.Interface
     public interface IQueryTemplates
     {
         /// <summary>
-        /// Gets the template for a SELECT query.
+        /// Gets the template for a SELECT template.
         /// </summary>
-        IFluidTemplate SELECT_QUERY { get; }
+        IFluidTemplate SelectTemplate { get; }
 
         /// <summary>
-        /// Gets the template for an INSERT query.
+        /// Gets the template for an INSERT template.
         /// </summary>
-        IFluidTemplate INSERT_QUERY { get; }
+        IFluidTemplate InsertTemplate { get; }
 
         /// <summary>
-        /// Gets the template for an UPDATE query.
+        /// Gets the template for an UPDATE template.
         /// </summary>
-        IFluidTemplate UPDATE_QUERY { get; }
+        IFluidTemplate UpdateTemplate { get; }
 
         /// <summary>
-        /// Gets the template for a DELETE query.
+        /// Gets the template for a DELETE template.
         /// </summary>
-        IFluidTemplate DELETE_QUERY { get; }
+        IFluidTemplate DeleteTemplate { get; }
 
         /// <summary>
-        /// Gets the template for a COMMENT query.
+        /// Gets the template for a COMMENT template.
         /// </summary>
-        IFluidTemplate COMMENT_QUERY { get; }
+        IFluidTemplate CommentTemplate { get; }
     }
 }

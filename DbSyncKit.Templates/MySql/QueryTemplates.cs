@@ -10,40 +10,40 @@ namespace DbSyncKit.Templates.MySql
     {
         #region Public Properties
         /// <summary>
-        /// Gets the template for a SELECT query.
+        /// Gets the template for a SELECT template.
         /// </summary>
-        public IFluidTemplate SELECT_QUERY => _selectQueryTemplate.Value;
+        public IFluidTemplate SelectTemplate => _selectQueryTemplate.Value;
 
         /// <summary>
-        /// Gets the template for an INSERT query.
+        /// Gets the template for an INSERT template.
         /// </summary>
-        public IFluidTemplate INSERT_QUERY => _insertQueryTemplate.Value;
+        public IFluidTemplate InsertTemplate => _insertQueryTemplate.Value;
 
         /// <summary>
-        /// Gets the template for an UPDATE query.
+        /// Gets the template for an UPDATE template.
         /// </summary>
-        public IFluidTemplate UPDATE_QUERY => _updateQueryTemplate.Value;
+        public IFluidTemplate UpdateTemplate => _updateQueryTemplate.Value;
 
         /// <summary>
-        /// Gets the template for a DELETE query.
+        /// Gets the template for a DELETE template.
         /// </summary>
-        public IFluidTemplate DELETE_QUERY => _deleteQueryTemplate.Value;
+        public IFluidTemplate DeleteTemplate => _deleteQueryTemplate.Value;
 
         /// <summary>
-        /// Gets the template for a COMMENT query.
+        /// Gets the template for a COMMENT template.
         /// </summary>
-        public IFluidTemplate COMMENT_QUERY => _commentQueryTemplate.Value;
+        public IFluidTemplate CommentTemplate => _commentQueryTemplate.Value;
 
 
         #endregion
 
         #region Private Properties
 
-        private static Lazy<IFluidTemplate> _selectQueryTemplate = new Lazy<IFluidTemplate>(CreateSelectQueryTemplate);
-        private static Lazy<IFluidTemplate> _insertQueryTemplate = new Lazy<IFluidTemplate>(CreateInsertQueryTemplate);
-        private readonly Lazy<IFluidTemplate> _updateQueryTemplate = new Lazy<IFluidTemplate>(CreateUpdateQueryTemplate);
-        private readonly Lazy<IFluidTemplate> _deleteQueryTemplate = new Lazy<IFluidTemplate>(CreateDeleteQueryTemplate);
-        private readonly Lazy<IFluidTemplate> _commentQueryTemplate = new Lazy<IFluidTemplate>(CreateCommentQueryTemplate);
+        private static readonly Lazy<IFluidTemplate> _selectQueryTemplate = new Lazy<IFluidTemplate>(CreateSelectQueryTemplate);
+        private static readonly Lazy<IFluidTemplate> _insertQueryTemplate = new Lazy<IFluidTemplate>(CreateInsertQueryTemplate);
+        private static readonly Lazy<IFluidTemplate> _updateQueryTemplate = new Lazy<IFluidTemplate>(CreateUpdateQueryTemplate);
+        private static readonly Lazy<IFluidTemplate> _deleteQueryTemplate = new Lazy<IFluidTemplate>(CreateDeleteQueryTemplate);
+        private static readonly Lazy<IFluidTemplate> _commentQueryTemplate = new Lazy<IFluidTemplate>(CreateCommentQueryTemplate);
         private static readonly FluidParser parser = new FluidParser();
         #endregion
 
