@@ -2,12 +2,7 @@
 using DbSyncKit.Core.DataContract;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.Test.SampleContract.DataContract;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DbSyncKit.Test.CrossDatabase
 {

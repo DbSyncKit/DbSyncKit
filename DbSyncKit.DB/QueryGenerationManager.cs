@@ -54,7 +54,7 @@ namespace DbSyncKit.DB
         }
 
         /// <inheritdoc />
-        public string GetCondition<T>(T entity, List<string> keyColumns) where T : IDataContractComparer
+        public List<string> GetCondition<T>(T entity, List<string> keyColumns) where T : IDataContractComparer
         {
             return _querryGenerator.GetCondition<T>(entity, keyColumns);
         }

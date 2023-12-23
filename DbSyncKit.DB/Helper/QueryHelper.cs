@@ -1,6 +1,8 @@
 ﻿using DbSyncKit.DB.Attributes;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.DB.Manager;
+
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -91,6 +93,7 @@ namespace DbSyncKit.DB.Helper
         /// </summary>
         /// <typeparam name="T">The type for which to get the key columns. Must implement <see cref="IDataContractComparer"/>.</typeparam>
         /// <returns>A list of key column names.</returns>
+        /// <seealso cref="IDataContractComparer"/>
         public List<string> GetKeyColumns<T>() where T : IDataContractComparer
         {
             return TypePropertyCacheManager.GetTypeProperties(typeof(T))
@@ -102,6 +105,7 @@ namespace DbSyncKit.DB.Helper
         /// </summary>
         /// <typeparam name="T">The type for which to get the excluded properties. Must implement <see cref="IDataContractComparer"/>.</typeparam>
         /// <returns>A list of excluded property names.</returns>
+        /// <seealso cref="IDataContractComparer"/>
         public List<string> GetExcludedProperties<T>() where T : IDataContractComparer
         {
             return TypePropertyCacheManager.GetTypeProperties(typeof(T))
@@ -113,10 +117,26 @@ namespace DbSyncKit.DB.Helper
         /// </summary>
         /// <typeparam name="T">The type for which to get all properties. Must implement <see cref="IDataContractComparer"/>.</typeparam>
         /// <returns>A list of all property names.</returns>
+        /// <seealso cref="IDataContractComparer"/>
         public List<string> GetAllColumns<T>() where T : IDataContractComparer
         {
             return TypePropertyCacheManager.GetTypeProperties(typeof(T))
                 .Select(prop => prop.Name).ToList();
+        }
+
+        /// <summary>
+        /// Retrieves a list of identity columns for a specified data contract type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type implementing the IDataContractComparer interface.</typeparam>
+        /// <returns>A list containing the names of identity columns for the specified data contract type <typeparamref name="T"/>.</returns>
+        /// <remarks>
+        /// This method uses reflection to analyze the properties of the specified type <typeparamref name="T"/> and retrieves properties marked with a [Key] attribute, indicating identity columns.
+        /// </remarks>
+        /// <seealso cref="IDataContractComparer"/>
+        public List<string> GetIdentityColumns<T>() where T : IDataContractComparer
+        {
+            return TypePropertyCacheManager.GetTypeProperties(typeof(T))
+                .Where(prop => Attribute.IsDefined(prop, typeof(KeyAttribute))).Select(prop => prop.Name).ToList();
         }
 
     }

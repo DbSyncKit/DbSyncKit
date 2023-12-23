@@ -59,7 +59,7 @@
         /// <param name="entity">The entity for which the condition is generated.</param>
         /// <param name="keyColumns">The list of key columns used to create the condition.</param>
         /// <returns>A string representing the generated condition for a SQL WHERE clause.</returns>
-        string GetCondition<T>(T entity, List<string> keyColumns) where T : IDataContractComparer;
+        List<string> GetCondition<T>(T entity, List<string> keyColumns) where T : IDataContractComparer;
 
         /// <summary>
         /// Escapes special characters in the input to make it SQL-safe.
