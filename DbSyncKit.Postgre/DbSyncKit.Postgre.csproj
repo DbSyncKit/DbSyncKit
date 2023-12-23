@@ -14,6 +14,11 @@
 	<RepositoryUrl>https://github.com/RohitM-IN/DbSyncKit</RepositoryUrl>
   </PropertyGroup>
 
+  <PropertyGroup>
+	<IncludeSymbols>true</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="..\README.md">
       <Pack>True</Pack>
