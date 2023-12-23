@@ -1,6 +1,7 @@
 ﻿using DbSyncKit.DB.Helper;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.Templates.MSSQL;
+using DotLiquid;
 using System.Reflection;
 using System.Text;
 
@@ -60,12 +61,12 @@ namespace DbSyncKit.MSSQL
                 schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
             }
 
-            return _template.SELECT_QUERY(new
+            return _template.SELECT_QUERY.Render(Hash.FromAnonymousObject(new
             {
                 TableName = tableName,
                 Schema = schemaName,
                 Columns = listOfColumns
-            });
+            }));
             
         }
 
@@ -85,13 +86,13 @@ namespace DbSyncKit.MSSQL
             List<string> SetClause = editedProperties.Select(kv => $"{EscapeColumn(kv.Key)} = '{EscapeValue(kv.Value)}'").ToList();
             List<string> condition = GetCondition(DataContract, keyColumns);
 
-            return _template.UPDATE_QUERY(new
+            return _template.UPDATE_QUERY.Render(Hash.FromAnonymousObject(new
             {
                 TableName = tableName,
                 Schema = schemaName,
                 Set = SetClause,
                 Where = condition
-            });
+            }));
         }
 
         /// <summary>
@@ -107,12 +108,12 @@ namespace DbSyncKit.MSSQL
             string schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
             List<string> condition = GetCondition(entity, keyColumns);
 
-            return _template.DELETE_QUERY(new
+            return _template.DELETE_QUERY.Render(Hash.FromAnonymousObject(new
             {
                 TableName = tableName,
                 Schema = schemaName,
                 Where = condition
-            });
+            }));
         }
 
         /// <summary>
@@ -138,7 +139,7 @@ namespace DbSyncKit.MSSQL
             List<string> columns = properties.Select(p => EscapeColumn(p.Name)).ToList();
             List<string> values = properties.Select(p => $"'{EscapeValue(p.GetValue(entity))}'").ToList();
 
-            return _template.INSERT_QUERY(new
+            return _template.INSERT_QUERY.Render(Hash.FromAnonymousObject(new
             {
                 TableName = tableName,
                 Schema = schemaName,
@@ -146,7 +147,7 @@ namespace DbSyncKit.MSSQL
                 Columns = columns,
                 Values = values,
                 Where = condition
-            });
+            }));
         }
 
         /// <summary>
@@ -162,11 +163,11 @@ namespace DbSyncKit.MSSQL
 
             bool _isMultiLine = comment.Contains(Environment.NewLine);
 
-            return _template.COMMENT_QUERY(new
+            return _template.COMMENT_QUERY.Render(Hash.FromAnonymousObject(new
             {
                 isMultiLine = _isMultiLine,
                 Comment = comment
-            });
+            }));
         }
 
         #endregion

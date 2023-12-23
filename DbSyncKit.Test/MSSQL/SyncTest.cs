@@ -2,7 +2,6 @@
 using DbSyncKit.Core.DataContract;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.MSSQL;
-using DbSyncKit.Templates.Helpers;
 using DbSyncKit.Test.SampleContract.DataContract;
 using System.Diagnostics;
 
@@ -20,7 +19,6 @@ namespace DbSyncKit.Test.MSSQL
 
         public SyncTest()
         {
-            HandlebarHelpers.Register();
             Source = new Connection("(localdb)\\MSSQLLocalDB", "SourceChinook", true);
             Destination = new Connection("(localdb)\\MSSQLLocalDB", "DestinationChinook", true);
             Sync = new Synchronization();

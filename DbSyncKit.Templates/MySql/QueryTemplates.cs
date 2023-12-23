@@ -1,74 +1,71 @@
 ﻿using DbSyncKit.Templates.Interface;
-using HandlebarsDotNet;
+using DotLiquid;
 
 namespace DbSyncKit.Templates.MySql
 {
     public class QueryTemplates : IQueryTemplates
     {
         #region Public Properties
-        public HandlebarsTemplate<object, object> SELECT_QUERY => _selectQueryTemplate.Value;
-        public HandlebarsTemplate<object, object> INSERT_QUERY => _insertQueryTemplate.Value;
-        public HandlebarsTemplate<object, object> UPDATE_QUERY => _updateQueryTemplate.Value;
-        public HandlebarsTemplate<object, object> DELETE_QUERY => _deleteQueryTemplate.Value;
-        public HandlebarsTemplate<object, object> COMMENT_QUERY => _commentQueryTemplate.Value;
+        public Template SELECT_QUERY => _selectQueryTemplate.Value;
+        public Template INSERT_QUERY => _insertQueryTemplate.Value;
+        public Template UPDATE_QUERY => _updateQueryTemplate.Value;
+        public Template DELETE_QUERY => _deleteQueryTemplate.Value;
+        public Template COMMENT_QUERY => _commentQueryTemplate.Value;
 
         #endregion
 
         #region Private Properties
 
-        private static Lazy<HandlebarsTemplate<object, object>> _selectQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateSelectQueryTemplate);
-        private static Lazy<HandlebarsTemplate<object, object>> _insertQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateInsertQueryTemplate);
-        private readonly Lazy<HandlebarsTemplate<object, object>> _updateQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateUpdateQueryTemplate);
-        private readonly Lazy<HandlebarsTemplate<object, object>> _deleteQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateDeleteQueryTemplate);
-        private readonly Lazy<HandlebarsTemplate<object, object>> _commentQueryTemplate = new Lazy<HandlebarsTemplate<object, object>>(CreateCommentQueryTemplate);
+        private static Lazy<Template> _selectQueryTemplate = new Lazy<Template>(CreateSelectQueryTemplate);
+        private static Lazy<Template> _insertQueryTemplate = new Lazy<Template>(CreateInsertQueryTemplate);
+        private readonly Lazy<Template> _updateQueryTemplate = new Lazy<Template>(CreateUpdateQueryTemplate);
+        private readonly Lazy<Template> _deleteQueryTemplate = new Lazy<Template>(CreateDeleteQueryTemplate);
+        private readonly Lazy<Template> _commentQueryTemplate = new Lazy<Template>(CreateCommentQueryTemplate);
         #endregion
 
         #region Templates
 
-        private static HandlebarsTemplate<object, object> CreateSelectQueryTemplate()
+        private static Template CreateSelectQueryTemplate()
         {
-            var str = @" SELECT {{Join Columns}} FROM {{TableName}}; ";
+            var str = @" SELECT {{ Columns | join: ', ' }} FROM {{ TableName }}; ";
 
-            return Handlebars.Compile(str);
+            return Template.Parse(str);
         }
 
-        private static HandlebarsTemplate<object, object> CreateInsertQueryTemplate()
+        private static Template CreateInsertQueryTemplate()
         {
             var str = @" 
-INSERT INTO `{{TableName}}` ({{Join Columns}}) SELECT {{Join Values}} FROM DUAL WHERE NOT EXISTS ( SELECT 1 FROM `{{TableName}}` WHERE {{And Where}} )
+INSERT INTO `{{ TableName }}` ({{ Columns | join: ', ' }}) SELECT {{ Values | join: ', ' }} FROM DUAL WHERE NOT EXISTS ( SELECT 1 FROM `{{ TableName }}` WHERE {{ Where | join: ' AND '  }} )
 ";
 
-            return Handlebars.Compile(str);
+            return Template.Parse(str);
         }
 
-        private static HandlebarsTemplate<object, object> CreateUpdateQueryTemplate()
+        private static Template CreateUpdateQueryTemplate()
         {
             var str = @"
-UPDATE `{{TableName}}` SET {{Join Set}} WHERE {{And Where}} LIMIT 1; 
+UPDATE `{{ TableName }}` SET {{ Set | join: ', ' }} WHERE {{ Where | join: ' AND '  }} LIMIT 1; 
 ";
-            return Handlebars.Compile(str);
+            return Template.Parse(str);
         }
 
-        private static HandlebarsTemplate<object, object> CreateDeleteQueryTemplate()
+        private static Template CreateDeleteQueryTemplate()
         {
             var str = @"
-DELETE FROM {{TableName}} WHERE {{And Where}} LIMIT 1;  ";
+DELETE FROM {{ TableName }} WHERE {{ Where | join: ' AND '  }} LIMIT 1;  ";
 
-            return Handlebars.Compile(str);
+            return Template.Parse(str);
         }
 
-        private static HandlebarsTemplate<object, object> CreateCommentQueryTemplate()
+        private static Template CreateCommentQueryTemplate()
         {
-            var str = @"
-{{#if isMultiLine}}
+            var str = @"{% unless isMultiLine %} -- {{ comment }} {% else %}
 /* 
-{{comment}}
+{{ comment }}
 */
-{{else}}
--- {{comment}}
-{{/if}}";
+-- {{ comment }} {% endunless %}";
 
-            return Handlebars.Compile(str);
+            return Template.Parse(str);
         }
         #endregion
 

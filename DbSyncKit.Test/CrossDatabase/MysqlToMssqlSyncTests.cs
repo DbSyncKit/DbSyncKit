@@ -1,14 +1,8 @@
 ﻿using DbSyncKit.Core;
 using DbSyncKit.Core.DataContract;
 using DbSyncKit.DB.Interface;
-using DbSyncKit.Templates.Helpers;
 using DbSyncKit.Test.SampleContract.DataContract;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DbSyncKit.Test.CrossDatabase
 {
@@ -23,7 +17,6 @@ namespace DbSyncKit.Test.CrossDatabase
 
         public MysqlToMssqlSyncTests()
         {
-            HandlebarHelpers.Register();
             Source = new DbSyncKit.MySQL.Connection("localhost", 3306, "SourceChinook", "root", "");
             Destination = new DbSyncKit.MSSQL.Connection("(localdb)\\MSSQLLocalDB", "DestinationChinook", true);
             Sync = new Synchronization();

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HandlebarsDotNet;
+﻿using DotLiquid;
 
 namespace DbSyncKit.Templates.Interface
 {
     public interface IQueryTemplates
     {
-        HandlebarsTemplate<object, object> SELECT_QUERY { get; }
-        HandlebarsTemplate<object, object> INSERT_QUERY { get; }
-        HandlebarsTemplate<object, object> UPDATE_QUERY { get; }
-        HandlebarsTemplate<object, object> DELETE_QUERY { get; }
-        HandlebarsTemplate<object, object> COMMENT_QUERY { get; }
+        Template SELECT_QUERY { get; }
+        Template INSERT_QUERY { get; }
+        Template UPDATE_QUERY { get; }
+        Template DELETE_QUERY { get; }
+        Template COMMENT_QUERY { get; }
     }
 }

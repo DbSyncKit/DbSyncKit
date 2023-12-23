@@ -4,6 +4,7 @@ using System.Text;
 using DbSyncKit.DB.Helper;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.Templates.MySql;
+using DotLiquid;
 
 namespace DbSyncKit.MySQL
 {
@@ -66,11 +67,11 @@ namespace DbSyncKit.MySQL
 
             bool _isMultiLine = comment.Contains(Environment.NewLine);
 
-            return _template.COMMENT_QUERY(new
+            return _template.COMMENT_QUERY.Render(Hash.FromAnonymousObject(new
             {
                 isMultiLine = _isMultiLine,
                 Comment = comment
-            });
+            }));
         }
 
         /// <summary>
@@ -87,11 +88,11 @@ namespace DbSyncKit.MySQL
             string schemaName = GetTableSchema<T>() ?? DEFAULT_SCHEMA_NAME;
             List<string> whereClause = GetCondition(entity, keyColumns);
 
-            return _template.DELETE_QUERY(new
+            return _template.DELETE_QUERY.Render(Hash.FromAnonymousObject(new
             {
                 TableName = tableName,
                 Where = whereClause
-            });
+            }));
         }
 
         /// <summary>
@@ -119,13 +120,13 @@ namespace DbSyncKit.MySQL
             List<string> values = properties.Select(p => $"{EscapeValue(p.GetValue(entity))}").ToList();
             List<string> whereClause = GetCondition(entity, keyColumns);
 
-            return _template.INSERT_QUERY(new
+            return _template.INSERT_QUERY.Render(Hash.FromAnonymousObject(new
             {
                 TableName = tableName,
                 Columns = columns,
                 Values = values,
                 Where = whereClause
-            });
+            }));
         }
 
         /// <summary>
@@ -148,11 +149,11 @@ namespace DbSyncKit.MySQL
                 tableName = GetTableName<T>();
             }
 
-            return _template.SELECT_QUERY(new
+            return _template.SELECT_QUERY.Render(Hash.FromAnonymousObject(new
             {
                 TableName = tableName,
-                Columns = ListOfColumns,
-            });
+                Columns = ListOfColumns
+            }));
 
         }
 
@@ -172,12 +173,12 @@ namespace DbSyncKit.MySQL
             List<string> setClause = editedProperties.Select(kv => $"{EscapeColumn(kv.Key)} = {EscapeValue(kv.Value)}").ToList();
             List<string> whereClause = GetCondition(DataContract, keyColumns);
 
-            return _template.UPDATE_QUERY(new
+            return _template.UPDATE_QUERY.Render(Hash.FromAnonymousObject(new
             {
                 TableName = tableName,
                 Set = setClause,
                 Where = whereClause
-            });
+            }));
         }
 
         /// <summary>
