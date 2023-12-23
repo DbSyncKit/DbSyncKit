@@ -1,13 +1,13 @@
-﻿using DotLiquid;
+﻿using Fluid;
 
 namespace DbSyncKit.Templates.Interface
 {
     public interface IQueryTemplates
     {
-        Template SELECT_QUERY { get; }
-        Template INSERT_QUERY { get; }
-        Template UPDATE_QUERY { get; }
-        Template DELETE_QUERY { get; }
-        Template COMMENT_QUERY { get; }
+        IFluidTemplate SELECT_QUERY { get; }
+        IFluidTemplate INSERT_QUERY { get; }
+        IFluidTemplate UPDATE_QUERY { get; }
+        IFluidTemplate DELETE_QUERY { get; }
+        IFluidTemplate COMMENT_QUERY { get; }
     }
 }
