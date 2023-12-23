@@ -37,10 +37,10 @@ public class Album : DataContractUtility<Album>
 
 ### Available Attributes for Configuration:
 
-- [TableName](xref:DbSyncKit.DB.Attributes.TableNameAttribute): Specifies the name of the table.
-- [TableSchema](xref:DbSyncKit.DB.Attributes.TableSchemaAttribute): Specifies the schema of the table.
-- [KeyProperty](xref:DbSyncKit.DB.Attributes.KeyPropertyAttribute): Defines a property as a key property.
-- [ExcludedProperty](xref:DbSyncKit.DB.Attributes.ExcludedPropertyAttribute): Excludes a property from specific operations.
-- [GenerateInsertWithID](xref:DbSyncKit.DB.Attributes.GenerateInsertWithIDAttribute): Controls the inclusion of the ID property in the insert query generation, allowing fine-tuning of insertion behavior.
-  - [GenerateWithID](xref:DbSyncKit.DB.Attributes.GenerateInsertWithIDAttribute.GenerateWithID): Determines whether the ID property should be included in the insert query generation. Possible values are `true` (to include the ID property) or `false` (to exclude the ID property).
-  - [IncludeIdentityInsert](xref:DbSyncKit.DB.Attributes.GenerateInsertWithIDAttribute.IncludeIdentityInsert): Indicates whether to include database-specific SQL statements during insert query generation affecting identity insert behavior. The default value is `true`.
+- [TableName](xref:api-DbSyncKit.DB.Attributes.TableNameAttribute): Specifies the name of the table.
+- [TableSchema](xref:api-DbSyncKit.DB.Attributes.TableSchemaAttribute): Specifies the schema of the table.
+- [KeyProperty](xref:api-DbSyncKit.DB.Attributes.KeyPropertyAttribute): Defines a property as a key property.
+- [ExcludedProperty](xref:api-DbSyncKit.DB.Attributes.ExcludedPropertyAttribute): Excludes a property from specific operations.
+- [GenerateInsertWithID](xref:api-DbSyncKit.DB.Attributes.GenerateInsertWithIDAttribute): Controls the inclusion of the ID property in the insert query generation, allowing fine-tuning of insertion behavior.
+  - [GenerateWithID](xref:api-DbSyncKit.DB.Attributes.GenerateInsertWithIDAttribute.GenerateWithID): Determines whether the ID property should be included in the insert query generation. Possible values are `true` (to include the ID property) or `false` (to exclude the ID property).
+  - [IncludeIdentityInsert](xref:api-DbSyncKit.DB.Attributes.GenerateInsertWithIDAttribute.IncludeIdentityInsert): Indicates whether to include database-specific SQL statements during insert query generation affecting identity insert behavior. The default value is `true`.

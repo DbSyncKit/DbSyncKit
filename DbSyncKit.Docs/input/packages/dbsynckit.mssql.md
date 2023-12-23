@@ -1,5 +1,5 @@
 ﻿﻿Title: DbSyncKit.MSSQL
-Order: 2
+Order: 3
 BreadcrumbTitle: DbSyncKit.MSSQL
 NavigationTitle: DbSyncKit.MSSQL
 ShowInSidebar: true

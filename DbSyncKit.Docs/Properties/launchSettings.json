@@ -6,7 +6,7 @@
     },
     "Preview": {
       "commandName": "Project",
-      "commandLineArgs": "preview -s \\\"SourceFiles=\\\" -s IgnoreInvalidXrefs=true"
+      "commandLineArgs": "preview -s IgnoreInvalidXrefs=true"
     },
     "Deploy": {
       "commandName": "Project",

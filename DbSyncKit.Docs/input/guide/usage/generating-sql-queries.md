@@ -19,7 +19,7 @@ Before generating SQL queries, ensure that you have:
 
 ## Generate SQL Queries
 
-Once you have the synchronization result, you can generate SQL queries using the [`GetSqlQueryForSyncData`](xref:api-DbSyncKit.Core.Synchronization.GetSqlQueryForSyncData) method. Replace `YourEntity` with the appropriate entity type.
+Once you have the synchronization result, you can generate SQL queries using the [`GetSqlQueryForSyncData`](xref:api-DbSyncKit.Core.Synchronization.GetSqlQueryForSyncData<T>) method. Replace `YourEntity` with the appropriate entity type.
 
 ```csharp
 // Perform synchronization
@@ -32,7 +32,7 @@ Console.WriteLine(sqlQueries);
 
 ```
 
-The [`GetSqlQueryForSyncData`](xref:api-DbSyncKit.Core.Synchronization.GetSqlQueryForSyncData) method takes the synchronization result as input and returns a list of SQL queries corresponding to the changes detected during synchronization.
+The [`GetSqlQueryForSyncData`](xref:api-DbSyncKit.Core.Synchronization.GetSqlQueryForSyncData<T>) method takes the synchronization result as input and returns a list of SQL queries corresponding to the changes detected during synchronization.
 
 ## Understanding Generated SQL Queries
 
@@ -47,3 +47,19 @@ The generated SQL queries fall into three categories:
 By examining these queries, you gain insights into the exact modifications that will be applied to the destination database.
 
 Continue exploring other topics in the [Usage Guide](xref:usage).
+
+## Query Generation Process Updates
+
+### New Package: DbSyncKit.Templates
+
+We're excited to introduce a new package called [`DbSyncKit.Templates`](xref:api-DbSyncKit.Templates). This package is dedicated to providing templates for all supported database providers.
+
+### Templating Engine: Fluid
+
+To facilitate the templating process, we've integrated the Fluid templating engine (https://github.com/sebastienros/fluid) into the [`DbSyncKit.Templates`](xref:api-DbSyncKit.Templates) package. Fluid provides a flexible and expressive way to define templates, enhancing the readability and maintainability of the code.
+
+### Improved Readability and Flexibility
+
+With the introduction of templating, the query generation process has seen improvements in terms of code readability and flexibility. The templating approach allows for clearer and more maintainable templates, ensuring a smooth and user-friendly experience.
+
+Explore these updates as you continue to use DbSyncKit. If you have any questions or feedback, refer to the [Support and Contact](xref:support) section.

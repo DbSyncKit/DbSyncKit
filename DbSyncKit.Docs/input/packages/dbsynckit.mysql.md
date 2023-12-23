@@ -1,5 +1,5 @@
 ﻿﻿Title: DbSyncKit.MySQL
-Order: 3
+Order: 4
 BreadcrumbTitle: DbSyncKit.MySQL
 NavigationTitle: DbSyncKit.MySQL
 ShowInSidebar: true
