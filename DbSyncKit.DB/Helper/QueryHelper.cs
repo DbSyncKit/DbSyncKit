@@ -12,31 +12,13 @@ namespace DbSyncKit.DB.Helper
     public class QueryHelper
     {
         /// <summary>
-        /// Replaces a specified placeholder in a StringBuilder with the provided replacement string.
-        /// </summary>
-        /// <param name="stringBuilder">The StringBuilder to modify.</param>
-        /// <param name="placeholder">The placeholder to replace.</param>
-        /// <param name="replacement">The string to replace the placeholder.</param>
-        public void ReplacePlaceholder(ref StringBuilder stringBuilder, string placeholder, string replacement)
-        {
-            // Use Regex to replace all occurrences of the placeholder
-            string pattern = Regex.Escape(placeholder);
-            stringBuilder.Replace(pattern, replacement);
-        }
-
-        /// <summary>
         /// Gets the table name of a specified type, considering the TableNameAttribute if present.
         /// </summary>
         /// <typeparam name="T">The type for which to get the table name. Must implement <see cref="IDataContractComparer"/>.</typeparam>
         /// <returns>The table name.</returns>
         public string GetTableName<T>() where T : IDataContractComparer
         {
-            TableNameAttribute? tableNameAttribute = (TableNameAttribute?)Attribute.GetCustomAttribute(typeof(T), typeof(TableNameAttribute));
-
-            if (tableNameAttribute != null)
-                return tableNameAttribute.TableName;
-
-            return typeof(T).Name;
+            return CacheManager.GetTableName(typeof(T));
         }
 
         /// <summary>
@@ -46,12 +28,7 @@ namespace DbSyncKit.DB.Helper
         /// <returns>The table schema name or null if not specified.</returns>
         public string? GetTableSchema<T>() where T : IDataContractComparer
         {
-            TableSchemaAttribute? tableSchemaAttribute = (TableSchemaAttribute?)Attribute.GetCustomAttribute(typeof(T), typeof(TableSchemaAttribute));
-
-            if (tableSchemaAttribute != null)
-                return tableSchemaAttribute.SchemaName;
-
-            return null;
+            return CacheManager.GetTableSchema(typeof(T));
         }
 
         /// <summary>
@@ -61,12 +38,7 @@ namespace DbSyncKit.DB.Helper
         /// <returns>True if the INSERT query should include ID, otherwise false.</returns>
         public bool GetInsertWithID<T>() where T : IDataContractComparer
         {
-            GenerateInsertWithIDAttribute? tableSchemaAttribute = (GenerateInsertWithIDAttribute?)Attribute.GetCustomAttribute(typeof(T), typeof(GenerateInsertWithIDAttribute));
-
-            if (tableSchemaAttribute != null)
-                return tableSchemaAttribute.GenerateWithID;
-
-            return false;
+            return CacheManager.GetInsertWithID(typeof(T));
         }
 
         /// <summary>
@@ -78,12 +50,7 @@ namespace DbSyncKit.DB.Helper
         /// <returns><c>true</c> if identity insert statements should be included; otherwise, <c>false</c>.</returns>
         public bool GetIncludeIdentityInsert<T>() where T : IDataContractComparer
         {
-            GenerateInsertWithIDAttribute? attribute = (GenerateInsertWithIDAttribute?)Attribute.GetCustomAttribute(typeof(T), typeof(GenerateInsertWithIDAttribute));
-
-            if (attribute != null)
-                return attribute.IncludeIdentityInsert;
-
-            return false;
+            return CacheManager.GetIncludeIdentityInsert(typeof(T));
         }
 
         /// <summary>
@@ -94,7 +61,7 @@ namespace DbSyncKit.DB.Helper
         /// <seealso cref="IDataContractComparer"/>
         public List<string> GetKeyColumns<T>() where T : IDataContractComparer
         {
-            return TypePropertyCacheManager.GetKeyColumns(typeof(T));
+            return CacheManager.GetKeyColumns(typeof(T));
         }
 
         /// <summary>
@@ -105,7 +72,7 @@ namespace DbSyncKit.DB.Helper
         /// <seealso cref="IDataContractComparer"/>
         public List<string> GetExcludedProperties<T>() where T : IDataContractComparer
         {
-            return TypePropertyCacheManager.GetExcludedProperties(typeof(T));
+            return CacheManager.GetExcludedProperties(typeof(T));
         }
 
         /// <summary>
@@ -116,7 +83,7 @@ namespace DbSyncKit.DB.Helper
         /// <seealso cref="IDataContractComparer"/>
         public List<string> GetAllColumns<T>() where T : IDataContractComparer
         {
-            return TypePropertyCacheManager.GetAllColumns(typeof(T));
+            return CacheManager.GetAllColumns(typeof(T));
         }
 
         /// <summary>
@@ -130,7 +97,7 @@ namespace DbSyncKit.DB.Helper
         /// <seealso cref="IDataContractComparer"/>
         public List<string> GetIdentityColumns<T>() where T : IDataContractComparer
         {
-            return TypePropertyCacheManager.GetIdentityColumns(typeof(T));
+            return CacheManager.GetIdentityColumns(typeof(T));
         }
 
     }

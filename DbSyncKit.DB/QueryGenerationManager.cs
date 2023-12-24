@@ -77,6 +77,11 @@ namespace DbSyncKit.DB
             return _querryGenerator.GenerateBatchSeparator();
         }
 
+        public void Dispose()
+        {
+            _querryGenerator.Dispose();
+        }
+
         #endregion
     }
 }

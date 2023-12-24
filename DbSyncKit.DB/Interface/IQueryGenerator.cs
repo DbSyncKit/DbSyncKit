@@ -3,7 +3,7 @@
     /// <summary>
     /// Defines methods for generating SQL queries and handling query-related operations.
     /// </summary>
-    public interface IQueryGenerator
+    public interface IQueryGenerator : IDisposable
     {
         /// <summary>
         /// Generates a SELECT query for retrieving data from a database table.

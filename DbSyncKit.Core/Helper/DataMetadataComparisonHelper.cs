@@ -94,7 +94,7 @@ namespace DbSyncKit.Core.Helper
                 return (isEdited, updatedProperties);
             }
 
-            foreach (PropertyInfo prop in TypePropertyCacheManager.GetTypeProperties(typeof(T)).Where(prop => !excludedProperties.Contains(prop.Name)))
+            foreach (PropertyInfo prop in CacheManager.GetTypeProperties(typeof(T)).Where(prop => !excludedProperties.Contains(prop.Name)))
             {
                 object sourceValue = prop.GetValue(source);
                 object destinationValue = prop.GetValue(destination);

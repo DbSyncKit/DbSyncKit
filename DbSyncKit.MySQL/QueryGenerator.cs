@@ -206,5 +206,9 @@ namespace DbSyncKit.MySQL
         {
             return string.Empty;
         }
+
+        public void Dispose()
+        {
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DbSyncKit.DB.Attributes;
 using DbSyncKit.DB.Interface;
+using DbSyncKit.DB.Manager;
 using System.Text;
 
 namespace DbSyncKit.DB.Utils
@@ -104,8 +105,10 @@ namespace DbSyncKit.DB.Utils
             if (obj == null || GetType() != obj.GetType())
                 return false;
 
-            var props = GetType().GetProperties()
-                .Where(prop => !Attribute.IsDefined(prop, typeof(ExcludedPropertyAttribute)));
+            var listOfExcluded = CacheManager.GetExcludedProperties(GetType());
+            var listOfKey = CacheManager.GetKeyColumns(GetType());
+
+            var props = CacheManager.GetComparableProperties(GetType());
 
             foreach (var prop in props)
             {

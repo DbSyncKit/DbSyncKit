@@ -170,6 +170,10 @@ namespace DbSyncKit.MSSQL
             }));
         }
 
+        public void Dispose()
+        {
+        }
+
         #endregion
 
         #region Helper Methods

@@ -18,11 +18,6 @@ namespace DbSyncKit.Core
         #region Decleration
 
         /// <summary>
-        /// Gets or sets the IQueryGenerator instance for the source database.
-        /// </summary>
-        public IQueryGenerator sourceQueryGenerationManager {  get; private set; }
-
-        /// <summary>
         /// Gets or sets the IQueryGenerator instance for the destination database.
         /// </summary>
         public IQueryGenerator destinationQueryGenerationManager { get; private set; }
@@ -40,11 +35,9 @@ namespace DbSyncKit.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="Synchronization"/> class with specified IQueryGenerator instances.
         /// </summary>
-        /// <param name="source">The IQueryGenerator for the source database.</param>
         /// <param name="destination">The IQueryGenerator for the destination database.</param>
-        public Synchronization(IQueryGenerator source, IQueryGenerator destination)
+        public Synchronization(IQueryGenerator destination)
         {
-            sourceQueryGenerationManager = source;
             destinationQueryGenerationManager = destination;
         }
 
@@ -91,14 +84,22 @@ namespace DbSyncKit.Core
                     break;
             }
 
-            sourceQueryGenerationManager = new QueryGenerationManager(QueryGeneratorFactory.GetQueryGenerator(source.Provider));
-            destinationQueryGenerationManager = new QueryGenerationManager(QueryGeneratorFactory.GetQueryGenerator(destination.Provider));
+            var sourceQueryGenerationManager = new QueryGenerationManager(QueryGeneratorFactory.GetQueryGenerator(source.Provider));
+                sourceList = GetDataFromDatabase<T>(tableName, source, sourceQueryGenerationManager, sourceColList);
 
-            sourceList = GetDataFromDatabase<T>(tableName, source, sourceQueryGenerationManager, sourceColList);
+            if (source.Provider != destination.Provider)
+            {
+                sourceQueryGenerationManager.Dispose();
+                destinationQueryGenerationManager = new QueryGenerationManager(QueryGeneratorFactory.GetQueryGenerator(destination.Provider));
+            }
+            else
+            {
+                destinationQueryGenerationManager = sourceQueryGenerationManager;
+            }
+
             destinationList = GetDataFromDatabase<T>(tableName, destination, destinationQueryGenerationManager, destinationColList);
 
             return DataMetadataComparisonHelper<T>.GetDifferences(sourceList, destinationList, GetKeyColumns<T>(), GetExcludedProperties<T>(), direction);
-
         }
 
         /// <summary>
