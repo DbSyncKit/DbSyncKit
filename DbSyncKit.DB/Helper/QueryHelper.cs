@@ -1,8 +1,6 @@
 ﻿using DbSyncKit.DB.Attributes;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.DB.Manager;
-
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -96,8 +94,7 @@ namespace DbSyncKit.DB.Helper
         /// <seealso cref="IDataContractComparer"/>
         public List<string> GetKeyColumns<T>() where T : IDataContractComparer
         {
-            return TypePropertyCacheManager.GetTypeProperties(typeof(T))
-                .Where(prop => Attribute.IsDefined(prop, typeof(KeyPropertyAttribute))).Select(prop => prop.Name).ToList();
+            return TypePropertyCacheManager.GetKeyColumns(typeof(T));
         }
 
         /// <summary>
@@ -108,8 +105,7 @@ namespace DbSyncKit.DB.Helper
         /// <seealso cref="IDataContractComparer"/>
         public List<string> GetExcludedProperties<T>() where T : IDataContractComparer
         {
-            return TypePropertyCacheManager.GetTypeProperties(typeof(T))
-               .Where(prop => Attribute.IsDefined(prop, typeof(ExcludedPropertyAttribute))).Select(prop => prop.Name).ToList();
+            return TypePropertyCacheManager.GetExcludedProperties(typeof(T));
         }
 
         /// <summary>
@@ -120,8 +116,7 @@ namespace DbSyncKit.DB.Helper
         /// <seealso cref="IDataContractComparer"/>
         public List<string> GetAllColumns<T>() where T : IDataContractComparer
         {
-            return TypePropertyCacheManager.GetTypeProperties(typeof(T))
-                .Select(prop => prop.Name).ToList();
+            return TypePropertyCacheManager.GetAllColumns(typeof(T));
         }
 
         /// <summary>
@@ -135,8 +130,7 @@ namespace DbSyncKit.DB.Helper
         /// <seealso cref="IDataContractComparer"/>
         public List<string> GetIdentityColumns<T>() where T : IDataContractComparer
         {
-            return TypePropertyCacheManager.GetTypeProperties(typeof(T))
-                .Where(prop => Attribute.IsDefined(prop, typeof(KeyAttribute))).Select(prop => prop.Name).ToList();
+            return TypePropertyCacheManager.GetIdentityColumns(typeof(T));
         }
 
     }
