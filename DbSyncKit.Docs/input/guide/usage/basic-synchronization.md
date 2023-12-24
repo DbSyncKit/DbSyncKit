@@ -14,9 +14,9 @@ In this guide, we'll walk through the process of performing a basic data synchro
 
 Before we start, ensure that you have the following:
 
-- DbSyncKit.Core package installed
-- DbSyncKit.DB package installed
-- Appropriate database provider package installed (e.g., DbSyncKit.MSSQL, DbSyncKit.MySQL)
+- [DbSyncKit.Core](xref:packages/DbSyncKit.Core) package installed
+- [DbSyncKit.DB](xref:packages/DbSyncKit.DB) package installed
+- Appropriate database provider package installed (e.g., [DbSyncKit.MSSQL](xref:packages/DbSyncKit.MSSQL), [DbSyncKit.MySQL](xref:packages/DbSyncKit.MySQL))
 
 ## Setup
 

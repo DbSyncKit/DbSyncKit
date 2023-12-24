@@ -40,17 +40,17 @@ Synchronization Sync = new Synchronization();
 Or With QueryGenerator
 
 ```csharp
-Synchronization Sync = new Synchronization(sourceQueryGenerator,destinationQueryGenerator);
+Synchronization Sync = new Synchronization(destinationQueryGenerator);
 ```
 
-Where `sourceQueryGenerator` & `destinationQueryGenerator` are instance of `IQueryGenerator`
+Where `destinationQueryGenerator` is an instance of [`IQueryGenerator`](xref:api-DbSyncKit.DB.Interface.IQueryGenerator)
 
 ## 3. Database Configuration
 
 Configure your source and destination databases using DbSyncKit's [IDatabase](xref:api-DbSyncKit.DB.Interface.IDatabase) interface.
 
 ### For MSSQL
-[Connection](xref:api-DbSyncKit.MSSQL.Connection)
+ Api Ref: [Connection](xref:api-DbSyncKit.MSSQL.Connection)
 ```csharp
 // MSSQL manual database configuration
 IDatabase SourceDatabase = new Connection("(localdb)\\MSSQLLocalDB", "SourceChinook", true);
@@ -58,7 +58,7 @@ IDatabase DestinationDatabase = new Connection("(localdb)\\MSSQLLocalDB", "Desti
 ```
 
 ### For MySQL
-[Connection](xref:api-DbSyncKit.MySQL.Connection)
+Api Ref: [Connection](xref:api-DbSyncKit.MySQL.Connection)
 ```csharp
 // MySQL manual database configuration
 IDatabase SourceDatabase = new Connection("localhost", 3306, "SourceChinook", "root", "");
