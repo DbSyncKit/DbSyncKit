@@ -103,6 +103,84 @@ Xref: performance
     </section>
 
     <section class="py-5">
+        <h2>Method Comparison - Package Version 0.2.x vs 0.3</h2>
+
+        <p>
+            The following table compares the mean execution time for each method between Package Version 0.2.x and the new 0.3 release. The values represent the performance differences observed between the two versions.
+        </p>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Table</th>
+                        <th>Mean 0.2.x</th>
+                        <th>Mean 0.3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Album</td>
+                        <td>1,704.1 us</td>
+                        <td>1,674.4 us</td>
+                    </tr>
+                    <tr>
+                        <td>Artist</td>
+                        <td>1,280.0 us</td>
+                        <td>1,243.9 us</td>
+                    </tr>
+                    <tr>
+                        <td>Customer</td>
+                        <td>1,050.5 us</td>
+                        <td>1,044.3 us</td>
+                    </tr>
+                    <tr>
+                        <td>Employee</td>
+                        <td>579.1 us</td>
+                        <td>587.4 us</td>
+                    </tr>
+                    <tr>
+                        <td>Genre</td>
+                        <td>474.5 us</td>
+                        <td>485.8 us</td>
+                    </tr>
+                    <tr>
+                        <td>Invoice</td>
+                        <td>3,614.9 us</td>
+                        <td>3,407.5 us</td>
+                    </tr>
+                    <tr>
+                        <td>InvoiceLine</td>
+                        <td>11,601.0 us</td>
+                        <td>10,751.2 us</td>
+                    </tr>
+                    <tr>
+                        <td>MediaType</td>
+                        <td>410.8 us</td>
+                        <td>412.0 us</td>
+                    </tr>
+                    <tr>
+                        <td>Playlist</td>
+                        <td>452.9 us</td>
+                        <td>455.4 us</td>
+                    </tr>
+                    <tr>
+                        <td>PlaylistTrack</td>
+                        <td>41,430.9 us</td>
+                        <td>37,480.4 us</td>
+                    </tr>
+                    <tr>
+                        <td>Track</td>
+                        <td>27,842.0 us</td>
+                        <td>26,050.1 us</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <section class="py-5">
         <h2>Performance Graph</h2>
 
         <!-- Add canvas for Chart.js to render the bar chart -->
