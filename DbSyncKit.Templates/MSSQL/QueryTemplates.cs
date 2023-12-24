@@ -6,7 +6,7 @@ namespace DbSyncKit.Templates.MSSQL
     /// <summary>
     /// Implementation of <see cref="IQueryTemplates"/> for MSSQL database, providing templates for various SQL queries.
     /// </summary>
-    public class QueryTemplates: IQueryTemplates
+    public class QueryTemplates: IQueryTemplates, IDisposable
     {
         #region Public Properties
 
@@ -117,6 +117,14 @@ END";
 {% endunless %}";
 
             return parser.Parse(str);
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting resources.
+        /// </summary>
+        public void Dispose()
+        {
+            // No additional resources to release.
         }
         #endregion
 

@@ -6,7 +6,7 @@ namespace DbSyncKit.Templates.MySql
     /// <summary>
     /// Implementation of <see cref="IQueryTemplates"/> for MySQL database, providing templates for various SQL queries.
     /// </summary>
-    public class QueryTemplates : IQueryTemplates
+    public class QueryTemplates : IQueryTemplates, IDisposable
     {
         #region Public Properties
         /// <summary>
@@ -105,6 +105,15 @@ DELETE FROM {{ TableName }} WHERE {{ Where | join: ' AND '  }} LIMIT 1;  ";
 
             return parser.Parse(str);
         }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting resources.
+        /// </summary>
+        public void Dispose()
+        {
+            // No additional resources to release.
+        }
+
         #endregion
 
 

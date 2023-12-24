@@ -207,8 +207,12 @@ namespace DbSyncKit.MySQL
             return string.Empty;
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting resources.
+        /// </summary>
         public void Dispose()
         {
+            _template.Dispose();
         }
     }
 }
