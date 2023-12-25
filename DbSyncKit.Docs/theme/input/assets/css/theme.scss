@@ -244,13 +244,6 @@ code, code[class*="language-"], pre[class*="language-"] {
             padding-bottom: $spacer * .25;
         }
     }
-
-    &.p-4 > pre[class*="language-"] {
-        margin-left: -$spacer * 1.5;
-        margin-right: -$spacer * 1.5;
-        padding-left: $spacer * 1.5;
-        padding-right: $spacer * 1.5;
-    }
 }
 
 #footer {
@@ -387,8 +380,6 @@ code, code[class*="language-"], pre[class*="language-"] {
             }
         }
     }
-
-
     // All items
     & .sidebar-nav-item {
         padding: $spacer * 0.15 $spacer * 0.5;
@@ -444,29 +435,78 @@ code, code[class*="language-"], pre[class*="language-"] {
     margin-top: $spacer;
 
     &[data-processed="true"] {
-      visibility: visible !important;
+        visibility: visible !important;
     }
     min-height: 200px;
 
     svg {
-      min-height: 200px;
+        min-height: 200px;
     }
-  }
-  .node rect,
-  .node circle,
-  .node ellipse,
-  .node polygon {
+}
+.node rect,
+.node circle,
+.node ellipse,
+.node polygon {
     fill: lighten($primary, 50%) !important;
     stroke: #000 !important;
-  }
-  .type-node rect,
-  .type-node circle,
-  .type-node ellipse,
-  .type-node polygon {
+}
+.type-node rect,
+.type-node circle,
+.type-node ellipse,
+.type-node polygon {
     fill: lighten($primary, 30%) !important;
     stroke: #000 !important;
-  }
-  .cluster rect {
+}
+.cluster rect {
     fill: $gray-100 !important;
     stroke: $gray-300 !important;
-  }
+}
+
+/* Search Button*/
+.language {
+    position: relative;
+
+    button {
+        position: absolute; /* Change this line to fixed */
+        top: 5px;
+        right: 5px;
+        font-size: 0.9rem;
+        background-color: #bcbabb;
+        border: ridge 1px #7b7b7c;
+        border-radius: 5px;
+        text-shadow: #c4c4c4 0 0 2px;
+        outline: none;
+        background-clip: padding-box;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #828282;
+        }
+    }
+}
+
+pre[class*="language-"] {
+    overflow: visible;
+    margin: 5px 0;
+    border-radius: 10px;
+    padding-top: 30px !important;
+    /* custom scrollbar */
+    &::-webkit-scrollbar {
+        width: 20px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #d6dee1;
+        border-radius: 20px;
+        border: 6px solid transparent;
+        background-clip: content-box;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #a8bbbf;
+    }
+}

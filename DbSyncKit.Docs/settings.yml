@@ -29,3 +29,4 @@ sass-success: "#035d55"
 sass-info: "#035d55"
 sass-warning: "#835000"
 sass-danger: "#f10041"
+	GenerateSearchIndex: true
