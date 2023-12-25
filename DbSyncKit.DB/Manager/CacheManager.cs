@@ -178,7 +178,7 @@ namespace DbSyncKit.DB.Manager
         /// </summary>
         /// <param name="type">The type for which to retrieve the table schema.</param>
         /// <returns>The schema of the database table associated with the specified type.</returns>
-        public static string GetTableSchema(Type type)
+        public static string? GetTableSchema(Type type)
         {
             var typeCaches = GetOrCreateDictionary(type);
 
@@ -192,7 +192,7 @@ namespace DbSyncKit.DB.Manager
             if (tableSchemaAttribute != null)
                 TableSchema = tableSchemaAttribute.SchemaName;
             else
-                TableSchema = string.Empty;
+                TableSchema = null;
 
             typeCaches.Add(nameof(CachePropertyType.TableSchema), TableSchema);
 

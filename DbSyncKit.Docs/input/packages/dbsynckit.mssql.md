@@ -12,7 +12,7 @@ DbSyncKit.MSSQL is a package that extends DbSyncKit.DB, providing database-speci
 
 ## Installation
 
-To install the DbSyncKit.MSSQL package, use the following NuGet Package Manager (NPM) command:
+To install the DbSyncKit.MSSQL package, use the following NuGet Package Manager command:
 
 ```bash
 dotnet add package DbSyncKit.MSSQL

@@ -25,7 +25,8 @@ Choose the appropriate package based on the database system you are working with
 
 - For Microsoft SQL Server: [DbSyncKit.MSSQL](xref:packages/dbsynckit.mssql)
 - For MySQL: [DbSyncKit.MySQL](xref:packages/dbsynckit.mysql)
-- Future package for PostgreSQL: [DbSyncKit.PostgreSQL](xref:packages/dbsynckit.postgresql) (Note: This package is under development and will be available soon.)
+- For PostgreSQL: [DbSyncKit.PostgreSQL](xref:packages/dbsynckit.postgresql)
+
 
 Install these packages using your preferred package manager. For example, using NuGet:
 

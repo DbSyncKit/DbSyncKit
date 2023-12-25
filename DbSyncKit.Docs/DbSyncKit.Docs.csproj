@@ -21,6 +21,7 @@
     <ProjectReference Include="..\DbSyncKit.DB\DbSyncKit.DB.csproj" />
     <ProjectReference Include="..\DbSyncKit.MSSQL\DbSyncKit.MSSQL.csproj" />
     <ProjectReference Include="..\DbSyncKit.MySQL\DbSyncKit.MySQL.csproj" />
+    <ProjectReference Include="..\DbSyncKit.PostgreSQL\DbSyncKit.PostgreSQL.csproj" />
     <ProjectReference Include="..\DbSyncKit.Templates\DbSyncKit.Templates.csproj" />
   </ItemGroup>
 

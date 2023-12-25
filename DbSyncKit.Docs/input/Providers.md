@@ -21,14 +21,14 @@ DbSyncKit supports synchronization across various database platforms. Below is a
 - **Package:** [DbSyncKit.MySQL](xref:packages/dbsynckit.mysql)
 - **Documentation:** [MySQL Documentation](xref:api-DbSyncKit.MySQL)
 
-### PostgreSQL (In Development)
+### PostgreSQL
 
-- **Package:** [DbSyncKit.PostgreSQL (In Development)](xref:packages/in-development#dbsynckit.postgresql)
-- **Documentation:** [PostgreSQL Documentation (In Development)](xref:api-DbSyncKit.PostgreSQL)
+- **Package:** [DbSyncKit.PostgreSQL](xref:packages/dbsynckit.postgresql)
+- **Documentation:** [PostgreSQL Documentation](xref:api-DbSyncKit.PostgreSQL)
 
-## In Development
+## Future Additions
 
-Explore the upcoming features and database providers currently in development for DbSyncKit on the [In Development](xref:packages/in-development) page. This includes PostgreSQL and other providers planned for future releases.
+Explore the upcoming features and database providers planned for future releases on the [Future Additions](xref:packages/future-additions) page. This includes PostgreSQL and other providers currently in development.
 
 For detailed usage instructions, configuration options, and API reference for each provider, refer to the respective documentation links.
 

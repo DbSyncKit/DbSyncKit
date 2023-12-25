@@ -1,4 +1,4 @@
-﻿﻿Title: Handling Exceptions
+﻿Title: Handling Exceptions
 Order: 4
 BreadcrumbTitle: Handling Exceptions
 NavigationTitle: Handling Exceptions
@@ -24,6 +24,12 @@ DbSyncKit may encounter exceptions during various operations, such as database c
    - Thrown by SqlConnection or SqlDataAdapter during MSSQL-related operations.
    - Refer to the [Microsoft Documentation](https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlexception) for details on specific exceptions.
 
+### PostgreSQL Exceptions
+
+1. **`NpgsqlException`**
+   - Thrown by NpgsqlConnection or NpgsqlDataAdapter during PostgreSQL-related operations.
+   - Refer to the [Npgsql Documentation](https://www.npgsql.org/doc/) for details on specific exceptions.
+
 ## Handling Exceptions
 
 When handling exceptions in DbSyncKit, consider the following approach:
@@ -43,6 +49,11 @@ catch (SqlException ex)
     // Handle MSSQL-specific exceptions
     Console.WriteLine($"MSSQL Exception: {ex.Message}");
 }
+catch (NpgsqlException ex)
+{
+    // Handle PostgreSQL-specific exceptions
+    Console.WriteLine($"PostgreSQL Exception: {ex.Message}");
+}
 catch (Exception ex)
 {
     // Handle general exceptions
@@ -50,6 +61,6 @@ catch (Exception ex)
 }
 ```
 
-This approach allows you to differentiate between MySQL, MSSQL, and general exceptions and implement specific handling based on the context of the operation.
+This approach allows you to differentiate between MySQL, MSSQL, PostgreSQL, and general exceptions and implement specific handling based on the context of the operation.
 
 Continue exploring other topics in the [Usage Guide](xref:usage).
