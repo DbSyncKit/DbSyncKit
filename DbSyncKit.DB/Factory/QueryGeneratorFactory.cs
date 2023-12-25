@@ -33,6 +33,9 @@ namespace DbSyncKit.DB.Factory
                 case DatabaseProvider.MySQL:
                     namespacePrefix = "DbSyncKit.MySQL";
                     break;
+                case DatabaseProvider.PostgreSQL:
+                    namespacePrefix = "DbSyncKit.PostgreSQL";
+                    break;
                 // Add cases for other providers as needed
                 default:
                     throw new ArgumentException("Unsupported database provider", nameof(provider));

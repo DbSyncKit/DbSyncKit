@@ -13,15 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Test.SampleContra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.MySQL", "DbSyncKit.MySQL\DbSyncKit.MySQL.csproj", "{900BF1DB-5D0E-4B6C-A933-6059D6BD4476}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Postgre", "DbSyncKit.Postgre\DbSyncKit.Postgre.csproj", "{8F32DA53-8095-4875-8BDB-25BD1296A920}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Core", "DbSyncKit.Core\DbSyncKit.Core.csproj", "{AC79A3B2-B2C7-4B41-8CF0-9E88F5D3F646}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Docs", "DbSyncKit.Docs\DbSyncKit.Docs.csproj", "{990A6285-233E-44F4-9523-9D6A6B8D2933}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Templates", "DbSyncKit.Templates\DbSyncKit.Templates.csproj", "{C8CDEDB4-C908-40E2-9D34-639CAF8CEBBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbSyncKit.Benchmarks", "DbSyncKit.Benchmarks\DbSyncKit.Benchmarks.csproj", "{68A6A13A-038E-404C-BD79-D20D75562933}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Benchmarks", "DbSyncKit.Benchmarks\DbSyncKit.Benchmarks.csproj", "{68A6A13A-038E-404C-BD79-D20D75562933}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbSyncKit.PostgreSQL", "DbSyncKit.PostgreSQL\DbSyncKit.PostgreSQL.csproj", "{295E88C2-C08D-4347-8387-D42B8941B37F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +49,6 @@ Global
 		{900BF1DB-5D0E-4B6C-A933-6059D6BD4476}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{900BF1DB-5D0E-4B6C-A933-6059D6BD4476}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{900BF1DB-5D0E-4B6C-A933-6059D6BD4476}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F32DA53-8095-4875-8BDB-25BD1296A920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F32DA53-8095-4875-8BDB-25BD1296A920}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F32DA53-8095-4875-8BDB-25BD1296A920}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F32DA53-8095-4875-8BDB-25BD1296A920}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC79A3B2-B2C7-4B41-8CF0-9E88F5D3F646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC79A3B2-B2C7-4B41-8CF0-9E88F5D3F646}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC79A3B2-B2C7-4B41-8CF0-9E88F5D3F646}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +65,10 @@ Global
 		{68A6A13A-038E-404C-BD79-D20D75562933}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68A6A13A-038E-404C-BD79-D20D75562933}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68A6A13A-038E-404C-BD79-D20D75562933}.Release|Any CPU.Build.0 = Release|Any CPU
+		{295E88C2-C08D-4347-8387-D42B8941B37F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{295E88C2-C08D-4347-8387-D42B8941B37F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{295E88C2-C08D-4347-8387-D42B8941B37F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{295E88C2-C08D-4347-8387-D42B8941B37F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
