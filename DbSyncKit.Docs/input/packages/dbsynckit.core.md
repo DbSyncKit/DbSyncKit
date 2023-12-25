@@ -20,7 +20,7 @@ DbSyncKit.Core is the fundamental package that provides core components and infr
 
 ## Installation
 
-To install DbSyncKit.Core, use the following NuGet Package Manager (NPM) command:
+To install DbSyncKit.Core, use the following NuGet Package Manager command:
 
 ```bash
 dotnet add package DbSyncKit.Core

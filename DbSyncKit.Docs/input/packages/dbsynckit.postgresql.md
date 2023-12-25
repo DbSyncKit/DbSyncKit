@@ -1,37 +1,31 @@
-﻿﻿Title: DbSyncKit.PostgreSQL Package (DVP)
+﻿﻿Title: DbSyncKit.PostgreSQL
 Order: 5
 BreadcrumbTitle: DbSyncKit.PostgreSQL
 NavigationTitle: DbSyncKit.PostgreSQL
-ShowInSidebar: false
-Xref: packages/dbsynckit.postgresql
+ShowInSidebar: true
+Xref: packages/DbSyncKit.PostgreSQL
 ---
 
-# DbSyncKit.PostgreSQL Package (In Development)
+# DbSyncKit.PostgreSQL
 
-**Note: This package is currently in development and may not have a stable release.**
-
-The `DbSyncKit.PostgreSQL` package is an extension package for DbSyncKit, providing support for PostgreSQL databases. With this package, you can seamlessly synchronize data between PostgreSQL databases.
+DbSyncKit.PostgreSQL is a package that extends DbSyncKit.DB, providing database-specific implementations and features tailored for PostgreSQL. This package enhances DbSyncKit's capabilities to synchronize data efficiently with PostgreSQL databases.
 
 ## Installation
 
-To use DbSyncKit with PostgreSQL, you'll need to install the `DbSyncKit.PostgreSQL` package along with the core DbSyncKit packages. Here's how you can install it using the .NET CLI:
+To install the DbSyncKit.PostgreSQL package, use the following NuGet Package Manager command:
 
 ```bash
 dotnet add package DbSyncKit.PostgreSQL
 ```
 
-Or, if you are using the Package Manager Console in Visual Studio:
-
-```powershell
-Install-Package DbSyncKit.PostgreSQL
-```
+Make sure to include the appropriate version based on your project requirements.
 
 ## Documentation
 
-Explore the detailed API documentation for DbSyncKit.PostgreSQL to understand the classes, methods, and features specific to Postgre database synchronization:
+Explore the detailed API documentation for DbSyncKit.PostgreSQL to understand the classes, methods, and features specific to PostgreSQL database synchronization:
 
-- [DbSyncKit.Postgres API Documentation](xref:api-DbSyncKit.PostgresSQL)
+- [DbSyncKit.PostgreSQL API Documentation](xref:api-DbSyncKit.PostgreSQL)
 
-Refer to the [Setup Guide](xref:configuration) for configuring DbSyncKit.PostgreSQL with your MySQL database connections.
+Refer to the [Setup Guide](xref:configuration) for configuring DbSyncKit.PostgreSQL with your PostgreSQL database connections.
 
-Continue exploring other topics in the [Packages section](xref:packages).
+Continue exploring other topics in the [Usage Guide](xref:usage).

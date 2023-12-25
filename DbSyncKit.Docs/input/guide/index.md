@@ -49,6 +49,8 @@ Discover the different packages that make up DbSyncKit.
 - [DbSyncKit.DB](xref:packages/dbsynckit.db)
 - [DbSyncKit.MSSQL](xref:packages/dbsynckit.mssql)
 - [DbSyncKit.MySQL](xref:packages/dbsynckit.mysql)
+- [DbSyncKit.PostgreSQL](xref:packages/dbsynckit.postgresql)
+- [DbSyncKit.Templates](xref:packages/dbsynckit.templates)
 
 ## Contribution Guidelines <a name="contribution-guidelines"></a>
 

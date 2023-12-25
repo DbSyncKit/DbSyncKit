@@ -2,7 +2,7 @@
 Order: 3
 BreadcrumbTitle: Packages
 NavigationTitle: Packages
-ShowInSidebar: true
+ShowInSidebar: false
 Xref: packages
 ---
 
@@ -38,11 +38,13 @@ Use this package when working with MySQL databases. It contains functionalities 
 
 For detailed information, visit the [DbSyncKit.MySQL Documentation](xref:packages/DbSyncKit.MySQL).
 
-### PostgreSQL Package (Coming Soon)
+### PostgreSQL Package
 
 #### DbSyncKit.PostgreSQL
 
-This package, under development, will offer functionalities for PostgreSQL database synchronization. Stay tuned for updates.
+DbSyncKit.PostgreSQL is a comprehensive package that provides database-specific implementations for PostgreSQL. It includes functionalities and components designed to streamline synchronization operations with PostgreSQL databases.
+
+For detailed information, including installation instructions and usage details, explore the [DbSyncKit.PostgreSQL Documentation](xref:packages/DbSyncKit.PostgreSQL).
 
 ## Additional Packages
 
@@ -50,17 +52,16 @@ Explore additional packages under development or in planning, which aim to enhan
 
 ### DbSyncKit.Templates Package
 
-This package introduces templating support for SQL queries in DbSyncKit, enhancing readability and maintainability. It provides templates for different types of SQL queries, supporting MSSQL and MySQL databases.
+This package introduces templating support for SQL queries in DbSyncKit, enhancing readability and maintainability. It provides templates for different types of SQL queries, supporting MSSQL, MySQL, and PostgreSQL databases.
 
 Explore the capabilities of the [`DbSyncKit.Templates`](xref:api-DbSyncKit.Templates) package and enhance your SQL query generation experience.
 
 For detailed information, visit the [DbSyncKit.Templates Documentation](xref:packages/dbsynckit.templates).
 
-### In-Development Packages
+## Future Additions
 
-Discover upcoming features and functionalities in our in-development packages. Stay tuned for updates and new releases.
+Discover upcoming features and functionalities in our future additions packages. Stay tuned for updates and new releases.
 
-For more details, visit [In-Development Packages](xref:packages/in-development).
+For more details, visit [Future Additions](xref:packages/future-additions).
 
 Continue exploring other topics in the [Usage Guide](xref:usage).
-

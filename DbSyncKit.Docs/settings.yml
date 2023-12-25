@@ -9,6 +9,7 @@ SourceFiles:
 - ../../DbSyncKit.DB/**/{!.git,!bin,!obj,!packages,!*.Tests,!*.Templates,}/**/*.cs
 - ../../DbSyncKit.MSSQL/**/{!.git,!bin,!obj,!packages,!*.Tests,!*.Templates,}/**/*.cs
 - ../../DbSyncKit.MySQL/**/{!.git,!bin,!obj,!packages,!*.Tests,!*.Templates,}/**/*.cs
+- ../../DbSyncKit.PostgreSQL/**/{!.git,!bin,!obj,!packages,!*.Tests,!*.Templates,}/**/*.cs
 - ../../DbSyncKit.Templates/**/{!.git,!bin,!obj,!packages,!*.Tests,}/**/*.cs
 EditRoot: https://github.com/statiqdev/Website/edit/main/input
 FontLink: "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto+Slab:wght@400;700&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto+Thin:wght@200;700&display=swap"

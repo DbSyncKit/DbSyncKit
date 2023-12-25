@@ -36,6 +36,7 @@ It is important to inherit [DataContractUtility](xref:api-DbSyncKit.DB.Utils.Dat
 
 Here are some examples showcasing the use of attributes for configuring data contracts within DbSyncKit.
 
+---
 ### Example 1 (Album):
 
 To configure entities for example `Album` entity, apply attributes from the [DbSyncKit.DB.Attributes](xref:api-DbSyncKit.DB.Attributes) namespace to the entity class.
@@ -59,7 +60,7 @@ public class Album : DataContractUtility<Album>
     }
 }
 ```
-
+---
 
 ### Example 2:
 
