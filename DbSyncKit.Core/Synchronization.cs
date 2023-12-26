@@ -6,6 +6,7 @@ using DbSyncKit.DB;
 using DbSyncKit.DB.Factory;
 using DbSyncKit.DB.Helper;
 using DbSyncKit.DB.Interface;
+using System.Reflection;
 using System.Text;
 
 namespace DbSyncKit.Core
@@ -64,6 +65,8 @@ namespace DbSyncKit.Core
 
             List<string> sourceColList = GetAllColumns<T>().Except(excludedProperty).ToList();
             List<string> destinationColList = GetAllColumns<T>().Except(excludedProperty).ToList();
+            PropertyInfo[] ComparableProperties = GetComparableProperties<T>();
+
             HashSet<T> sourceList, destinationList;
 
             switch (direction)
@@ -85,7 +88,7 @@ namespace DbSyncKit.Core
             }
 
             var sourceQueryGenerationManager = new QueryGenerationManager(QueryGeneratorFactory.GetQueryGenerator(source.Provider));
-                sourceList = GetDataFromDatabase<T>(tableName, source, sourceQueryGenerationManager, sourceColList);
+                sourceList = GetDataFromDatabase<T>(tableName, source, sourceQueryGenerationManager, sourceColList, ComparableProperties);
 
             if (source.Provider != destination.Provider)
             {
@@ -97,9 +100,9 @@ namespace DbSyncKit.Core
                 destinationQueryGenerationManager = sourceQueryGenerationManager;
             }
 
-            destinationList = GetDataFromDatabase<T>(tableName, destination, destinationQueryGenerationManager, destinationColList);
+            destinationList = GetDataFromDatabase<T>(tableName, destination, destinationQueryGenerationManager, destinationColList, ComparableProperties);
 
-            return DataMetadataComparisonHelper<T>.GetDifferences(sourceList, destinationList, GetKeyColumns<T>(), GetExcludedProperties<T>(), direction);
+            return DataMetadataComparisonHelper<T>.GetDifferences(sourceList, destinationList, GetKeyColumns<T>(), ComparableProperties, direction);
         }
 
         /// <summary>
@@ -172,13 +175,13 @@ namespace DbSyncKit.Core
         #endregion
 
         #region Private Methods
-        private HashSet<T> GetDataFromDatabase<T>(string tableName, IDatabase connection, IQueryGenerator manager, List<string> columns) where T : IDataContractComparer
+        private HashSet<T> GetDataFromDatabase<T>(string tableName, IDatabase connection, IQueryGenerator manager, List<string> columns, PropertyInfo[] ComparableProperties) where T : IDataContractComparer
         {
             var query = manager.GenerateSelectQuery<T>(tableName, columns, string.Empty);
 
             using (var DBManager = new DatabaseManager<IDatabase>(connection))
             {
-                return DBManager.ExecuteQuery<T>(query, tableName).ToHashSet(new KeyEqualityComparer<T>(GetKeyColumns<T>(), GetExcludedProperties<T>()));
+                return DBManager.ExecuteQuery<T>(query, tableName).ToHashSet(new KeyEqualityComparer<T>(ComparableProperties));
             }
         }
 
