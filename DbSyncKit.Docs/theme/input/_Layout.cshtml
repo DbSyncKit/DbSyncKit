@@ -277,6 +277,15 @@
                         }
                     }
                 }
+
+                // Find the active element
+                var activeElement = $("#left-sidebar .sidebar-nav-item.active");
+
+                if (activeElement.length > 0) {
+                    // Scroll to the active element
+                    $("#left-sidebar").scrollTop(activeElement.position().top);
+                }
+
             }
             function stickSidebar(sidebar, rect) {
                 // Bottom
