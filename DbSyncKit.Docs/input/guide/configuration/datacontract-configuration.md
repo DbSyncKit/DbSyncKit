@@ -27,10 +27,10 @@ To configure the actual data contract for entities, you can use attributes from 
 
 ## DataContractUtility for Customized Entity Operations
 
-The [`DataContractUtility`](xref:api-DbSyncKit.DB.Utils.DataContractUtility<T>) class serves as a generic utility for working with data contract classes. This utility class is designed to be inherited by specific data contract classes and provides functionality for hash code calculation, string representation generation, and equality checks, allowing customization of default methods like `Equals` and `ToString`.
+The [`DataContractUtility`](xref:api-DbSyncKit.DB.Utils.DataContractUtility-T-) class serves as a generic utility for working with data contract classes. This utility class is designed to be inherited by specific data contract classes and provides functionality for hash code calculation, string representation generation, and equality checks, allowing customization of default methods like `Equals` and `ToString`.
 
 ### Note:
-It is important to inherit [DataContractUtility](xref:api-DbSyncKit.DB.Utils.DataContractUtility<T>) in the contract or you many need to define your own logic for `equals` and `tostring`
+It is important to inherit [DataContractUtility](xref:api-DbSyncKit.DB.Utils.DataContractUtility-T-) in the contract or you many need to define your own logic for `equals` and `tostring`
 
 ## Entity Configuration Examples
 

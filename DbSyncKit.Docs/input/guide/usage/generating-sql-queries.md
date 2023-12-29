@@ -15,11 +15,11 @@ In addition to synchronizing data, DbSyncKit allows you to generate SQL queries 
 Before generating SQL queries, ensure that you have:
 
 - Performed a synchronization operation using DbSyncKit (Refer to [Basic Synchronization](xref:usage/basic-synchronization)).
-- Received a synchronization result ([`Result<T>`](xref:api-DbSyncKit.Core.DataContract.Result)) object.
+- Received a synchronization result ([`Result<T>`](xref:api-DbSyncKit.Core.DataContract.Result-T-)) object.
 
 ## Generate SQL Queries
 
-Once you have the synchronization result, you can generate SQL queries using the [`GetSqlQueryForSyncData`](xref:api-DbSyncKit.Core.Synchronization.GetSqlQueryForSyncData<T>) method. Replace `YourEntity` with the appropriate entity type.
+Once you have the synchronization result, you can generate SQL queries using the [`GetSqlQueryForSyncData`](xref:api-DbSyncKit.Core.Synchronization.GetSqlQueryForSyncData-T-(DbSyncKit.Core.DataContract.Result-T-,System.Int32)) method. Replace `YourEntity` with the appropriate entity type.
 
 ```csharp
 // Perform synchronization
@@ -32,7 +32,7 @@ Console.WriteLine(sqlQueries);
 
 ```
 
-The [`GetSqlQueryForSyncData`](xref:api-DbSyncKit.Core.Synchronization.GetSqlQueryForSyncData<T>) method takes the synchronization result as input and returns a list of SQL queries corresponding to the changes detected during synchronization.
+The [`GetSqlQueryForSyncData`](xref:api-DbSyncKit.Core.Synchronization.GetSqlQueryForSyncData-T-(DbSyncKit.Core.DataContract.Result-T-,System.Int32)) method takes the synchronization result as input and returns a list of SQL queries corresponding to the changes detected during synchronization.
 
 ## Understanding Generated SQL Queries
 
