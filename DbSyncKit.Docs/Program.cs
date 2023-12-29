@@ -13,6 +13,7 @@ namespace DbSyncKit.ConsoleApp
                 Config.FromSetting<string>("NetlifySiteId"),
                 Config.FromSetting<string>("NetlifyAccessToken")
             )
+            .AddSetting(WebKeys.AdditionalSearchResultFields, new List<string> { Keys.Excerpt })
             .RunAsync();
     }
 }
