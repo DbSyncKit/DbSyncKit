@@ -1,3 +1,6 @@
 [submodule "DbSyncKit.Core"]
 	path = DbSyncKit.Core
 	url = https://github.com/DbSyncKit/DbSyncKit.Core.git
+[submodule "DbSyncKit.DB"]
+	path = DbSyncKit.DB
+	url = https://github.com/DbSyncKit/DbSyncKit.DB.git
