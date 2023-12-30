@@ -7,3 +7,6 @@
 [submodule "DbSyncKit.MSSQL"]
 	path = DbSyncKit.MSSQL
 	url = https://github.com/DbSyncKit/DbSyncKit.MSSQL.git
+[submodule "DbSyncKit.MySQL"]
+	path = DbSyncKit.MySQL
+	url = https://github.com/DbSyncKit/DbSyncKit.MySQL.git
