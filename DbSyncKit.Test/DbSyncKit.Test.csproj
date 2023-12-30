@@ -24,12 +24,16 @@
     <PackageReference Include="coverlet.collector" Version="3.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DbSyncKit.Core\DbSyncKit.Core.csproj" />
-    <ProjectReference Include="..\DbSyncKit.DB\DbSyncKit.DB.csproj" />
-    <ProjectReference Include="..\DbSyncKit.MSSQL\DbSyncKit.MSSQL.csproj" />
-    <ProjectReference Include="..\DbSyncKit.MySQL\DbSyncKit.MySQL.csproj" />
-    <ProjectReference Include="..\DbSyncKit.PostgreSQL\DbSyncKit.PostgreSQL.csproj" />
-    <ProjectReference Include="..\DbSyncKit.Templates\DbSyncKit.Templates.csproj" />
+    <ProjectReference Include="..\DbSyncKit.Core\src\DbSyncKit.Core.csproj" />
+    <ProjectReference Include="..\DbSyncKit.DB\src\DbSyncKit.DB.csproj" />
+    <ProjectReference Include="..\DbSyncKit.Docs\DbSyncKit.Docs.csproj" />
+    <ProjectReference Include="..\DbSyncKit.MSSQL\src\DbSyncKit.MSSQL.csproj" />
+    <ProjectReference Include="..\DbSyncKit.MySQL\src\DbSyncKit.MySQL.csproj" />
+    <ProjectReference Include="..\DbSyncKit.PostgreSQL\src\DbSyncKit.PostgreSQL.csproj" />
+    <ProjectReference Include="..\DbSyncKit.Templates.MSSQL\src\DbSyncKit.Templates.MSSQL.csproj" />
+    <ProjectReference Include="..\DbSyncKit.Templates.MySQL\src\DbSyncKit.Templates.MySQL.csproj" />
+    <ProjectReference Include="..\DbSyncKit.Templates.PostgreSQL\src\DbSyncKit.Templates.PostgreSQL.csproj" />
+    <ProjectReference Include="..\DbSyncKit.Templates\src\DbSyncKit.Templates.csproj" />
     <ProjectReference Include="..\DbSyncKit.Test.Contracts\DbSyncKit.Test.SampleContract.csproj" />
   </ItemGroup>
   <PropertyGroup>
