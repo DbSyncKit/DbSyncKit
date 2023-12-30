@@ -1,0 +1,21 @@
+[submodule "DbSyncKit.Core"]
+	path = DbSyncKit.Core
+	url = https://github.com/DbSyncKit/DbSyncKit.Core.git
+[submodule "DbSyncKit.DB"]
+	path = DbSyncKit.DB
+	url = https://github.com/DbSyncKit/DbSyncKit.DB.git
+[submodule "DbSyncKit.MSSQL"]
+	path = DbSyncKit.MSSQL
+	url = https://github.com/DbSyncKit/DbSyncKit.MSSQL.git
+[submodule "DbSyncKit.MySQL"]
+	path = DbSyncKit.MySQL
+	url = https://github.com/DbSyncKit/DbSyncKit.MySQL.git
+[submodule "DbSyncKit.Templates"]
+	path = DbSyncKit.Templates
+	url = https://github.com/DbSyncKit/DbSyncKit.Templates.git
+[submodule "DbSyncKit.PostgreSQL"]
+	path = DbSyncKit.PostgreSQL
+	url = https://github.com/DbSyncKit/DbSyncKit.PostgreSQL.git
+[submodule "DbSyncKit.Docs"]
+	path = DbSyncKit.Docs
+	url = https://github.com/DbSyncKit/DbSyncKit.Docs.git
