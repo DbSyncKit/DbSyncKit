@@ -22,10 +22,9 @@ namespace DbSyncKit.Core.Helper
         /// <param name="sourceList">Source set of data contracts.</param>
         /// <param name="destinationList">Destination set of data contracts.</param>
         /// <param name="keyProperties">List of properties to use as keys for comparison.</param>
-        /// <param name="excludedProperties">List of properties to exclude from comparison.</param>
         /// <param name="direction">Represents Which Direction to compare db</param>
         /// <returns>Result object containing added, deleted, and edited data contracts, as well as data counts.</returns>
-        public static Result<T> GetDifferences(HashSet<T> sourceList, HashSet<T> destinationList, List<string> keyProperties, List<string> excludedProperties, Direction direction = Direction.SourceToDestination)
+        public static Result<T> GetDifferences(HashSet<T> sourceList, HashSet<T> destinationList, List<string> keyProperties, PropertyInfo[] compariableProperties, Direction direction = Direction.SourceToDestination)
         {
             if (direction == Direction.BiDirectional)
                 throw new NotImplementedException();
@@ -34,11 +33,7 @@ namespace DbSyncKit.Core.Helper
             List<T> deleted = new List<T>();
             ConcurrentBag<(T edit, Dictionary<string, object> updatedProperties)> edited = new ConcurrentBag<(T, Dictionary<string, object>)>();
 
-            var keyComparer = new KeyEqualityComparer<T>(keyProperties, excludedProperties);
-            var properties = typeof(T).GetProperties()
-                .Where(prop => keyProperties.Contains(prop.Name) && !excludedProperties.Contains(prop.Name));
-
-            //Columns.Add(property.Name);
+            var keyComparer = new KeyEqualityComparer<T>(compariableProperties);
 
             // Identify added entries
             added.AddRange(sourceList.Except(destinationList, keyComparer));
@@ -62,7 +57,7 @@ namespace DbSyncKit.Core.Helper
                 T destinationContract;
                 if (destinationKeyDictionary.TryGetValue(GenerateCompositeKey(sourceContract, keyProperties), out destinationContract))
                 {
-                    var (isEdited, updatedProperties) = GetEdited(sourceContract, destinationContract, excludedProperties);
+                    var (isEdited, updatedProperties) = GetEdited(sourceContract, destinationContract, compariableProperties);
 
                     if (isEdited)
                     {
@@ -85,7 +80,7 @@ namespace DbSyncKit.Core.Helper
         #endregion
 
         #region Private Methods
-        private static (bool isEdited, Dictionary<string, object> updatedProperties) GetEdited(T source, T destination, List<string> excludedProperties)
+        private static (bool isEdited, Dictionary<string, object> updatedProperties) GetEdited(T source, T destination, PropertyInfo[] compariableProperties)
         {
             Dictionary<string, object> updatedProperties = new Dictionary<string, object>();
             bool isEdited = false;
@@ -94,7 +89,7 @@ namespace DbSyncKit.Core.Helper
                 return (isEdited, updatedProperties);
             }
 
-            foreach (PropertyInfo prop in CacheManager.GetTypeProperties(typeof(T)).Where(prop => !excludedProperties.Contains(prop.Name)))
+            foreach (PropertyInfo prop in compariableProperties)
             {
                 object sourceValue = prop.GetValue(source);
                 object destinationValue = prop.GetValue(destination);

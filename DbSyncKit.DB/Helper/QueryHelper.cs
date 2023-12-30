@@ -1,8 +1,6 @@
-﻿using DbSyncKit.DB.Attributes;
-using DbSyncKit.DB.Interface;
+﻿using DbSyncKit.DB.Interface;
 using DbSyncKit.DB.Manager;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Reflection;
 
 namespace DbSyncKit.DB.Helper
 {
@@ -98,6 +96,11 @@ namespace DbSyncKit.DB.Helper
         public List<string> GetIdentityColumns<T>() where T : IDataContractComparer
         {
             return CacheManager.GetIdentityColumns(typeof(T));
+        }
+
+        public PropertyInfo[] GetComparableProperties<T>() where T: IDataContractComparer
+        {
+            return CacheManager.GetComparableProperties(typeof(T));
         }
 
     }

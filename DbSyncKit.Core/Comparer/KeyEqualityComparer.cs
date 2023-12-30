@@ -1,4 +1,5 @@
 ﻿using DbSyncKit.DB.Interface;
+using System.Reflection;
 
 namespace DbSyncKit.Core.Comparer
 {
@@ -10,18 +11,14 @@ namespace DbSyncKit.Core.Comparer
     {
         //private readonly PropertyInfo keyProperty;
 
-        private readonly List<string> keyColumns;
-        private readonly List<string> ignoredColumns;
+        private readonly PropertyInfo[] compariableProperties;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyEqualityComparer{T}"/> class.
         /// </summary>
-        /// <param name="keyColumns">List of key property names used for comparison.</param>
-        /// <param name="ignoredColumns">List of property names to be ignored during comparison.</param>
-        public KeyEqualityComparer(List<string> keyColumns, List<string> ignoredColumns)
+        public KeyEqualityComparer(PropertyInfo[] CompariableProperties)
         {
-            this.keyColumns = keyColumns;
-            this.ignoredColumns = ignoredColumns;
+            compariableProperties = CompariableProperties;
         }
 
         /// <summary>
@@ -32,10 +29,7 @@ namespace DbSyncKit.Core.Comparer
         /// <returns><c>true</c> if the instances are equal; otherwise, <c>false</c>.</returns>
         public bool Equals(T? x, T? y)
         {
-            var properties = typeof(T).GetProperties()
-                .Where(prop => keyColumns.Contains(prop.Name) && !ignoredColumns.Contains(prop.Name));
-
-            return properties.All(prop => Equals(prop.GetValue(x), prop.GetValue(y)));
+            return compariableProperties.All(prop => Equals(prop.GetValue(x), prop.GetValue(y)));
         }
 
         /// <summary>
@@ -48,10 +42,8 @@ namespace DbSyncKit.Core.Comparer
             unchecked
             {
                 int hash = 17;
-                var properties = typeof(T).GetProperties()
-                    .Where(prop => keyColumns.Contains(prop.Name) && !ignoredColumns.Contains(prop.Name));
 
-                foreach (var prop in properties)
+                foreach (var prop in compariableProperties)
                 {
                     var value = prop.GetValue(obj);
                     hash = hash ^ ((value?.GetHashCode() ?? 0) + 23);
