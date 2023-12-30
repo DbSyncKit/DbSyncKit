@@ -16,3 +16,6 @@
 [submodule "DbSyncKit.PostgreSQL"]
 	path = DbSyncKit.PostgreSQL
 	url = https://github.com/DbSyncKit/DbSyncKit.PostgreSQL.git
+[submodule "DbSyncKit.Docs"]
+	path = DbSyncKit.Docs
+	url = https://github.com/DbSyncKit/DbSyncKit.Docs.git
