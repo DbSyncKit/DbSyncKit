@@ -13,3 +13,6 @@
 [submodule "DbSyncKit.Templates"]
 	path = DbSyncKit.Templates
 	url = https://github.com/DbSyncKit/DbSyncKit.Templates.git
+[submodule "DbSyncKit.PostgreSQL"]
+	path = DbSyncKit.PostgreSQL
+	url = https://github.com/DbSyncKit/DbSyncKit.PostgreSQL.git
