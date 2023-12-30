@@ -10,3 +10,6 @@
 [submodule "DbSyncKit.MySQL"]
 	path = DbSyncKit.MySQL
 	url = https://github.com/DbSyncKit/DbSyncKit.MySQL.git
+[submodule "DbSyncKit.Templates"]
+	path = DbSyncKit.Templates
+	url = https://github.com/DbSyncKit/DbSyncKit.Templates.git
