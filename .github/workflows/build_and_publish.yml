@@ -1,0 +1,57 @@
+name: Build and Publish Packages
+
+on:
+  push:
+    tags:
+      - '*' # Trigger on any tag
+    branches:
+      - main
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        package: ['DbSyncKit.Core', 'DbSyncKit.DB', 'DbSyncKit.MSSQL', 'DbSyncKit.MySQL', 'DbSyncKit.PostgreSQL', 'DbSyncKit.Templates', 'DbSyncKit.Templates.MSSQL', 'DbSyncKit.Templates.MySQL', 'DbSyncKit.Templates.PostgreSQL']
+
+    steps:
+    - name: Checkout Repository with Submodules
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '3.1' # Use the appropriate version
+
+    - name: Build and Publish Packages
+      run: |
+        cd ${{ matrix.package }}/src
+        dotnet build -c Release
+        dotnet pack -c Release
+        dotnet nuget push bin/Release/${{ matrix.package }}.*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+
+  deploy_docs:
+    runs-on: ubuntu-latest
+    needs: build_and_publish
+
+    steps:
+    - name: Checkout Repository with Submodules
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: Deploy Documentation
+      run: |
+        cd DbSyncKit.Docs
+
+        # Install any required dependencies
+        dotnet restore
+
+        # Build documentation
+        dotnet build -c Release
+
+        # Run the Statiq documentation console app with necessary arguments and secrets
+        dotnet run deploy -s NetlifySiteId=${{ secrets.NETLIFY_SITE_ID }} -s NetlifyAccessToken=${{ secrets.NETLIFY_API_KEY }}
