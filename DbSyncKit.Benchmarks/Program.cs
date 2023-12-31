@@ -6,10 +6,12 @@ namespace DbSyncKit.Benchmarks
     {
         static void Main(string[] args)
         {
-            //var b = new MySqlBenchmark();
+            //var b = new SyncCompareDifferenceBenchmark();
             //b.MSSQLBenchmarkSetup();
-            //b.ConnectionTest();
+            ////b.ConnectionTest();
+            //b.SyncAlbumSetup();
             //b.SyncAlbum();
+            //b.SyncAlbumCleanup();
             //b.SyncArtist();
             //b.SyncInvoiceLine();
             //b.SyncInvoice();
@@ -18,8 +20,11 @@ namespace DbSyncKit.Benchmarks
             //b.SyncGenre();
             //b.SyncPlaylist();
             //b.SyncPlaylistTrack();
+            //b.SyncTrackSetup();
+            //b.SyncTrack();
+            //b.SyncTrackCleanup();
 
-            BenchmarkRunner.Run<MySqlBenchmark>();
+            BenchmarkRunner.Run<SyncCompareDifferenceBenchmark>();
         }
     }
 }
