@@ -64,7 +64,7 @@ namespace DbSyncKit.Test
 
             }
             Console.WriteLine($"Found Total of {contracts.Count()} classes");
-        }
+        }  
 
         [TestMethod]
         public void CheckAttributes()
@@ -73,7 +73,7 @@ namespace DbSyncKit.Test
             var TableName = queryHelper.GetTableName<Album>();
             var SchemaName = queryHelper.GetTableSchema<Album>();
             var KeyAttribues = queryHelper.GetKeyColumns<Album>();
-            var ExcludeAttribues = queryHelper.GetExcludedProperties<Album>();
+            var ExcludeAttribues = queryHelper.GetExcludedColumns<Album>();
             var withID = queryHelper.GetInsertWithID<Album>();
 
             Console.WriteLine($"TableName: {TableName}, SchemaName: {SchemaName}");
