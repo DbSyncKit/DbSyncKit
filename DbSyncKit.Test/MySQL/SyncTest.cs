@@ -1,4 +1,5 @@
 ﻿using DbSyncKit.Core;
+using DbSyncKit.Core.Comparer;
 using DbSyncKit.Core.DataContract;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.MySQL;
@@ -42,12 +43,27 @@ namespace DbSyncKit.Test.MySQL
 
         private void DataSync<T>() where T : IDataContractComparer
         {
+            var excludedProperty = Sync.GetExcludedColumns<T>();
+            var ColumnList = Sync.GetAllColumns<T>().Except(excludedProperty).ToList();
+            var ComparableProperties = Sync.GetComparableProperties<T>();
+            var keyProperties = Sync.GetKeyProperties<T>();
+            var keyEqualityComparer = new KeyEqualityComparer<T>(ComparableProperties, keyProperties);
+            var _tableName = Sync.GetTableName<T>();
+
             stopwatch.Start();
-            Result<T> data = Sync.SyncData<T>(Source, Destination);
+            Sync.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, keyEqualityComparer, out HashSet<T> SourceList, out HashSet<T> DestinationList);
+            stopwatch.Stop();
+            var getDataSpan = stopwatch.Elapsed;
+            stopwatch.Restart();
+
+
+            stopwatch.Start();
+            Result<T> data = Sync.GetDifferences<T>(SourceList, DestinationList, keyEqualityComparer);
             stopwatch.Stop();
             Console.WriteLine($"Added: {data.Added.Count} Edited: {data.Edited.Count} Deleted: {data.Deleted.Count}");
             Console.WriteLine($"Total Source Data: {data.SourceDataCount}");
             Console.WriteLine($"Total Destination Data: {data.DestinaionDataCount}");
+            Console.WriteLine($"Time took to Get Data: {GetFormattedTime(getDataSpan)}");
             Console.WriteLine($"Time took to compare: {GetFormattedTime(stopwatch.Elapsed)}");
 
             stopwatch.Restart();
@@ -68,10 +84,19 @@ namespace DbSyncKit.Test.MySQL
             {
                 return $"{elapsed.TotalSeconds:F2} s";
             }
-            else
+            else if (elapsed.TotalMilliseconds >= 1)
             {
                 return $"{elapsed.TotalMilliseconds:F2} ms";
             }
+            else if (elapsed.TotalMicroseconds >= 1)
+            {
+                return $"{elapsed.TotalMicroseconds:F2} us";
+            }
+            else
+            {
+                return $"{elapsed.TotalNanoseconds:F2} ns";
+            }
+
         }
 
         [TestMethod]
