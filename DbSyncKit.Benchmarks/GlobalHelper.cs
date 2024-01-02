@@ -43,7 +43,7 @@ namespace DbSyncKit.Benchmarks
 
         public void Compare<T>(Synchronization Sync) where T : IDataContractComparer
         {
-            result = Sync.GetDifferences<T>((HashSet<T>)sourceList, (HashSet<T>)destinationList, (KeyEqualityComparer<T>)keyEqualityComparer);
+            result = Sync.GetDifferences<T>((HashSet<T>)sourceList, (HashSet<T>)destinationList, (KeyEqualityComparer<T>)keyEqualityComparer, ComparableProperties);
         }
 
         public void GetSqlQueryForSyncData<T>(Synchronization Sync) where T : IDataContractComparer

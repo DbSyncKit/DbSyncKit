@@ -60,7 +60,7 @@ namespace DbSyncKit.Test.MSSQL
 
 
             stopwatch.Start();
-            Result<T> data = Sync.GetDifferences<T>(SourceList, DestinationList, keyEqualityComparer);
+            Result<T> data = Sync.GetDifferences<T>(SourceList, DestinationList, keyEqualityComparer, ComparableProperties);
             stopwatch.Stop();
             Console.WriteLine($"Added: {data.Added.Count} Edited: {data.Edited.Count} Deleted: {data.Deleted.Count}");
             Console.WriteLine($"Total Source Data: {data.SourceDataCount}");
