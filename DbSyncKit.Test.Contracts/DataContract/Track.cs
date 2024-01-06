@@ -1,12 +1,12 @@
 ﻿using DbSyncKit.DB.Attributes;
 using DbSyncKit.DB.Extensions;
-using DbSyncKit.DB.Utils;
+using DbSyncKit.DB.Interface;
 using System.Data;
 
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("Track")]
-    public class Track : DataContractUtility<Track>
+    public class Track : IDataContractComparer
     {
         #region Decleration
 

@@ -1,13 +1,13 @@
 ﻿using DbSyncKit.DB.Attributes;
 using DbSyncKit.DB.Extensions;
-using DbSyncKit.DB.Utils;
+using DbSyncKit.DB.Interface;
 using System.Data;
 
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("Customer")]
 
-    public class Customer : DataContractUtility<Customer>
+    public class Customer : IDataContractComparer
     {
         #region Properties
         [KeyPropertyAttribute(isPrimaryKey: true)]

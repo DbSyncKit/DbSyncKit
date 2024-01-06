@@ -47,7 +47,7 @@ namespace DbSyncKit.Test.PostgreSQL
             var ColumnList = Sync.GetAllColumns<T>().Except(excludedProperty).ToList();
             var ComparableProperties = Sync.GetComparableProperties<T>();
             var keyProperties = Sync.GetKeyProperties<T>();
-            var keyEqualityComparer = new KeyEqualityComparer<T>(ComparableProperties, keyProperties);
+            var keyEqualityComparer = new PropertyEqualityComparer<T>(keyProperties);
             var _tableName = Sync.GetTableName<T>();
 
             stopwatch.Start();

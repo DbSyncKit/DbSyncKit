@@ -1,6 +1,5 @@
 using DbSyncKit.DB.Helper;
 using DbSyncKit.DB.Interface;
-using DbSyncKit.DB.Utils;
 using DbSyncKit.Test.SampleContract.DataContract;
 using System.Reflection;
 
@@ -49,8 +48,7 @@ namespace DbSyncKit.Test
                         type.IsClass &&
                         !type.IsAbstract &&
                         type.BaseType != null &&
-                        (type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(DataContractUtility<>) ||
-                        type.GetInterfaces().Any(i => i == typeof(IDataContractComparer)))
+                        type.GetInterfaces().Any(i => i == typeof(IDataContractComparer))
                     );
 
                 // Add the found types to the dictionary

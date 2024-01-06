@@ -29,13 +29,13 @@ namespace DbSyncKit.Benchmarks
             ColumnList = Sync.GetAllColumns<T>().Except(excludedProperty).ToList();
             ComparableProperties = Sync.GetComparableProperties<T>();
             keyProperties = Sync.GetKeyProperties<T>();
-            keyEqualityComparer = new KeyEqualityComparer<T>(ComparableProperties, keyProperties);
+            keyEqualityComparer = new PropertyEqualityComparer<T>(keyProperties);
             _tableName = Sync.GetTableName<T>();
         }
 
         public void GetData<T>(Synchronization Sync, IDatabase Source, IDatabase Destination) where T : IDataContractComparer
         {
-            Sync.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, (KeyEqualityComparer<T>)keyEqualityComparer, out HashSet<T> SourceList, out HashSet<T> DestinationList);
+            Sync.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, (PropertyEqualityComparer<T>)keyEqualityComparer, out HashSet<T> SourceList, out HashSet<T> DestinationList);
 
             sourceList = SourceList;
             destinationList = DestinationList;
@@ -43,7 +43,7 @@ namespace DbSyncKit.Benchmarks
 
         public void Compare<T>(Synchronization Sync) where T : IDataContractComparer
         {
-            result = Sync.GetDifferences<T>((HashSet<T>)sourceList, (HashSet<T>)destinationList, (KeyEqualityComparer<T>)keyEqualityComparer, ComparableProperties);
+            result = Sync.GetDifferences<T>((HashSet<T>)sourceList, (HashSet<T>)destinationList, (PropertyEqualityComparer<T>)keyEqualityComparer, ComparableProperties);
         }
 
         public void GetSqlQueryForSyncData<T>(Synchronization Sync) where T : IDataContractComparer
