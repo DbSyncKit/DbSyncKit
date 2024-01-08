@@ -28,3 +28,24 @@
 [submodule "DbSyncKit.Templates.MySQL"]
 	path = DbSyncKit.Templates.MySQL
 	url = https://github.com/DbSyncKit/DbSyncKit.Templates.MySQL.git
+[submodule "DbSyncKit.DB.Metadata"]
+	path = DbSyncKit.DB.Metadata
+	url = https://github.com/DbSyncKit/DbSyncKit.DB.Metadata.git
+[submodule "DbSyncKit.MSSQL.Metadata"]
+	path = DbSyncKit.MSSQL.Metadata
+	url = https://github.com/DbSyncKit/DbSyncKit.MSSQL.Metadata.git
+[submodule "DbSyncKit.Templates.MSSQL.Metadata"]
+	path = DbSyncKit.Templates.MSSQL.Metadata
+	url = https://github.com/DbSyncKit/DbSyncKit.Templates.MSSQL.Metadata.git
+[submodule "DbSyncKit.MySQL.Metadata"]
+	path = DbSyncKit.MySQL.Metadata
+	url = https://github.com/DbSyncKit/DbSyncKit.MySQL.Metadata.git
+[submodule "DbSyncKit.PostgreSQL.Metadata"]
+	path = DbSyncKit.PostgreSQL.Metadata
+	url = https://github.com/DbSyncKit/DbSyncKit.PostgreSQL.Metadata.git
+[submodule "DbSyncKit.Templates.PostgreSQL.Metadata"]
+	path = DbSyncKit.Templates.PostgreSQL.Metadata
+	url = https://github.com/DbSyncKit/DbSyncKit.Templates.PostgreSQL.Metadata.git
+[submodule "DbSyncKit.Templates.MySQL.Metadata"]
+	path = DbSyncKit.Templates.MySQL.Metadata
+	url = https://github.com/DbSyncKit/DbSyncKit.Templates.MySQL.Metadata.git
