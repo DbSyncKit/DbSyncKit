@@ -6,10 +6,10 @@ using System.Data;
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("MediaType")]
-    public class MediaType : IDataContractComparer
+    public class MediaType : IDataContract
     {
         #region Declerations
-        [KeyPropertyAttribute(isPrimaryKey: true)]
+        [KeyProperty(isPrimaryKey: true)]
         public int MediaTypeId { get; set; }
         public string Name { get; set; }
 

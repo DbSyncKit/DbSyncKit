@@ -7,10 +7,10 @@ using System.Data;
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("Employee")]
-    public class Employee : IDataContractComparer
+    public class Employee : IDataContract
     {
         #region Decleration
-        [KeyPropertyAttribute(isPrimaryKey: true)]
+        [KeyProperty(isPrimaryKey: true)]
         public int EmployeeId { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -59,6 +59,7 @@ namespace DbSyncKit.Test.SampleContract.DataContract
             PostalCode = employeeData.GetValue<string>("PostalCode");
             Phone = employeeData.GetValue<string>("Phone");
             Fax = employeeData.GetValue<string>("Fax");
+            Email = employeeData.GetValue<string>("Email");
         }
 
         #endregion

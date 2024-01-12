@@ -7,10 +7,10 @@ namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("Customer")]
 
-    public class Customer : IDataContractComparer
+    public class Customer : IDataContract
     {
         #region Properties
-        [KeyPropertyAttribute(isPrimaryKey: true)]
+        [KeyProperty(isPrimaryKey: true)]
         public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

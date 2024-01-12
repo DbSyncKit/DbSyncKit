@@ -1,4 +1,8 @@
-﻿using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Reports;
+using BenchmarkDotNet.Running;
+using Perfolizer.Horology;
 
 namespace DbSyncKit.Benchmarks
 {
@@ -23,8 +27,16 @@ namespace DbSyncKit.Benchmarks
             //b.SyncTrackSetup();
             //b.SyncTrack();
             //b.SyncTrackCleanup();
-
             BenchmarkRunner.Run<SyncCompareDifferenceBenchmark>();
         }
+
     }
+
+    //public class MicrosecondConfig : ManualConfig
+    //{
+    //    public MicrosecondConfig()
+    //    {
+    //        AddJob(Job.Default.With(TimeUnit.Microsecond));
+    //    }
+    //}
 }

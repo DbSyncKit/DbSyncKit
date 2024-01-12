@@ -40,18 +40,19 @@ namespace DbSyncKit.Test.CrossDatabase
                 Console.WriteLine($"Connection Test is not Successful");
         }
 
-        private void DataSync<T>() where T : IDataContractComparer
+        private void DataSync<T>() where T : IDataContract
         {
             stopwatch.Start();
             Result<T> data = Sync.SyncData<T>(Source, Destination);
             stopwatch.Stop();
-            Console.WriteLine($"Added: {data.Added.Count} Edited: {data.Edited.Count} Deleted: {data.Deleted.Count}");
+            Console.WriteLine($"Added: {data.Added.Count} EditedDetailed: {data.EditedDetailed.Count} Deleted: {data.Deleted.Count}");
             Console.WriteLine($"Total Source Data: {data.SourceDataCount}");
             Console.WriteLine($"Total Destination Data: {data.DestinaionDataCount}");
             Console.WriteLine($"Time took to compare: {GetFormattedTime(stopwatch.Elapsed)}");
 
             stopwatch.Restart();
-            var query = Sync.GetSqlQueryForSyncData(data);
+            
+            var query = Sync.QueryBuilder.GetSqlQueryForSyncData<T>(data, Sync.ContractFetcher.DestinationQueryGenerationManager!);
             stopwatch.Stop();
             Console.WriteLine($"Time took to Generate Query: {GetFormattedTime(stopwatch.Elapsed)}");
 

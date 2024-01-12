@@ -48,7 +48,7 @@ namespace DbSyncKit.Test
                         type.IsClass &&
                         !type.IsAbstract &&
                         type.BaseType != null &&
-                        type.GetInterfaces().Any(i => i == typeof(IDataContractComparer))
+                        type.GetInterfaces().Any(i => i == typeof(IDataContract))
                     );
 
                 // Add the found types to the dictionary
@@ -57,11 +57,11 @@ namespace DbSyncKit.Test
 
                 foreach (var dataContractType in dataContractTypes)
                 {
-                    contracts.Add(dataContractType.Name, dataContractType.Namespace);
+                    contracts.Add(dataContractType.Name, dataContractType.Namespace!);
                 }
 
             }
-            Console.WriteLine($"Found Total of {contracts.Count()} classes");
+            Console.WriteLine($"Found Total of {contracts.Count} classes");
         }  
 
         [TestMethod]

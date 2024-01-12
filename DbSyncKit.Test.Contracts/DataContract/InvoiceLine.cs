@@ -6,10 +6,10 @@ using System.Data;
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("InvoiceLine")]
-    public class InvoiceLine : IDataContractComparer
+    public class InvoiceLine : IDataContract
     {
         #region Declerations
-        [KeyPropertyAttribute(isPrimaryKey: true)]
+        [KeyProperty(isPrimaryKey: true)]
         public int InvoiceLineId { get; set; }
         public int InvoiceId { get; set; }
         public int TrackId { get; set; }

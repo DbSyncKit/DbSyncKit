@@ -6,10 +6,10 @@ using System.Data;
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("Playlist")]
-    public class Playlist : IDataContractComparer
+    public class Playlist : IDataContract
     {
         #region Declerations
-        [KeyPropertyAttribute(isPrimaryKey: true)]
+        [KeyProperty(isPrimaryKey: true)]
         public int PlaylistId { get; set; }
         public string Name { get; set; }
 

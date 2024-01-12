@@ -7,10 +7,10 @@ namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("Invoice")]
 
-    public class Invoice : IDataContractComparer
+    public class Invoice : IDataContract
     {
         #region Declerations
-        [KeyPropertyAttribute(isPrimaryKey: true)]
+        [KeyProperty(isPrimaryKey: true)]
         public int InvoiceId { get; set; }
         public int CustomerId { get; set; }
         public DateTime InvoiceDate { get; set; }

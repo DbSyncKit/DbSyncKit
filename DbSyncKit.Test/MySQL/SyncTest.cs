@@ -41,33 +41,35 @@ namespace DbSyncKit.Test.MySQL
                 Console.WriteLine($"Connection Test is not Successful");
         }
 
-        private void DataSync<T>() where T : IDataContractComparer
+        private void DataSync<T>() where T : IDataContract
         {
             var excludedProperty = Sync.GetExcludedColumns<T>();
             var ColumnList = Sync.GetAllColumns<T>().Except(excludedProperty).ToList();
             var ComparableProperties = Sync.GetComparableProperties<T>();
             var keyProperties = Sync.GetKeyProperties<T>();
             var keyEqualityComparer = new PropertyEqualityComparer<T>(keyProperties);
+            var ComparablePropertiesComparer = new PropertyEqualityComparer<T>(ComparableProperties);
+
             var _tableName = Sync.GetTableName<T>();
 
             stopwatch.Start();
-            Sync.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, keyEqualityComparer, out HashSet<T> SourceList, out HashSet<T> DestinationList);
+            Sync.ContractFetcher.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, keyEqualityComparer, out HashSet<T> SourceList, out HashSet<T> DestinationList);
             stopwatch.Stop();
             var getDataSpan = stopwatch.Elapsed;
             stopwatch.Restart();
 
 
             stopwatch.Start();
-            Result<T> data = Sync.GetDifferences<T>(SourceList, DestinationList, keyEqualityComparer, ComparableProperties);
+            Result<T> data = Sync.MismatchIdentifier.GetDifferences<T>(SourceList, DestinationList, keyEqualityComparer, ComparablePropertiesComparer);
             stopwatch.Stop();
-            Console.WriteLine($"Added: {data.Added.Count} Edited: {data.Edited.Count} Deleted: {data.Deleted.Count}");
+            Console.WriteLine($"Added: {data.Added.Count} EditedDetailed: {data.EditedDetailed.Count} Deleted: {data.Deleted.Count}");
             Console.WriteLine($"Total Source Data: {data.SourceDataCount}");
             Console.WriteLine($"Total Destination Data: {data.DestinaionDataCount}");
             Console.WriteLine($"Time took to Get Data: {GetFormattedTime(getDataSpan)}");
             Console.WriteLine($"Time took to compare: {GetFormattedTime(stopwatch.Elapsed)}");
 
             stopwatch.Restart();
-            var query = Sync.GetSqlQueryForSyncData(data);
+            var query = Sync.QueryBuilder.GetSqlQueryForSyncData<T>(data, Sync.ContractFetcher.DestinationQueryGenerationManager!);
             stopwatch.Stop();
             Console.WriteLine($"Time took to Generate Query: {GetFormattedTime(stopwatch.Elapsed)}");
 
