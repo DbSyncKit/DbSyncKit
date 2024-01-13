@@ -11,7 +11,7 @@ namespace DbSyncKit.Test.SampleContract.DataContract
         #region Declerations
         [KeyProperty(isPrimaryKey: true,isComparable:true)]
         public int PlaylistId { get; set; }
-        [KeyProperty(isComparable: true)]
+        [KeyProperty(isPrimaryKey: true,isComparable: true)]
         public int TrackId { get; set; }
 
         #endregion

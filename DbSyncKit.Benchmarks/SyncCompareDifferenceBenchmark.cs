@@ -40,6 +40,7 @@ namespace DbSyncKit.Benchmarks
         public void SyncAlbum()
         {
             GlobalHelper.Compare<Album>(Sync);
+            //GlobalHelper.GetSqlQueryForSyncData<Album>(Sync);
         }
 
         [GlobalCleanup(Target = nameof(SyncAlbum))] 
@@ -68,6 +69,7 @@ namespace DbSyncKit.Benchmarks
         public void SyncArtist()
         {
             GlobalHelper.Compare<Artist>(Sync);
+            //GlobalHelper.GetSqlQueryForSyncData<Artist>(Sync);
         }
 
         [GlobalCleanup(Target = nameof(SyncArtist))]
@@ -97,6 +99,7 @@ namespace DbSyncKit.Benchmarks
         public void SyncCustomer()
         {
             GlobalHelper.Compare<Customer>(Sync);
+            //GlobalHelper.GetSqlQueryForSyncData<Customer>(Sync);
         }
 
         [GlobalCleanup(Target = nameof(SyncCustomer))]
@@ -127,6 +130,7 @@ namespace DbSyncKit.Benchmarks
         public void SyncEmployee()
         {
             GlobalHelper.Compare<Employee>(Sync);
+            //GlobalHelper.GetSqlQueryForSyncData<Employee>(Sync);
         }
 
         [GlobalCleanup(Target = nameof(SyncEmployee))]
@@ -157,6 +161,8 @@ namespace DbSyncKit.Benchmarks
         public void SyncGenre()
         {
             GlobalHelper.Compare<Genre>(Sync);
+            //GlobalHelper.GetSqlQueryForSyncData<Genre>(Sync);
+
         }
 
         [GlobalCleanup(Target = nameof(SyncGenre))]
@@ -187,6 +193,7 @@ namespace DbSyncKit.Benchmarks
         public void SyncInvoice()
         {
             GlobalHelper.Compare<Invoice>(Sync);
+            //GlobalHelper.GetSqlQueryForSyncData<Invoice>(Sync);
         }
 
         [GlobalCleanup(Target = nameof(SyncInvoice))]
@@ -217,6 +224,8 @@ namespace DbSyncKit.Benchmarks
         public void SyncInvoiceLine()
         {
             GlobalHelper.Compare<InvoiceLine>(Sync);
+            //GlobalHelper.GetSqlQueryForSyncData<InvoiceLine>(Sync);
+
         }
 
         [GlobalCleanup(Target = nameof(SyncInvoiceLine))]
@@ -246,6 +255,8 @@ namespace DbSyncKit.Benchmarks
         public void SyncMediaType()
         {
             GlobalHelper.Compare<MediaType>(Sync);
+            //GlobalHelper.GetSqlQueryForSyncData<MediaType>(Sync);
+
         }
 
         [GlobalCleanup(Target = nameof(SyncMediaType))]
@@ -275,6 +286,8 @@ namespace DbSyncKit.Benchmarks
         public void SyncPlaylist()
         {
             GlobalHelper.Compare<Playlist>(Sync);
+            //GlobalHelper.GetSqlQueryForSyncData<Playlist>(Sync);
+
         }
 
         [GlobalCleanup(Target = nameof(SyncPlaylist))]
@@ -304,6 +317,8 @@ namespace DbSyncKit.Benchmarks
         public void SyncPlaylistTrack()
         {
             GlobalHelper.Compare<PlaylistTrack>(Sync);
+            //GlobalHelper.GetSqlQueryForSyncData<PlaylistTrack>(Sync);
+
         }
 
         [GlobalCleanup(Target = nameof(SyncPlaylistTrack))]
@@ -333,6 +348,8 @@ namespace DbSyncKit.Benchmarks
         public void SyncTrack()
         {
             GlobalHelper.Compare<Track>(Sync);
+            //GlobalHelper.GetSqlQueryForSyncData<Track>(Sync);
+
         }
 
         [GlobalCleanup(Target = nameof(SyncTrack))]
