@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.MySQL.Metadata", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Templates.MySQL.Metadata", "DbSyncKit.Templates.MySQL.Metadata\src\DbSyncKit.Templates.MySQL.Metadata.csproj", "{04B93290-BFBC-44AE-92B4-485A22B5CCD8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbSyncKit.Cli", "DbSyncKit.Cli\src\DbSyncKit.Cli.csproj", "{BB179243-4640-497A-88A7-41A0D3D74F94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{04B93290-BFBC-44AE-92B4-485A22B5CCD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04B93290-BFBC-44AE-92B4-485A22B5CCD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04B93290-BFBC-44AE-92B4-485A22B5CCD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB179243-4640-497A-88A7-41A0D3D74F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB179243-4640-497A-88A7-41A0D3D74F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB179243-4640-497A-88A7-41A0D3D74F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB179243-4640-497A-88A7-41A0D3D74F94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
