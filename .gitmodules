@@ -49,3 +49,6 @@
 [submodule "DbSyncKit.Templates.MySQL.Metadata"]
 	path = DbSyncKit.Templates.MySQL.Metadata
 	url = https://github.com/DbSyncKit/DbSyncKit.Templates.MySQL.Metadata.git
+[submodule "DbSyncKit.Cli"]
+	path = DbSyncKit.Cli
+	url = https://github.com/DbSyncKit/DbSyncKit.Cli.git
