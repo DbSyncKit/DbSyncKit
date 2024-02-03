@@ -1,13 +1,12 @@
 ﻿using DbSyncKit.DB.Attributes;
 using DbSyncKit.DB.Extensions;
-using DbSyncKit.DB.Interface;
 using System.Data;
 
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("Invoice")]
 
-    public class Invoice : IDataContract
+    public class Invoice
     {
         #region Declerations
         [KeyProperty(isPrimaryKey: true)]

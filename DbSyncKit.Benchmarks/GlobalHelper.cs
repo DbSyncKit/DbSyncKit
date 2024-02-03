@@ -24,7 +24,7 @@ namespace DbSyncKit.Benchmarks
         private string _tableName;
         private object result;
 
-        public void Setup<T>(Synchronization Sync) where T : IDataContract
+        public void Setup<T>(Synchronization Sync)
         {
             excludedProperty = Sync.GetExcludedColumns<T>();
             ColumnList = Sync.GetAllColumns<T>().Except(excludedProperty).ToList();
@@ -35,7 +35,7 @@ namespace DbSyncKit.Benchmarks
             _tableName = Sync.GetTableName<T>();
         }
 
-        public void GetData<T>(Synchronization Sync, IDatabase Source, IDatabase Destination) where T : IDataContract
+        public void GetData<T>(Synchronization Sync, IDatabase Source, IDatabase Destination)
         {
             Sync.ContractFetcher.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, (PropertyEqualityComparer<T>)ComparablePropertiesComparer, out HashSet<T> SourceList, out HashSet<T> DestinationList);
 
@@ -43,17 +43,17 @@ namespace DbSyncKit.Benchmarks
             destinationList = DestinationList;
         }
 
-        public void Compare<T>(Synchronization Sync) where T : IDataContract
+        public void Compare<T>(Synchronization Sync)
         {
             result = Sync.MismatchIdentifier.GetDifferences<T>((HashSet<T>)sourceList, (HashSet<T>)destinationList, (PropertyEqualityComparer<T>)keyEqualityComparer, (PropertyEqualityComparer<T>)ComparablePropertiesComparer);
         }
 
-        public void GetSqlQueryForSyncData<T>(Synchronization Sync) where T : IDataContract
+        public void GetSqlQueryForSyncData<T>(Synchronization Sync)
         {
             Sync.QueryBuilder.GetSqlQueryForSyncData<T>((Result<T>)result,Sync.ContractFetcher.DestinationQueryGenerationManager!);
         }
 
-        public void CleanUp<T>() where T : IDataContract
+        public void CleanUp<T>()
         {
             CacheManager.DisposeType(typeof(T));
         }

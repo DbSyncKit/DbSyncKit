@@ -41,7 +41,7 @@ namespace DbSyncKit.Test.MySQL
                 Console.WriteLine($"Connection Test is not Successful");
         }
 
-        private void DataSync<T>() where T : IDataContract
+        private void DataSync<T>()
         {
             var excludedProperty = Sync.GetExcludedColumns<T>();
             var ColumnList = Sync.GetAllColumns<T>().Except(excludedProperty).ToList();

@@ -28,42 +28,6 @@ namespace DbSyncKit.Test
             }
         }
 
-
-        [TestMethod]
-        public void DataContractSearchTest()
-        {
-            Dictionary<string, string> contracts = new();
-            // Get all loaded assemblies
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-
-            // Iterate through each assembly
-            foreach (var assembly in assemblies)
-            {
-                // Get all types in the assembly
-                var types = assembly.GetTypes();
-
-                // Filter types that inherit from DataContractUtility<T>
-                var dataContractTypes = types
-                    .Where(type =>
-                        type.IsClass &&
-                        !type.IsAbstract &&
-                        type.BaseType != null &&
-                        type.GetInterfaces().Any(i => i == typeof(IDataContract))
-                    );
-
-                // Add the found types to the dictionary
-                if (dataContractTypes.Any())
-                    Console.WriteLine($"Found {dataContractTypes.Count()} classes in {assembly.GetName().Name}");
-
-                foreach (var dataContractType in dataContractTypes)
-                {
-                    contracts.Add(dataContractType.Name, dataContractType.Namespace!);
-                }
-
-            }
-            Console.WriteLine($"Found Total of {contracts.Count} classes");
-        }  
-
         [TestMethod]
         public void CheckAttributes()
         {

@@ -40,7 +40,7 @@ namespace DbSyncKit.Test.CrossDatabase
                 Console.WriteLine($"Connection Test is not Successful");
         }
 
-        private void DataSync<T>() where T : IDataContract
+        private void DataSync<T>() 
         {
             stopwatch.Start();
             Result<T> data = Sync.SyncData<T>(Source, Destination);

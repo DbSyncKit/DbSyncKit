@@ -1,17 +1,16 @@
 ﻿using DbSyncKit.DB.Attributes;
 using DbSyncKit.DB.Extensions;
-using DbSyncKit.DB.Interface;
 using System.Data;
 
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("PlaylistTrack")]
-    public class PlaylistTrack : IDataContract
+    public class PlaylistTrack
     {
         #region Declerations
-        [KeyProperty(isPrimaryKey: true,isComparable:true)]
+        [KeyProperty(isPrimaryKey: true, isComparable: true)]
         public int PlaylistId { get; set; }
-        [KeyProperty(isPrimaryKey: true,isComparable: true)]
+        [KeyProperty(isPrimaryKey: true, isComparable: true)]
         public int TrackId { get; set; }
 
         #endregion
