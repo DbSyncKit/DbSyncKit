@@ -53,7 +53,7 @@ namespace DbSyncKit.Test.MySQL
             var _tableName = Sync.GetTableName<T>();
 
             stopwatch.Start();
-            Sync.ContractFetcher.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, keyEqualityComparer, out HashSet<T> SourceList, out HashSet<T> DestinationList);
+            Sync.ContractFetcher.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, keyEqualityComparer,null, out HashSet<T> SourceList, out HashSet<T> DestinationList);
             stopwatch.Stop();
             var getDataSpan = stopwatch.Elapsed;
             stopwatch.Restart();

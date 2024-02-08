@@ -43,7 +43,7 @@ namespace DbSyncKit.Test.CrossDatabase
         private void DataSync<T>()
         {
             stopwatch.Start();
-            Result<T> data = Sync.SyncData<T>(Source, Destination);
+            Result<T> data = Sync.SyncData<T>(Source, Destination, null);
             stopwatch.Stop();
             Console.WriteLine($"Added: {data.Added.Count} EditedDetailed: {data.EditedDetailed.Count} Deleted: {data.Deleted.Count}");
             Console.WriteLine($"Total Source Data: {data.SourceDataCount}");

@@ -1,6 +1,7 @@
 ﻿using DbSyncKit.Core;
 using DbSyncKit.Core.Comparer;
 using DbSyncKit.Core.DataContract;
+using DbSyncKit.Core.Fetcher;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.DB.Manager;
 using System;
@@ -35,9 +36,9 @@ namespace DbSyncKit.Benchmarks
             _tableName = Sync.GetTableName<T>();
         }
 
-        public void GetData<T>(Synchronization Sync, IDatabase Source, IDatabase Destination)
+        public void GetData<T>(Synchronization Sync, IDatabase Source, IDatabase Destination, FilterCallback<T>? filterCallback = null)
         {
-            Sync.ContractFetcher.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, (PropertyEqualityComparer<T>)ComparablePropertiesComparer, out HashSet<T> SourceList, out HashSet<T> DestinationList);
+            Sync.ContractFetcher.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, (PropertyEqualityComparer<T>)ComparablePropertiesComparer, filterCallback, out HashSet<T> SourceList, out HashSet<T> DestinationList);
 
             sourceList = SourceList;
             destinationList = DestinationList;
