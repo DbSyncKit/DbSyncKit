@@ -18,7 +18,7 @@ namespace DbSyncKit.Test.CrossDatabase
         public PostgresToMysqlSyncTests()
         {
             Source = new DbSyncKit.PostgreSQL.Connection("localhost", 5432, "sourceChinook", "postgres", "");
-            Destination = new DbSyncKit.MSSQL.Connection("(localdb)\\MSSQLLocalDB", "DestinationChinook", true);
+            Destination = new DbSyncKit.MySQL.Connection("localhost", 3306, "destinationChinook", "root", "");
             Sync = new Synchronization();
             stopwatch = new Stopwatch();
         }

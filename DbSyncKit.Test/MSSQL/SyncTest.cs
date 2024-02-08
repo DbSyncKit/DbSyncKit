@@ -20,8 +20,8 @@ namespace DbSyncKit.Test.MSSQL
 
         public SyncTest()
         {
-            Source = new Connection("(localdb)\\MSSQLLocalDB", "SourceChinook", true);
-            Destination = new Connection("(localdb)\\MSSQLLocalDB", "DestinationChinook", true);
+            Source = new Connection("(localdb)\\MSSQLLocalDB", false,"SourceChinook");
+            Destination = new Connection("(localdb)\\MSSQLLocalDB", false,"DestinationChinook");
             Sync = new Synchronization();
             stopwatch = new Stopwatch();
         }

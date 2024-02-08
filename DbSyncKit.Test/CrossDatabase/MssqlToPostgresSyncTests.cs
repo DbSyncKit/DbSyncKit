@@ -17,7 +17,7 @@ namespace DbSyncKit.Test.CrossDatabase
 
         public MssqlToPostgresSyncTests()
         {
-            Source = new DbSyncKit.MSSQL.Connection("(localdb)\\MSSQLLocalDB", "SourceChinook", true);
+            Source = new DbSyncKit.MSSQL.Connection("(localdb)\\MSSQLLocalDB", false, "SourceChinook");
             Destination = new DbSyncKit.PostgreSQL.Connection("localhost", 5432, "destinationChinook", "postgres", ""); 
             Sync = new Synchronization();
             stopwatch = new Stopwatch();

@@ -10,6 +10,7 @@ namespace DbSyncKit.Test.SampleContract.DataContract
         #region Declerations
         [KeyProperty(isPrimaryKey: true)]
         public int MediaTypeId { get; set; }
+        [ExcludedProperty]
         public string Name { get; set; }
 
         #endregion

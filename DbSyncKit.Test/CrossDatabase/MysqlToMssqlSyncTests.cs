@@ -18,7 +18,7 @@ namespace DbSyncKit.Test.CrossDatabase
         public MysqlToMssqlSyncTests()
         {
             Source = new DbSyncKit.MySQL.Connection("localhost", 3306, "SourceChinook", "root", "");
-            Destination = new DbSyncKit.MSSQL.Connection("(localdb)\\MSSQLLocalDB", "DestinationChinook", true);
+            Destination = new DbSyncKit.MSSQL.Connection("(localdb)\\MSSQLLocalDB", false, "DestinationChinook");
             Sync = new Synchronization();
             stopwatch = new Stopwatch();
         }
