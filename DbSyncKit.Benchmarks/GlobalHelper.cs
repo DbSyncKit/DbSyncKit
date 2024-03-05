@@ -1,12 +1,9 @@
 ﻿using DbSyncKit.Core;
-using DbSyncKit.Core.Comparer;
 using DbSyncKit.Core.DataContract;
-using DbSyncKit.Core.Fetcher;
+using DbSyncKit.DB.Comparer;
+using DbSyncKit.DB.Fetcher;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.DB.Manager;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;

@@ -1,6 +1,6 @@
 ﻿using DbSyncKit.Core;
-using DbSyncKit.Core.Comparer;
 using DbSyncKit.Core.DataContract;
+using DbSyncKit.DB.Comparer;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.MSSQL;
 using DbSyncKit.Test.SampleContract.DataContract;
