@@ -1,12 +1,11 @@
 ﻿using DbSyncKit.DB.Attributes;
 using DbSyncKit.DB.Extensions;
-using DbSyncKit.DB.Interface;
 using System.Data;
 
 namespace DbSyncKit.Test.SampleContract.DataContract
 {
     [TableName("Album")]
-    public class Album : IDataContract
+    public class Album
     {
         #region Declerations
 

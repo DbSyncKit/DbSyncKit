@@ -1,16 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
 using DbSyncKit.Core;
-using DbSyncKit.Core.Comparer;
 using DbSyncKit.DB.Interface;
-using DbSyncKit.DB.Manager;
 using DbSyncKit.MySQL;
 using DbSyncKit.Test.SampleContract.DataContract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DbSyncKit.Benchmarks
 {

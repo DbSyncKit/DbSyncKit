@@ -17,7 +17,7 @@ namespace DbSyncKit.Test.CrossDatabase
 
         public MssqlToPostgresSyncTests()
         {
-            Source = new DbSyncKit.MSSQL.Connection("(localdb)\\MSSQLLocalDB", "SourceChinook", true);
+            Source = new DbSyncKit.MSSQL.Connection("(localdb)\\MSSQLLocalDB", false, "SourceChinook");
             Destination = new DbSyncKit.PostgreSQL.Connection("localhost", 5432, "destinationChinook", "postgres", ""); 
             Sync = new Synchronization();
             stopwatch = new Stopwatch();
@@ -40,10 +40,10 @@ namespace DbSyncKit.Test.CrossDatabase
                 Console.WriteLine($"Connection Test is not Successful");
         }
 
-        private void DataSync<T>() where T : IDataContract
+        private void DataSync<T>()
         {
             stopwatch.Start();
-            Result<T> data = Sync.SyncData<T>(Source, Destination);
+            Result<T> data = Sync.SyncData<T>(Source, Destination,null);
             stopwatch.Stop();
             Console.WriteLine($"Added: {data.Added.Count} EditedDetailed: {data.EditedDetailed.Count} Deleted: {data.Deleted.Count}");
             Console.WriteLine($"Total Source Data: {data.SourceDataCount}");

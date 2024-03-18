@@ -1,6 +1,6 @@
 ﻿using DbSyncKit.Core;
-using DbSyncKit.Core.Comparer;
 using DbSyncKit.Core.DataContract;
+using DbSyncKit.DB.Comparer;
 using DbSyncKit.DB.Interface;
 using DbSyncKit.MSSQL;
 using DbSyncKit.Test.SampleContract.DataContract;
@@ -20,8 +20,8 @@ namespace DbSyncKit.Test.MSSQL
 
         public SyncTest()
         {
-            Source = new Connection("(localdb)\\MSSQLLocalDB", "SourceChinook", true);
-            Destination = new Connection("(localdb)\\MSSQLLocalDB", "DestinationChinook", true);
+            Source = new Connection("(localdb)\\MSSQLLocalDB", false,"SourceChinook");
+            Destination = new Connection("(localdb)\\MSSQLLocalDB", false,"DestinationChinook");
             Sync = new Synchronization();
             stopwatch = new Stopwatch();
         }
@@ -43,7 +43,7 @@ namespace DbSyncKit.Test.MSSQL
                 Console.WriteLine($"Connection Test is not Successful");
         }
 
-        private void DataSync<T>() where T : IDataContract
+        private void DataSync<T>()
         {
             var excludedProperty = Sync.GetExcludedColumns<T>();
             var ColumnList = Sync.GetAllColumns<T>().Except(excludedProperty).ToList();
@@ -54,7 +54,7 @@ namespace DbSyncKit.Test.MSSQL
             var _tableName = Sync.GetTableName<T>();
 
             stopwatch.Start();
-            Sync.ContractFetcher.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, keyEqualityComparer, out HashSet<T> SourceList, out HashSet<T> DestinationList);
+            Sync.ContractFetcher.RetrieveDataFromDatabases<T>(Source, Destination, _tableName, ColumnList, keyEqualityComparer, null, out HashSet<T> SourceList, out HashSet<T> DestinationList);
             stopwatch.Stop();
             var getDataSpan = stopwatch.Elapsed;
             stopwatch.Restart();
