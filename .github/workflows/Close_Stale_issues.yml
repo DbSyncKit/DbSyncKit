@@ -20,3 +20,5 @@ jobs:
           days-before-pr-stale: -1
           days-before-pr-close: -1
           repo-token: ${{ secrets.GIT_TOKEN }}
+          exempt-issue-assignees: 'RohitM-IN,Psychac'
+          exempt-pr-assignees: 'RohitM-IN,Psychac'
