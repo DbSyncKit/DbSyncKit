@@ -52,3 +52,9 @@
 [submodule "DbSyncKit.Cli"]
 	path = DbSyncKit.Cli
 	url = https://github.com/DbSyncKit/DbSyncKit.Cli.git
+[submodule "DbSyncKit.Templates.SQLite"]
+	path = DbSyncKit.Templates.SQLite
+	url = https://github.com/DbSyncKit/DbSyncKit.Templates.SQLite.git
+[submodule "DbSyncKit.SQLite"]
+	path = DbSyncKit.SQLite
+	url = https://github.com/DbSyncKit/DbSyncKit.SQLite.git

@@ -1,0 +1,58 @@
+{
+  "MSSQL": {
+    "Source": {
+      "host": "localhost",
+      "port": 5432,
+      "Database": "sourceChinook",
+      "user": "postgres",
+      "password": ""
+    },
+    "Destination": {
+      "host": "localhost",
+      "port": 5432,
+      "Database": "destinationChinook",
+      "user": "postgres",
+      "password": ""
+    }
+  },
+  "Postgres": {
+    "Source": {
+      "host": "localhost",
+      "port": 5432,
+      "Database": "sourceChinook",
+      "user": "postgres",
+      "password": ""
+    },
+    "Destination": {
+      "host": "localhost",
+      "port": 5432,
+      "Database": "destinationChinook",
+      "user": "postgres",
+      "password": ""
+    }
+  },
+  "MySQL": {
+    "Source": {
+      "host": "localhost",
+      "port": 5432,
+      "Database": "sourceChinook",
+      "user": "postgres",
+      "password": ""
+    },
+    "Destination": {
+      "host": "localhost",
+      "port": 5432,
+      "Database": "destinationChinook",
+      "user": "postgres",
+      "password": ""
+    }
+  },
+  "SQLite": {
+    "Source": {
+
+    },
+    "Destination": {
+
+    }
+  }
+}
