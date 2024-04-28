@@ -55,6 +55,7 @@ namespace DbSyncKit.UnitTest
         [Test]
         public void FetchSqliteData()
         {
+            SQLitePCL.Batteries.Init();
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             var Source = new SQLite.Connection(Path.Combine(baseDirectory, "Data", "sourceChinook.sqlite"));
             var Destination = new SQLite.Connection(Path.Combine(baseDirectory, "Data", "destinationChinook.sqlite"));

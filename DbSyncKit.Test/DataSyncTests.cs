@@ -11,6 +11,10 @@ namespace DbSyncKit.UnitTest
 {
     public class DataSyncTests : DataSyncTestBase
     {
+        public DataSyncTests()
+        {
+            SQLitePCL.Batteries.Init();
+        }
 
         protected override IDatabase GetSourceDatabase()
         {
