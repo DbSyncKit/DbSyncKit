@@ -35,4 +35,4 @@ DbSyncKit is released under the [MIT License](https://opensource.org/licenses/MI
 
 ---
 
-**Note:** DbSyncKit is actively developed, and future updates may include support for additional database providers. For the latest information on upcoming features, check the [Future Additions](https://dbsynckit.rohit-mahajan.in/packages/future-additions) section.
+**Note:** DbSyncKit is actively developed, and future updates may include support for additional database providers. For the latest information on upcoming features, check the [Future Additions](https://dbsynckit.rohit-mahajan.in/planned) section.
